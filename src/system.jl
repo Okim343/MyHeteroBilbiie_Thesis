@@ -1,0 +1,239 @@
+###########################################################################
+#  src/system.jl – build the linearised DSGE system and call gensys        #
+#  (system size: 3 + 8·I controls / residuals)                             #
+###########################################################################
+
+module LinearSystem
+
+include("mygensys.jl")            # gensys function
+
+using LinearAlgebra, SparseArrays
+using DSGE                          # provides gensys & system wrappers
+using ..MyGenSys: gensys
+
+import ..Types: MyHeteroBilbiieModel
+import ..SteadyState: steady_state
+import ..Jacobian: build_G_blocks
+import ..EqCond: eqcond
+import ..MyGenSys: gensys
+
+export build_system!
+
+# ──────────────────────────────────────────────────────────────────
+# Helpers to pack steady-state *state* and *control* vectors
+# in exactly the order expected by eqcond.jl (3 + 8·I)
+# ──────────────────────────────────────────────────────────────────
+
+"""
+    ss_state_vector(ss, model) -> s̄
+
+Builds the **state vector**
+
+s̄ = [M̄₁ … M̄ᴵ, Z̄=1, X̄=1, f̄_E] # length I + 3
+
+
+`X̄` is a placeholder (composition shock) that `eqcond` ignores.
+"""
+function ss_state_vector(ss, model)
+    I = length(model.α)
+    s = Vector{Float64}(undef, I + 3)
+    s[1:I]   = ss.M          # incumbents
+    s[I + 1] = 1.0           # Z̄  (normalisation)
+    s[I + 2] = 1.0           # X̄  (unused in current eqcond)
+    s[I + 3] = model.fE      # entry-cost parameter
+    return s
+end
+
+"""
+    ss_control_vector(ss, model) -> x̄
+
+Builds the **control vector** in the order
+
+[w, L, r, C₁,ρ₁,d₁,v₁,e₁,Π₁,M₁₊, … , Cᴵ,ρᴵ,dᴵ,vᴵ,eᴵ,Πᴵ,Mᴵ₊]
+
+
+whose length is `n = 3 + 8 I`.
+"""
+function ss_control_vector(ss, model)
+    I = length(model.α)
+    n = 3 + 8I
+    x = Vector{Float64}(undef, n)
+
+    # ── aggregate block (w, L, r) ──
+    x[1:3] .= (ss.w, ss.L, ss.r)
+
+    # ── sectoral block ──
+    @inbounds for i in 1:I
+        base = 3 + 8*(i - 1)          # starting index for sector i
+        x[base + 1] = ss.M[i]         # current Mᵢ
+        x[base + 2] = ss.C_i[i]
+        x[base + 3] = ss.ρ_i[i]
+        x[base + 4] = ss.d_i[i]
+        x[base + 5] = ss.v_i[i]
+        x[base + 6] = ss.e_i[i]
+        x[base + 7] = ss.Π_i[i]       # parameter, but a control in eqcond
+        x[base + 8] = ss.M[i]         # next period Mᵢ
+    end
+    return x
+end
+
+# ──────────────────────────────────────────────────────────────────
+# Top-level builder
+# ──────────────────────────────────────────────────────────────────
+"""
+    build_system!(model) -> (sys, ss)
+
+1. Computes the non-linear steady state  
+2. Derives Jacobian blocks `(G1, G0)`  
+3. Solves the linear rational-expectations system with `gensys`  
+4. Returns the DSGE.jl `System` **and** the steady-state record `ss`
+"""
+function build_system!(model::MyHeteroBilbiieModel)
+
+    # 1. Non-linear steady state
+    ss  = steady_state(model)
+
+    # 2. Pack state & control vectors in the order eqcond expects
+    s̄   = ss_state_vector(ss, model)
+    x̄   = ss_control_vector(ss, model)
+
+    # 3. Jacobian blocks   G1 · x_{t+1} + G0 · x_t = 0
+    G1, G0 = build_G_blocks(s̄, x̄, x̄, model)
+    #= println("G1 = ", size(G1))
+    println("G0 = ", size(G0)) =#
+
+    res = eqcond(model, s̄, x̄, x̄)
+    println("--- largest absolute residuals in steady state ---")
+    for (k, v) in enumerate(sortperm(abs.(res), rev = true)[1:10])
+        println(rpad(k,3), ":  |res[", v, "]| = ", abs(res[v]))
+    end
+
+    @assert all(abs.(eqcond(model, s̄, x̄, x̄)) .< 1e-10) "Steady state not exact"
+
+    # 4. Constant/shock matrices (zeros for now)
+    n_resid = size(G1, 1)
+    c  = zeros(Float64, n_resid)            # deterministic constant
+    Ψ  = zeros(Float64, n_resid, 0)         # structural shocks
+    Π  = zeros(Float64, n_resid, 0)         # expectational errors
+
+    # 1) identify your state indices in the *original* ordering
+    I = length(model.α)
+    state_inds = [4 + (i-1)*8 for i in 1:I]   # [4,12,20,…,68]
+    
+
+    # 2) build the jump indices = everything else
+    all_inds  = collect(1:size(G0,1))
+    jump_inds = Base.filter(i -> i ∉ state_inds, all_inds)
+
+    # 3) permutation: states first, jumps second
+    perm = vcat(state_inds, jump_inds)
+
+    # 4) permute rows & cols of G0,G1 and permute c,Ψ,Π rows
+    G0p = G0[perm, perm]
+    G1p = G1[perm, perm]
+    cp  = c[perm]
+    Ψp  = Ψ[perm, :]
+    Πp  = Π[perm, :]
+
+    # ────── DEBUG: check eigenvalues vs. jump‐state count ──────
+    # Gensys is called as gensys(-G1p, G0p, …), so use that pencil:
+    λp = eigvals(G0p, -G1p)
+
+    # ── immediately after computing λp = eigvals(G0p, -G1p) ──
+#=     tol = 1e-8
+    unit_inds = findall(i -> abs(abs(λp[i]) - 1.0) < tol, eachindex(λp))
+    if !isempty(unit_inds)
+        println("→ Warning: unit‐modulus roots at positions ", unit_inds,
+                " with values: ", λp[unit_inds])
+    else
+        println("→ No eigenvalues on the unit circle (|λ|≈1).")
+    end =#
+
+    n_states = length(state_inds)                 # should be 9
+    n_jumps  = length(perm) - n_states           # should be 66
+    n_inside = count(abs.(λp) .< 1.0)
+    n_out    = count(abs.(λp) .> 1.0)
+    println("→ Permuted system: #states=", n_states,
+            ", #jumps=",     n_jumps)
+    println("→ Eigenvalues: #|λ|<1 =", n_inside,
+            "  #|λ|>1 =",     n_out)
+    println("   (total eigs = ", length(λp), ")")
+    # ────────────────────────────────────────────────────────────
+
+    #  (already computed above, before permuting G0/G1)
+    #    state_inds = [4,12,20,…,68]
+    #    jump_inds  = setdiff(1:n_resid, state_inds)  # length 66
+
+    # after permuting G0/G1 into G0p,G1p, `perm = vcat(state_inds, jump_inds)`
+    n = size(G1p,1)
+    n_jumps = length(jump_inds)  # 66
+    Πp = zeros(n, n_jumps)
+    for k in 1:n_jumps
+    row = n_states + k            # because you put all the jumps 2nd in the perm
+    Πp[row, k] = 1.0
+    end
+
+
+    # 1) do the generalized Schur decomposition of the same pencil gensys uses
+    F = schur!(complex(-G1p), complex(G0p))   # in-place is fine for debugging
+    # 2) extract the Q matrix (columns of Q are the Schur vectors)
+    Q = F.Q
+
+    # 3) build your permuted index (states first, jumps second)
+    permute = vcat(1:n_states, (n_states+1):n)
+
+    # 4) pick out the “unstable” Schur vectors
+    usub = permute[n_states+1:end]            # these correspond to the jump block
+    qt2 = Q[:, usub]
+
+    # 5) now do your Π-rank debug exactly as before
+    etawt = adjoint(qt2) * Πp
+    sv    = svd(etawt).S
+    tol   = 1e-8
+    zero_dirs = findall(sv .< tol)
+    @show zero_dirs, length(zero_dirs)
+
+    # in system.jl, right after you compute zero_dirs:
+    orig_missing = jump_inds[zero_dirs]
+    println("→ Missing expectation terms for original x‐indices: ", orig_missing)
+
+    #@show size(cp), size(Ψp), size(Πp)
+
+    # 2) See which gensys method matches these types:
+    #sig = (typeof(G1p), typeof(-G0p), typeof(cp), typeof(Ψp), typeof(Πp), typeof(1e-6))
+    #println("Matched gensys: ", which(gensys, sig))
+
+    # 5) call gensys with an explicit, nonzero `div`
+    G1g, Cg, Rg, fmat, fwt, ywt, gev, eu, loose =
+        MyGenSys.gensys(
+        G1p,       # Γ0
+        -G0p,       # Γ1
+        cp,        # constant
+        Ψp,        # 75×0 shock-loading
+        Πp,        # 75×66 expectational-error
+        1e-3      # nonzero “div” so gensys takes the 9-output branch
+        )
+
+    # extract the transition matrices
+    TTT = G1g
+    RRR = Rg
+    CCC = Cg
+
+    # now `eu` really is the two-element existence/uniqueness flag
+    if any(eu .!= 1)
+    @warn "gensys signalled existence/uniqueness problems:" eu
+    end
+
+    # 6. Wrap into DSGE.jl `System`
+    n_states  = length(s̄)
+    trans = Transition(TTT, RRR, CCC)      
+    meas      = Measurement(zeros(0, n_states), zeros(0),
+                            zeros(0, 0), zeros(0, 0))
+
+    sys = System(trans, meas)
+
+    return sys, ss
+end
+
+end # module
+

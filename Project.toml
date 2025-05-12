@@ -1,0 +1,16 @@
+name = "MyHeteroBilbiie"
+uuid = "c4c1e8d7-9f6d-4a11-9b7a-4ae7c0b79b52"
+authors = ["Enrico Truzzi <emtruzzi@gmail.com>"]
+version = "0.1.0"
+
+[deps]
+DSGE = "6cf23378-2c47-544c-b0c3-6efefe57ca11"
+ForwardDiff = "f6369f11-7733-5829-9624-2563aa707210"
+LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
+QuantEcon = "fcd29c91-0bd7-5a09-975d-7ac3f643a60c"
+Roots = "f2b01f46-fcfa-551c-844a-d8ac1e96c665"
+SparseArrays = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
+SparseDiffTools = "47a9eef4-7e08-11e9-0b38-333d64bd3804"
+SparsityDetection = "684fba80-ace3-11e9-3d08-3bc7ed6f96df"
+Statistics = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
