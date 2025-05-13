@@ -54,10 +54,12 @@ function eqcond(m::Types.MyHeteroBilbiieModel,
     ###########################
     # 1.  Unpack *states*     #
     ###########################
-    Mi  = @view s[1:I]                  # incumbents at t (state)
-    Zt  = s[I + 1]                      # aggregate productivity
-    Xt  = s[I + 2]                      # composition shock
-    fEt = s[I + 3]                      # entry cost shock
+    Mi    = @view s[1:I]             # incumbents at t
+    Zt    = s[I + 1]                 # agg. productivity @ t
+    Xt    = s[I + 2]                 # comp. shock (unchanged)
+    fEt   = s[I + 3]                 # entry‐cost @ t
+    Zlag  = s[I + 4]                 # productivity @ t−1
+    fElag = s[I + 5]                 # entry‐cost @ t−1
 
     ###########################
     # 2.  Unpack *controls*   #
@@ -97,7 +99,7 @@ function eqcond(m::Types.MyHeteroBilbiieModel,
     ############################################################
     # 3.  Prepare containers & accumulators                    #
     ############################################################
-    R = zeros(T, 3 + 7I)               # output residual vector
+    R = zeros(T, 3 + 7I + 2)              # output residual vector with exogenous shocks
     next_idx = 4                       # residual pointer (first 3 left for aggregates)
 
     Ci_vec   = similar(Mi)             # store Cᵢ for aggregation
@@ -183,27 +185,23 @@ function eqcond(m::Types.MyHeteroBilbiieModel,
     R[2] = 1 - β * (1 + r) * C / Cp
 
     # (C) goods / investment identity ---- R[3]
-#=  ss_entry_cost = ((w * fEt) / Zt) * m_sum 
-    ss_profit_term = ((κ * w * fEt) / Zt )* profit_term =#
-
-    #= # === DEBUG dashboard (remove or wrap in `if debug` later) =================
-    println("-----------  AGGREGATE ACCOUNTING DEBUG  -----------")
-    println("price-weighted C   ΣρᵢCᵢ     = ", ρCi_sum)
-    println("utility index      C         = ", C)
-    println("entry attempts     e_sum     = ", e_sum)
-    println("successful entry   m_sum     = ", m_sum)
-    println("entry value        w f_E/Z·e_sum  = ", entry_cost)
-    println("wage bill          wL        = ", wage_bill)
-    println("profits (sector)   (1–1/μ)·ρC     = ", profit_term)
-    println("-----------------------------------------------------")  =#
-
+    
     # USES
     uses = ρCi_sum + entry_cost          # Σ ρᵢ Cᵢ     
-
     # SOURCES
     sources = wage_bill + profit_term                # Σ ρᵢ dᵢ Mᵢ  (= d_t N_t)
 
     R[3] = (uses - sources) - (C/C_ss - 1)
+
+    ############################################################
+    # 7.  Shock‐process residuals                              #
+    ############################################################
+
+    # (D) productivity AR(1):   ln Zₜ = ρ_Z · ln Zₜ₋₁  +  ε_Zₜ
+    R[next_idx] = log(Zt) - m.ρ_Z * log(Zlag); next_idx += 1
+
+    # (E) entry‐cost AR(1):     fEₜ = γ_fE · fEₜ₋₁
+    R[next_idx] = fEt - m.γ_fE * fElag; next_idx += 1
 
     return R 
 end

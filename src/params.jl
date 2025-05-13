@@ -19,4 +19,4 @@ const Π = [0.625, 0.357, 0.218, 0.123, 0.070, 0.040, 0.022, 0.013, 0.002] #Prob
 const ρ_Z, σ_Z = 0.976,   0.0072^2
 const ρ_X, σ_X = 0.415,  0.000009
 const ρ_r = 0.7
-const γ_fE = 0.9 # persistance of the entry cost shock between 1 and 0 (arbitrary)
+const γ_fE = 1 # persistance of the entry cost shock between 1 and 0 (arbitrary)

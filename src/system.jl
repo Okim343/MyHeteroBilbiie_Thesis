@@ -52,20 +52,36 @@ end
 
 Builds the **state vector**
 
-s̄ = [M̄₁ … M̄ᴵ, Z̄=1, X̄=1, f̄_E] # length I + 3
-
+s̄ = [ M̄₁ … M̄ᴵ,
+       Z̄  = 1,
+       X̄  = 1,
+       f̄_E,
+       Z̄₋₁ = 1,
+       f̄_{E,₋1} = f̄_E
+     ]
+# length = I + 5
 
 `X̄` is a placeholder (composition shock) that `eqcond` ignores.
 """
 function ss_state_vector(ss, model)
     I = length(model.α)
-    s = Vector{Float64}(undef, I + 3)
-    s[1:I]   = ss.M          # incumbents
-    s[I + 1] = 1.0           # Z̄  (normalisation)
-    s[I + 2] = 1.0           # X̄  (unused in current eqcond)
-    s[I + 3] = model.fE      # entry-cost parameter
+    s = Vector{Float64}(undef, I + 5)
+
+    # incumbents
+    s[1:I]     = ss.M
+
+    # current-period exogenous levels
+    s[I + 1]   = 1.0         # Z̄  (normalisation)
+    s[I + 2]   = 1.0         # X̄  (unused in current eqcond)
+    s[I + 3]   = model.fE    # f̄_E
+
+    # lagged states (initialised at steady state)
+    s[I + 4]   = 1.0         # Z̄₋₁
+    s[I + 5]   = model.fE    # f̄_{E,₋1}
+
     return s
 end
+
 
 
 """
@@ -80,7 +96,7 @@ whose length is `n = 3 + 7 I`.
 """
 function ss_control_vector(ss, model)
     I = length(model.α)
-    n = 3 + 7I                       # ← 3 aggregate + 7·I sectoral
+    n = 3 + 7I + 2                     # ← 3 aggregate + 7·I sectoral + 2 exogenous shocks
     x = Vector{Float64}(undef, n)
 
     # ── aggregate block (w, L, r) ──
@@ -94,8 +110,10 @@ function ss_control_vector(ss, model)
         x[base + 3] = ss.d_i[i]
         x[base + 4] = ss.v_i[i]
         x[base + 5] = ss.e_i[i]
-        x[base + 6] = ss.Π_i[i]      # success probability Πᵢ,t
-        x[base + 7] = ss.M[i]        # next-period incumbents Mᵢ,t+1 (≡ Mplusᵢ)
+        x[base + 6] = ss.Π_i[i]     # success probability Πᵢ,t
+        x[base + 7] = ss.M[i]       # next-period incumbents Mᵢ,t+1 (≡ Mplusᵢ)
+        x[base + 8] = ss.s_lag_Z    # = 1.0
+        x[base + 9] = ss.s_lag_fE   # = model.fE
     end
     return x
 end
@@ -136,12 +154,16 @@ function build_system!(model::MyHeteroBilbiieModel)
     # 4. Constant/shock matrices (zeros for now)
     n_resid = size(G1, 1)
     c  = zeros(Float64, n_resid)            # deterministic constant
-    Ψ  = zeros(Float64, n_resid, 0)         # structural shocks
+
+    # we'll have exactly 1 structural shock (ε_Z); fill Ψ next
+    Ψ  = zeros(Float64, n_resid, 1)         # structural shocks
+    Ψ[n_resid - 1, 1] = 1.0
+
     Π  = zeros(Float64, n_resid, 0)         # expectational errors
 
-    # 1) identify your state indices in the *original* ordering
-    I = length(model.α)
-    state_inds = [4 + (i-1)*7 for i in 1:I]   # [4,12,20,…,68]
+    # now the number of predetermined (lagged) states is exactly length(s̄)
+    n_states   = length(s̄)
+    state_inds = collect(1:n_states)          # [1, 2, …, I+5]
     
 
     # 2) build the jump indices = everything else
@@ -158,69 +180,8 @@ function build_system!(model::MyHeteroBilbiieModel)
     Ψp  = Ψ[perm, :]
     Πp  = Π[perm, :]
 
-    # ────── DEBUG: check eigenvalues vs. jump‐state count ──────
-    # Gensys is called as gensys(-G1p, G0p, …), so use that pencil:
-    λp = eigvals(G0p, -G1p)
-
-    # ── immediately after computing λp = eigvals(G0p, -G1p) ──
-#=     tol = 1e-8
-    unit_inds = findall(i -> abs(abs(λp[i]) - 1.0) < tol, eachindex(λp))
-    if !isempty(unit_inds)
-        println("→ Warning: unit‐modulus roots at positions ", unit_inds,
-                " with values: ", λp[unit_inds])
-    else
-        println("→ No eigenvalues on the unit circle (|λ|≈1).")
-    end =#
-
-    n_states = length(state_inds)                 
-    n_jumps  = length(perm) - n_states           
-    n_inside = count(abs.(λp) .< 1.0)
-    n_out    = count(abs.(λp) .> 1.0)
-    println("→ Permuted system: #states=", n_states,
-            ", #jumps=",     n_jumps)
-    println("→ Eigenvalues: #|λ|<1 =", n_inside,
-            "  #|λ|>1 =",     n_out)
-    println("   (total eigs = ", length(λp), ")")
-    # ────────────────────────────────────────────────────────────
-
-    # after permuting G0/G1 into G0p,G1p, `perm = vcat(state_inds, jump_inds)`
-    n = size(G1p,1)
-    n_jumps = length(jump_inds)  # 66
-    Πp = zeros(n, n_jumps)
-    for k in 1:n_jumps
-    row = n_states + k            # because you put all the jumps 2nd in the perm
-    Πp[row, k] = 1.0
-    end
-
-
-    # 1) do the generalized Schur decomposition of the same pencil gensys uses
-    F = schur!(complex(-G1p), complex(G0p))   # in-place is fine for debugging
-    # 2) extract the Q matrix (columns of Q are the Schur vectors)
-    Q = F.Q
-
-    # 3) build your permuted index (states first, jumps second)
-    permute = vcat(1:n_states, (n_states+1):n)
-
-    # 4) pick out the “unstable” Schur vectors
-    usub = permute[n_states+1:end]            # these correspond to the jump block
-    qt2 = Q[:, usub]
-
-    # 5) now do your Π-rank debug exactly as before
-    etawt = adjoint(qt2) * Πp
-    sv    = svd(etawt).S
-    tol   = 1e-8
-    zero_dirs = findall(sv .< tol)
-    @show zero_dirs, length(zero_dirs)
-
-    # in system.jl, right after you compute zero_dirs:
-    orig_missing = jump_inds[zero_dirs]
-    println("→ Missing expectation terms for original x‐indices: ", orig_missing)
-
     #@show size(cp), size(Ψp), size(Πp)
 
-    # 2) See which gensys method matches these types:
-    #sig = (typeof(G1p), typeof(-G0p), typeof(cp), typeof(Ψp), typeof(Πp), typeof(1e-6))
-    #println("Matched gensys: ", which(gensys, sig))
 
     # 5) call gensys with an explicit, nonzero `div`
     G1g, Cg, Rg, fmat, fwt, ywt, gev, eu, loose =

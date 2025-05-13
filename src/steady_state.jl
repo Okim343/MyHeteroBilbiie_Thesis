@@ -146,7 +146,9 @@ function steady_state(model::MyHeteroBilbiieModel; tol = 1e-15)
         v_i    = blk.vi,
         d_i    = blk.di,
         e_i    = blk.ei,
-        Π_i    = Π̄
+        Π_i    = Π̄,
+        s_lag_Z = 1.0,               # Z̄₋₁
+        s_lag_fE = fE,               # f̄_{E,₋1}
     )
 
     return ss

@@ -11,15 +11,15 @@ model = Types.MyHeteroBilbiieModel()
 ss = steady_state(model)
 
 # 3. Build the state & control vectors for Jacobian
-s̄ = ss_state_vector(ss, model)       # length I+3
-x̄ = ss_control_vector(ss, model)     # length 3+8I
+s̄ = ss_state_vector(ss, model)       
+x̄ = ss_control_vector(ss, model)      
 
 # 4. Construct pred_mask: mark each sector‐incumbent Mᵢ as predetermined
 n = length(x̄)
 I = length(model.α)
 pred_mask = falses(n)
 for i in 1:I
-    base = 3 + (i-1)*8 + 1
+    base = 3 + (i-1)*7 + 1
     pred_mask[base] = true
 end
 

@@ -18,7 +18,7 @@ export build_G_blocks
 # ────────────────────────────────────────────────────────────
 # Helpers – system size depends only on the number of sectors
 # ────────────────────────────────────────────────────────────
-_n_controls(model)  = 3 + 7 * length(model.α)      # w,L,r  + 7 per sector
+_n_controls(model)  = 3 + 7 * length(model.α) + 2      # w,L,r  + 7 per sector
 _n_residuals(model) = _n_controls(model)           # square system
 
 # ────────────────────────────────────────────────────────────

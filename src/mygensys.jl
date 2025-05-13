@@ -84,15 +84,6 @@ function gensys(F::LinearAlgebra.GeneralizedSchur,
     bigev2 = findall(sv2.S .> ϵ)
     neta   = size(Π,2)
 
-    # Right before the existence check in gensys, add:
-    println("   ▶ size(Π)       = ", size(Π))
-    println("   ▶ size(qt2)     = ", size(qt2))
-    println("   ▶ size(etawt)   = ", size(etawt))
-    singvals = svd(etawt).S
-    println("   ▶ rank(etawt)   = ", sum(singvals .> ϵ), "/", length(singvals))
-    println("   ▶ singular vals = ", singvals)
-
-
     # 9) existence check
     if length(bigev2) >= nunstab
         eu[1] = 1
