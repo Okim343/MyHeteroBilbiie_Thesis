@@ -66,38 +66,37 @@ function eqcond(m::Types.MyHeteroBilbiieModel,
     wp, Lp, rp = x_p[1:3]
 
     ##  Sectors: 7 unknowns each
-    #    (Cᵢ, ρᵢ, dᵢ, vᵢ, eᵢ, Πᵢ, Mᵢ₊)
+    ##    (Cᵢ, ρᵢ, dᵢ, vᵢ, eᵢ, Πᵢ, M⁺ᵢ)
+
     # controls at t
     function slice(base)
-        M  = x[base]       # current Mᵢ,t  (predetermined)
-        C  = x[base+1]
-        ρ  = x[base+2]
-        d  = x[base+3]
-        v  = x[base+4]
-        e  = x[base+5]
-        Π  = x[base+6]
-        M₊ = x[base+7]     # next-period Mᵢ,t+1
-        return M, C, ρ, d, v, e, Π, M₊
+        C  = x[base]        #   Cᵢ,t
+        ρ  = x[base + 1]
+        d  = x[base + 2]
+        v  = x[base + 3]
+        e  = x[base + 4]
+        Π  = x[base + 5]
+        M⁺ = x[base + 6]    #   Mplusᵢ,t  (≡ Mᵢ,t+1 decided at t)
+        return C, ρ, d, v, e, Π, M⁺
     end
 
     # controls at t+1
     function slice_p(base)
-        Mp = x_p[base]
-        Cp = x_p[base+1]
-        ρp = x_p[base+2]
-        dp = x_p[base+3]
-        vp = x_p[base+4]
-        ep = x_p[base+5]
-        Πp = x_p[base+6]
-        M₊p= x_p[base+7]
-        return Mp, Cp, ρp, dp, vp, ep, Πp, M₊p
+        Cp  = x_p[base]
+        ρp  = x_p[base + 1]
+        dp  = x_p[base + 2]
+        vp  = x_p[base + 3]
+        ep  = x_p[base + 4]
+        Πp  = x_p[base + 5]
+        M⁺p = x_p[base + 6]
+        return Cp, ρp, dp, vp, ep, Πp, M⁺p
     end
 
 
     ############################################################
     # 3.  Prepare containers & accumulators                    #
     ############################################################
-    R = zeros(T, 3 + 8I)               # output residual vector
+    R = zeros(T, 3 + 7I)               # output residual vector
     next_idx = 4                       # residual pointer (first 3 left for aggregates)
 
     Ci_vec   = similar(Mi)             # store Cᵢ for aggregation
@@ -114,11 +113,13 @@ function eqcond(m::Types.MyHeteroBilbiieModel,
     # 4.  Loop over sectors                                    #
     ############################################################
     for i in 1:I
-        base   = 3 + 8*(i-1) + 1       # offset inside x
-        base_p = base       # same offset in x_p
+        base   = 3 + 7*(i-1) + 1     # offset inside x
+        base_p = base                # same offset in x_p
 
-        Mᵢ,Cᵢ, ρᵢ, dᵢ, vᵢ, eᵢ, Πᵢ, M⁺ᵢ = slice(base)
-        Mᵢp,Cᵢp, ρp, dᵢp, vᵢp, ep, Πᵢp, M⁺ᵢp = slice_p(base_p)
+        Cᵢ, ρᵢ, dᵢ, vᵢ, eᵢ, Πᵢ, M⁺ᵢ = slice(base)
+        Mᵢ = Mi[i]                         # predetermined state at t
+
+        Cᵢp, ρp, dᵢp, vᵢp, ep, Πᵢp, M⁺ᵢp = slice_p(base_p)
 
         αᵢ = m.α[i]
 
@@ -147,10 +148,7 @@ function eqcond(m::Types.MyHeteroBilbiieModel,
         R[next_idx] = Πᵢ * eᵢ - mi;                         next_idx += 1
 
         # (7) law of motion for Mᵢ: Mᵢ₊ = (1−δ)(Mᵢ + mᵢ)
-        R[next_idx] = M⁺ᵢp - (1-δ)*(Mᵢ  + mi);      next_idx += 1
-
-        # (8) pin Πᵢ to its calibrated value  Π̄[i]
-        R[next_idx] = Πᵢ - Π_bar[i];                  next_idx += 1     
+        R[next_idx] = M⁺ᵢp - (1-δ)*(Mᵢ  + mi);      next_idx += 1   
 
         # ---- aggregation helpers -----------------------------------------
         Ci_vec[i]  = Cᵢ

@@ -18,7 +18,7 @@ export build_G_blocks
 # ────────────────────────────────────────────────────────────
 # Helpers – system size depends only on the number of sectors
 # ────────────────────────────────────────────────────────────
-_n_controls(model)  = 3 + 8 * length(model.α)      # w,L,r  + 7 per sector
+_n_controls(model)  = 3 + 7 * length(model.α)      # w,L,r  + 7 per sector
 _n_residuals(model) = _n_controls(model)           # square system
 
 # ────────────────────────────────────────────────────────────
@@ -78,6 +78,30 @@ function build_G_blocks(s::AbstractVector,
     G0 = J[:, n+1:2n]     # columns premultiplying x_t
     return G1, G0
 end
+
+"""
+    debug_column_norms(missing_cols, model, s̄, x̄)
+
+Print ‖G1[:,j]‖_∞ for each *column index* `j` in `missing_cols`
+(based on the original, **un‐permuted** ordering).
+"""
+function debug_column_norms(missing_cols::Vector{Int},
+                            model,
+                            s̄::AbstractVector,
+                            x̄::AbstractVector)
+
+    G1, G0 = build_G_blocks(s̄, x̄, x̄, model)   # G1 = ∂R/∂x_{t+1}
+
+    for j in missing_cols
+        col = @view G1[:, j]
+        rows = findall(abs.(col) .> 1e-10)
+        println("x[$j]  max|∂R/∂x_{t+1}| = ",
+                maximum(abs.(col)),
+                "   non-zero rows: ", rows)
+    end
+end
+
+
 
 """
     check_determinacy(s, x_next, x, model; pred_mask=nothing)

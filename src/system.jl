@@ -25,6 +25,29 @@ export build_system!
 # ──────────────────────────────────────────────────────────────────
 
 """
+    control_names(I) -> Vector{String}
+
+Return the list of variable names in **exactly** the order
+`ss_control_vector` builds the control vector
+[w, L, r, M₁, C₁, ρ₁, d₁, v₁, e₁, Π₁, M₁₊, …].
+
+N = 3 + 7I elements.
+"""
+function control_names(I::Integer)
+    names = String["w", "L", "r"]
+    for i in 1:I
+        push!(names, "C_$i")
+        push!(names, "rho_$i")
+        push!(names, "d_$i")
+        push!(names, "v_$i")
+        push!(names, "e_$i")
+        push!(names, "Pi_$i")
+        push!(names, "Mplus_$i")      # next-period Mᵢ
+    end
+    return names
+end
+
+"""
     ss_state_vector(ss, model) -> s̄
 
 Builds the **state vector**
@@ -44,6 +67,7 @@ function ss_state_vector(ss, model)
     return s
 end
 
+
 """
     ss_control_vector(ss, model) -> x̄
 
@@ -52,27 +76,26 @@ Builds the **control vector** in the order
 [w, L, r, C₁,ρ₁,d₁,v₁,e₁,Π₁,M₁₊, … , Cᴵ,ρᴵ,dᴵ,vᴵ,eᴵ,Πᴵ,Mᴵ₊]
 
 
-whose length is `n = 3 + 8 I`.
+whose length is `n = 3 + 7 I`.
 """
 function ss_control_vector(ss, model)
     I = length(model.α)
-    n = 3 + 8I
+    n = 3 + 7I                       # ← 3 aggregate + 7·I sectoral
     x = Vector{Float64}(undef, n)
 
     # ── aggregate block (w, L, r) ──
     x[1:3] .= (ss.w, ss.L, ss.r)
 
-    # ── sectoral block ──
+    # ── sectoral block  (C, ρ, d, v, e, Π, Mplus) ──
     @inbounds for i in 1:I
-        base = 3 + 8*(i - 1)          # starting index for sector i
-        x[base + 1] = ss.M[i]         # current Mᵢ
-        x[base + 2] = ss.C_i[i]
-        x[base + 3] = ss.ρ_i[i]
-        x[base + 4] = ss.d_i[i]
-        x[base + 5] = ss.v_i[i]
-        x[base + 6] = ss.e_i[i]
-        x[base + 7] = ss.Π_i[i]       # parameter, but a control in eqcond
-        x[base + 8] = ss.M[i]         # next period Mᵢ
+        base = 3 + 7*(i - 1)         # starting index for sector i
+        x[base + 1] = ss.C_i[i]
+        x[base + 2] = ss.ρ_i[i]
+        x[base + 3] = ss.d_i[i]
+        x[base + 4] = ss.v_i[i]
+        x[base + 5] = ss.e_i[i]
+        x[base + 6] = ss.Π_i[i]      # success probability Πᵢ,t
+        x[base + 7] = ss.M[i]        # next-period incumbents Mᵢ,t+1 (≡ Mplusᵢ)
     end
     return x
 end
@@ -102,11 +125,11 @@ function build_system!(model::MyHeteroBilbiieModel)
     #= println("G1 = ", size(G1))
     println("G0 = ", size(G0)) =#
 
-    res = eqcond(model, s̄, x̄, x̄)
+    #= res = eqcond(model, s̄, x̄, x̄)
     println("--- largest absolute residuals in steady state ---")
     for (k, v) in enumerate(sortperm(abs.(res), rev = true)[1:10])
         println(rpad(k,3), ":  |res[", v, "]| = ", abs(res[v]))
-    end
+    end =#
 
     @assert all(abs.(eqcond(model, s̄, x̄, x̄)) .< 1e-10) "Steady state not exact"
 
@@ -118,7 +141,7 @@ function build_system!(model::MyHeteroBilbiieModel)
 
     # 1) identify your state indices in the *original* ordering
     I = length(model.α)
-    state_inds = [4 + (i-1)*8 for i in 1:I]   # [4,12,20,…,68]
+    state_inds = [4 + (i-1)*7 for i in 1:I]   # [4,12,20,…,68]
     
 
     # 2) build the jump indices = everything else
@@ -149,8 +172,8 @@ function build_system!(model::MyHeteroBilbiieModel)
         println("→ No eigenvalues on the unit circle (|λ|≈1).")
     end =#
 
-    n_states = length(state_inds)                 # should be 9
-    n_jumps  = length(perm) - n_states           # should be 66
+    n_states = length(state_inds)                 
+    n_jumps  = length(perm) - n_states           
     n_inside = count(abs.(λp) .< 1.0)
     n_out    = count(abs.(λp) .> 1.0)
     println("→ Permuted system: #states=", n_states,
@@ -159,10 +182,6 @@ function build_system!(model::MyHeteroBilbiieModel)
             "  #|λ|>1 =",     n_out)
     println("   (total eigs = ", length(λp), ")")
     # ────────────────────────────────────────────────────────────
-
-    #  (already computed above, before permuting G0/G1)
-    #    state_inds = [4,12,20,…,68]
-    #    jump_inds  = setdiff(1:n_resid, state_inds)  # length 66
 
     # after permuting G0/G1 into G0p,G1p, `perm = vcat(state_inds, jump_inds)`
     n = size(G1p,1)
