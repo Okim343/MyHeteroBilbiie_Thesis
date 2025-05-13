@@ -56,6 +56,7 @@ function eqcond(m::Types.MyHeteroBilbiieModel,
     ###########################
     Mi  = @view s[1:I]                  # incumbents at t (state)
     Zt  = s[I + 1]                      # aggregate productivity
+    Xt  = s[I + 2]                      # composition shock
     fEt = s[I + 3]                      # entry cost shock
 
     ###########################
