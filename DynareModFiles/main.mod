@@ -113,14 +113,13 @@ steady_state_model;
 
 // -------- Solve & simulate --------
 
-//steady;
-
+steady;
 check;
 
 // model_info ;
 // model_diagnostics;
 
 
-stoch_simul(order=2, irf=50) logC logw logL C w L     ;
+stoch_simul(order=1, irf=50) ;
 
 
