@@ -1,0 +1,167 @@
+Starting Dynare (version 6.3).
+Calling Dynare with arguments: none
+Starting preprocessing of the model file ...
+Found 34 equation(s).
+Evaluating expressions...
+Computing static model derivatives (order 1).
+Normalizing the static model...
+Finding the optimal block decomposition of the static model...
+3 block(s) found:
+  2 recursive block(s) and 1 simultaneous block(s).
+  the largest simultaneous block has 8 equation(s)
+                                 and 8 feedback variable(s).
+Computing dynamic model derivatives (order 2).
+Normalizing the dynamic model...
+Finding the optimal block decomposition of the dynamic model...
+3 block(s) found:
+  2 recursive block(s) and 1 simultaneous block(s).
+  the largest simultaneous block has 8 equation(s)
+                                 and 7 feedback variable(s).
+Preprocessing completed.
+Preprocessing time: 0h00m00s.
+
+STEADY-STATE RESULTS:
+
+vc      		 0.924271
+vy      		 0.77838
+vn      		 12.1963
+vnc     		 7.30973
+vny     		 6.15593
+Y       		 1.98122
+YI      		 1.98122
+rhoo    		 2.09291
+d       		 0.0555188
+w       		 1.54214
+l       		 1
+le      		 0.202786
+lc      		 0.797214
+ne      		 0.202786
+n       		 7.90864
+v       		 1.54214
+c       		 1.6685
+z       		 1
+ln_ca   		 -0.226632
+ln_c    		 0.511924
+ln_ne   		 -1.59561
+ln_n    		 2.06796
+ln_d    		 -2.89103
+ln_da   		 -3.62959
+ln_v    		 0.433174
+ln_vva  		 -0.305382
+ln_l    		 9.47153e-08
+ln_le   		 -1.59561
+ln_lc   		 -0.226632
+ln_w    		 0.433174
+ln_wa   		 -0.305382
+ln_rhoo 		 0.738556
+ln_Y    		 0.683715
+ln_YA   		 -0.0548412
+
+EIGENVALUES:
+         Modulus             Real        Imaginary
+       3.189e-16       -3.189e-16                0
+          0.8663           0.8663                0
+           0.979            0.979                0
+           1.166            1.166                0
+       2.841e+16        2.841e+16                0
+       1.903e+17        1.903e+17                0
+
+There are 3 eigenvalue(s) larger than 1 in modulus for 3 forward-looking variable(s)
+The rank condition is verified.
+
+
+MODEL SUMMARY
+
+  Number of variables:         34
+  Number of stochastic shocks: 1
+  Number of state variables:   3
+  Number of jumpers:           3
+  Number of static variables:  28
+
+
+MATRIX OF COVARIANCE OF EXOGENOUS SHOCKS
+Variables           e
+e            0.000052
+
+POLICY AND TRANSITION FUNCTIONS
+                                   n              ne
+Constant                    7.908645        0.203045
+(correction)                       0        0.000259
+ne(-1)                      0.975000       -0.108694
+n(-1)                       0.975000       -0.108694
+z(-1)                              0        1.492190
+e                                  0        1.524198
+ne(-1),ne(-1)                      0        0.006576
+n(-1),ne(-1)                       0        0.013153
+n(-1),n(-1)                        0        0.006576
+z(-1),ne(-1)                       0       -0.110262
+z(-1),n(-1)                        0       -0.110262
+z(-1),z(-1)                        0        0.758564
+e,e                                0        1.569902
+ne(-1),e                           0       -0.112627
+n(-1),e                            0       -0.112627
+z(-1),e                            0        3.073869
+
+
+APPROXIMATED THEORETICAL MOMENTS
+VARIABLE         MEAN  STD. DEV.   VARIANCE
+n              7.9215     0.3665     0.1343
+ne             0.2031     0.0225     0.0005
+
+
+
+APPROXIMATED MATRIX OF CORRELATIONS
+Variables         n      ne
+n            1.0000  0.3920
+ne           0.3920  1.0000
+
+
+
+APPROXIMATED COEFFICIENTS OF AUTOCORRELATION
+Order          1       2       3       4       5
+n         0.9985  0.9944  0.9881  0.9800  0.9704
+ne        0.8732  0.7631  0.6677  0.5848  0.5129
+
+Information about testbilbiie (dynamic model)
+
+The following variables appear with a lag and are therefore states:
+ne(-1)
+n(-1)
+z(-1)
+
+The following variables appear with a lead and are therefore forward-looking variables:
+d(1)
+v(1)
+c(1)
+
+The following variables do not appear with a lead or lag and are therefore purely static variables:
+vc
+vy
+vn
+vnc
+vny
+Y
+YI
+rhoo
+w
+l
+le
+lc
+ln_ca
+ln_c
+ln_ne
+ln_n
+ln_d
+ln_da
+ln_v
+ln_vva
+ln_l
+ln_le
+ln_lc
+ln_w
+ln_wa
+ln_rhoo
+ln_Y
+ln_YA
+
+Total computing time : 0h00m01s

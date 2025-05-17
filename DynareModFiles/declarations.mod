@@ -1,0 +1,32 @@
+
+//------------------------------------------------
+//  declarations.mod
+//------------------------------------------------
+@#define I = 9
+
+// ─── Predetermined & forward‐looking variables ─────────────
+@#for i in 1:I
+  var M@{i} C@{i} rho@{i} d@{i} v@{i} e@{i} psi@{i};
+@#endfor
+var Z X C w L;
+
+// ─── Exogenous shocks ───────────────────────────────────────
+varexo eps_Z eps_X;
+
+// ─── Log Versions ───────────────────────────────────────
+@#for i in 1:I
+  var logM@{i} logC@{i} logd@{i} logv@{i} loge@{i};
+@#endfor
+
+var logC logw logL;
+
+// ─── Calibration parameters ─────────────────────────────────
+parameters
+  r        beta    delta   theta   eta     fE_par   Z_par
+  chi      phi    varphi     BigPsi     C_ss  fE
+  rho_Z   sigma_Z rho_X   sigma_X   
+@#for i in 1:I
+  alpha@{i}  Pi_bar@{i} psi_bar@{i}
+@#endfor
+;
+

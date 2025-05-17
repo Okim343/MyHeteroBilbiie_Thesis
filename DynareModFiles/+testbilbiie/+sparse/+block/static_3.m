@@ -1,0 +1,27 @@
+function [y, T] = static_3(y, x, params, sparse_rowval, sparse_colval, sparse_colptr, T)
+  y(12)=params(3)*y(14)/y(18);
+  y(13)=y(11)-y(12);
+  y(29)=log(y(13));
+  y(21)=log(y(14));
+  y(22)=log(y(15));
+  y(28)=log(y(12));
+  y(27)=log(y(11));
+  y(6)=y(17)+y(16)*y(14);
+  y(32)=log(y(8));
+  y(1)=y(16)/y(17);
+  y(2)=y(16)/y(6);
+  y(3)=y(15)*y(16);
+  y(4)=y(3)/y(17);
+  y(5)=y(3)/y(6);
+  y(34)=log(y(6)/y(8));
+  y(33)=log(y(6));
+  y(26)=log(y(16)/y(8));
+  y(25)=log(y(16));
+  y(31)=log(y(10)/y(8));
+  y(30)=log(y(10));
+  y(24)=log(y(9)/y(8));
+  y(23)=log(y(9));
+  y(19)=log(y(17)/y(8));
+  y(20)=log(y(17));
+  y(7)=y(10)*y(11)+y(15)*y(9);
+end

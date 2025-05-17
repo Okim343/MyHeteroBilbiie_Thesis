@@ -1,0 +1,21 @@
+Starting Dynare (version 6.3).
+Calling Dynare with arguments: none
+Starting preprocessing of the model file ...
+Found 116 equation(s).
+Evaluating expressions...
+Computing static model derivatives (order 1).
+Normalizing the static model...
+Finding the optimal block decomposition of the static model...
+103 block(s) found:
+  102 recursive block(s) and 1 simultaneous block(s).
+  the largest simultaneous block has 12 equation(s)
+                                 and 12 feedback variable(s).
+Computing dynamic model derivatives (order 2).
+Normalizing the dynamic model...
+Finding the optimal block decomposition of the dynamic model...
+103 block(s) found:
+  102 recursive block(s) and 1 simultaneous block(s).
+  the largest simultaneous block has 12 equation(s)
+                                 and 10 feedback variable(s).
+Preprocessing completed.
+Preprocessing time: 0h00m00s.
