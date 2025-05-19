@@ -144,7 +144,7 @@ function steady_state(model::MyHeteroBilbiieModel; tol = 1e-15)
         C = blk.C,
 
         # ── sectoral block (7 I) ──
-        M      = blk.Mi,
+        M_i      = blk.Mi,
         C_i    = blk.Ci,
         ρ_i    = blk.ρi,
         v_i    = blk.vi,
