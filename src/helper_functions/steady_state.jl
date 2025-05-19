@@ -1,7 +1,7 @@
-#############################################################
-#  src/steady_state.jl – analytical steady-state solver     #
-#  for the heterogeneous Bilbiie-Sedlacek model (3 + 7 I)    #
-#############################################################
+##############################################################################
+#  src/helper_functions/steady_state.jl – analytical steady-state solver     #
+#  for the heterogeneous Bilbiie-Sedlacek model (3 + 7 I)                    #
+##############################################################################
 
 using LinearAlgebra, Statistics
 

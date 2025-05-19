@@ -10,7 +10,7 @@
     rho@{i} - (theta/(theta-1))*(w/(alpha@{i}*Z))*(C@{i}/M@{i}/Z)^(1/alpha@{i}-1)     = 0;
     d@{i}   - (1 - 1/(theta/(theta-1)))*C@{i}/M@{i}                                   = 0;
     v@{i}   - beta*(1-delta)*(C@{i}/C@{i}(+1))*(v@{i}(+1)+d@{i}(+1))                  = 0;
-    psi@{i} - (psi_bar@{i} * X^(1/(1-phi)))                                           = 0;
+    psi@{i} - psi_bar@{i} * (X)^(1/(1-phi)) * (Z)^(1/(1-phi))                         = 0; // Z doesnt actually belong here, but since Pi is a parameter, we need to define it here to have it impact e and M (trick used by Sedlacek)
     e@{i}   - psi@{i}*(Pi_bar@{i})^(1/(phi - 1))                                      = 0;
     M@{i}   - (1-delta)*(M@{i}(-1) + Pi_bar@{i}*e@{i}(-1))                            = 0;
 @#endfor

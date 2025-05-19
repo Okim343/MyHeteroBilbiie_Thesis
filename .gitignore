@@ -22,6 +22,7 @@ docs/site/
 Manifest.toml
 
 # Dynare-generated files to ignore
+src/images/
 
 # Optional: ignore all files except the .mod files in DynareModFiles
 # Uncomment if you only want to keep .mod files and exclude everything else
