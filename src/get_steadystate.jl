@@ -1,14 +1,20 @@
-using MyHeteroBilbiie                   # umbrella module (you include all src/*.jl there)
-using MyHeteroBilbiie.Types
-#= using MyHeteroBilbiie.LinearSystem
-using MyHeteroBilbiie.EqCond            # for idx mapping
-using DSGE
-using Plots =#
+const SRC = @__DIR__
+
+using LinearAlgebra, Statistics
+using Plots 
+
+
+# load type definitions first
+include(joinpath(SRC, "parameter&types.jl"))    # defines structs, aliases, etc.
+
+# finally your steady‐state solver
+include(joinpath(SRC,"helper_functions","steady_state.jl"))  # defines steady_state(...)
+
 
 # ────────────────────────────────────────────────────────────────────────
 #  1. Build calibrated model and solve linear system                      
 # ────────────────────────────────────────────────────────────────────────
 
-model = Types.MyHeteroBilbiieModel()    # pulls constants from params.jl
-ss = steady_state(model)           # compute steady state
+model = MyHeteroBilbiieModel()    # pulls constants from params.jl
+ss = steady_state(model)          # compute steady state
 println("ss object = ", ss)

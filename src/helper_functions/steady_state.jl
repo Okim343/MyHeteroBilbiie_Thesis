@@ -3,11 +3,8 @@
 #  for the heterogeneous Bilbiie-Sedlacek model (3 + 7 I)    #
 #############################################################
 
-module SteadyState
-
 using LinearAlgebra, Statistics
-using MyHeteroBilbiie.Types
-import MyHeteroBilbiie.Types: MyHeteroBilbiieModel
+
 
 # ──────────────────────────────────────────────────────────
 # Generic root-finder (Brent / bisection mix)
@@ -162,6 +159,6 @@ end
 
 export steady_state
 
-end # module
+
 
 # ────────────────────────────────────────────────────────────────────────

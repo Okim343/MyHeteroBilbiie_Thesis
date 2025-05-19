@@ -22,23 +22,8 @@ docs/site/
 Manifest.toml
 
 # Dynare-generated files to ignore
-DynareModFiles/*.log
-DynareModFiles/*_results.mat
-DynareModFiles/*_static.m
-DynareModFiles/*_dynamic.m
-DynareModFiles/*_set_auxiliary_variables.m
-DynareModFiles/*.eps
-DynareModFiles/*.pdf
-DynareModFiles/*.tex
-DynareModFiles/*.asv
-DynareModFiles/*.m
-DynareModFiles/*.mod~
-DynareModFiles/*.xml
-DynareModFiles/*.json
-DynareModFiles/*.jnl
-DynareModFiles/*.mat
 
 # Optional: ignore all files except the .mod files in DynareModFiles
 # Uncomment if you only want to keep .mod files and exclude everything else
-DynareModFiles/*
-!DynareModFiles/*.mod
+src/DynareModFiles/*
+!src/DynareModFiles/*.mod
