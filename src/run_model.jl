@@ -25,16 +25,33 @@ shocks = mr.irfs                           # this is a ::Dict{Symbol, AxisArrayT
 # ─────────────────────Aggreagate productivity shock Z─────────────────────────────────────
 
 p = plot_irfs(mr, :eps_Z, [:logL, :logC, :logw]; horizon=75, ncols=3)
-savefig(p, "src/images/irf_epsZAgg.pdf")  # paper-ready PDF
+savefig(p, "src/images/Zshocks/irf_epsZAgg.pdf")  # paper-ready PDF =#
 
-p = plot_irfs(mr, :eps_Z, [:logv1, :logv2, :logv3, :logv4, :logv5, :logv6, :logv7, :logv8, :logv9]; horizon=75, ncols=3)
-savefig(p, "src/images/irf_epsZ_logv.pdf")  # paper-ready PDF
+p = plot_irfs_stacked(mr, :eps_Z, [:e1, :e2, :e3, :e4, :e5, :e6, :e7, :e8, :e9]; horizon=75, ncols=3)
+savefig(p, "src/images/Zshocks/irf_epsZ_e_stacked.pdf")  # paper-ready PDF
 
-p = plot_irfs(mr, :eps_Z, [:logd1, :logd2, :logd3, :logd4, :logd5, :logd6, :logd7, :logd8, :logd9]; horizon=75, ncols=3)
-savefig(p, "src/images/irf_epsZ_logd.pdf")  # paper-ready PDF
+p = plot_irfs_stacked(mr, :eps_Z, [:M1, :M2, :M3, :M4, :M5, :M6, :M7, :M8, :M9]; horizon=75, ncols=3)
+savefig(p, "src/images/Zshocks/irf_epsZ_M_stacked.pdf")  # paper-ready PDF
 
-p = plot_irfs(mr, :eps_Z, [:e1, :e2, :e3, :e4, :e5, :e6, :e7, :e8, :e9]; horizon=75, ncols=3)
-savefig(p, "src/images/irf_epsZ_e.pdf")  # paper-ready PDF
+p = plot_irfs_stacked(mr, :eps_Z, [:logv1, :logv2, :logv3, :logv4, :logv5, :logv6, :logv7, :logv8, :logv9]; horizon=75, ncols=3)
+savefig(p, "src/images/Zshocks/irf_epsZ_logv_stacked.pdf")  # paper-ready PDF
 
-p = plot_irfs(mr, :eps_Z, [:M1, :M2, :M3, :M4, :M5, :M6, :M7, :M8, :M9]; horizon=75, ncols=3)
-savefig(p, "src/images/irf_epsZ_M.pdf")  # paper-ready PDF
+p = plot_irfs_stacked(mr, :eps_Z, [:logd1, :logd2, :logd3, :logd4, :logd5, :logd6, :logd7, :logd8, :logd9]; horizon=75, ncols=3)
+savefig(p, "src/images/Zshocks/irf_epsZ_logd_stacked.pdf") # paper-ready PDF
+
+# ─────────────────────Aggreagate investment shock X─────────────────────────────────────<
+
+p = plot_irfs(mr, :eps_X, [:logL, :logC, :logw]; horizon=75, ncols=3)
+savefig(p, "src/images/Xshocks/irf_epsX_Agg.pdf")  # paper-ready PDF 
+
+p = plot_irfs_stacked(mr, :eps_X, [:e1, :e2, :e3, :e4, :e5, :e6, :e7, :e8, :e9]; horizon=75, ncols=3)
+savefig(p, "src/images/Xshocks/irf_epsX_e_stacked.pdf")  # paper-ready PDF
+
+p = plot_irfs_stacked(mr, :eps_X, [:M1, :M2, :M3, :M4, :M5, :M6, :M7, :M8, :M9]; horizon=75, ncols=3)
+savefig(p, "src/images/Xshocks/irf_epsX_M_stacked.pdf")  # paper-ready PDF
+
+p = plot_irfs_stacked(mr, :eps_X, [:logv1, :logv2, :logv3, :logv4, :logv5, :logv6, :logv7, :logv8, :logv9]; horizon=75, ncols=3)
+savefig(p, "src/images/Xshocks/irf_epsX_logv_stacked.pdf")  # paper-ready PDF
+
+p = plot_irfs_stacked(mr, :eps_X, [:logd1, :logd2, :logd3, :logd4, :logd5, :logd6, :logd7, :logd8, :logd9]; horizon=75, ncols=3)
+savefig(p, "src/images/Xshocks/irf_epsX_logd_stacked.pdf")  # paper-ready PDF
