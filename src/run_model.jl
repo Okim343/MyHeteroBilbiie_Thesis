@@ -1,11 +1,8 @@
-using Pkg
-Pkg.activate(@__DIR__)
-Pkg.instantiate()
 using LinearAlgebra
-@info "BLAS config: " BLAS.get_config()
+@info "BLAS config: " BLAS.get_config() # Used for debugging since BLAS is currently unstable in Dynare.jl depending on the Julia version
 using Dynare
 
-ctx = @dynare "DynareModFiles/main.mod" "stoponerror";
+ctx = @dynare "src/DynareModFiles/main.mod" "stoponerror";
 
 
 using AxisArrayTables

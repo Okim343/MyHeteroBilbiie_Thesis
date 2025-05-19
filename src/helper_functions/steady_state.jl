@@ -78,9 +78,10 @@ function steady_state(model::MyHeteroBilbiieModel; tol = 1e-15)
     function sector_block(w)
 
         Mi = zeros(I);  Ci = similar(Mi);  ρi = similar(Mi)
-        di = similar(Mi); vi = similar(Mi); ei = similar(Mi); ψi = similar(Mi)
+        di = similar(Mi); vi = similar(Mi); ei = similar(Mi); ψi = similar(Mi);
+         
 
-        # Internals not returned
+        # Internals
         yi = similar(Mi); li = similar(Mi); mi = similar(Mi)
 
         for i in 1:I
@@ -113,7 +114,7 @@ function steady_state(model::MyHeteroBilbiieModel; tol = 1e-15)
         C = (sum(Ci .^ ((η - 1)/η)))^(η/(η - 1))   # top-level CES
         L = sum(Mi .* li .+ ei * fE / Z̄)           # labour demand
 
-        return (; C, L, Mi, Ci, ρi, di, vi, ei, ψi)
+        return (; C, L, Mi, Ci, ρi, di, vi, ei, ψi, li, yi)
     end
 
     ## ─── Household intratemporal FOC residual g(w) ─────────────
@@ -151,6 +152,8 @@ function steady_state(model::MyHeteroBilbiieModel; tol = 1e-15)
         e_i    = blk.ei,
         ψ_i    = blk.ψi,
         Π_i    = Π̄,
+        l_i    = blk.li,
+        y_i    = blk.yi,
         s_lag_Z = 1.0,               # Z̄₋₁
     )
 
