@@ -22,7 +22,14 @@ print_ss(ss)                     # print steady state
 
 # ────────────────────────────────────────────────────────────────────────
 
+p = steady_state_scatter(ss; size_scale=30, log_y=true, log_x=true) # relationship between y_i l_i and M_i logged
+
+savefig(p, "src/images/steady_state/steady_firm_dynamic_log.pdf")
+
 p = steady_state_scatter(ss; size_scale=30) # relationship between y_i l_i and M_i 
 
+savefig(p, "src/images/steady_state/steady_firm_dynamic.pdf")
 
-savefig(p, "src/images/steady_firm_dynamic.pdf")
+p = steady_state_entry(ss; log_y=true, log_x=true) # relationship between y_i l_i and M_i logged
+
+savefig(p, "src/images/steady_state/steady_entry_log.pdf")

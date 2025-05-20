@@ -152,6 +152,7 @@ function steady_state(model::MyHeteroBilbiieModel; tol = 1e-15)
         e_i    = blk.ei,
         ψ_i    = blk.ψi,
         Π_i    = Π̄,
+        α_i    = α,
         l_i    = blk.li,
         y_i    = blk.yi,
         s_lag_Z = 1.0,               # Z̄₋₁
@@ -160,11 +161,12 @@ function steady_state(model::MyHeteroBilbiieModel; tol = 1e-15)
     return ss
 end
 
+# ──────────────────────────────────────────────────────────
 
 """
 Nicely print a steady‐state NamedTuple `ss` with:
   • scalars:  w, L, r, C, s_lag_Z
-  • 9‐element vectors: M_i, C_i, ρ_i, v_i, d_i, e_i, ψ_i, Π_i, l_i, y_i
+  • 9‐element vectors: M_i, C_i, ρ_i, v_i, d_i, e_i, ψ_i, Π_i, α_i, l_i, y_i
 """
 function print_ss(ss)
     # 1) scalars
@@ -176,16 +178,20 @@ function print_ss(ss)
         println(rpad(string(fld), 10), " = ", getproperty(ss, fld))
     end
 
-    # 2) sectoral vectors
-    vec_fields = (:M_i, :C_i, :ρ_i, :v_i, :d_i, :e_i, :ψ_i, :Π_i, :l_i, :y_i)
+    # 2) sectoral vectors (including α_i)
+    vec_fields = (:M_i, :C_i, :ρ_i, :v_i, :d_i, :e_i, :ψ_i, :Π_i, :α_i, :l_i, :y_i)
     df = DataFrame(sector = 1:9)
     for fld in vec_fields
         @assert hasproperty(ss, fld) "ss has no field $fld"
         arr = getproperty(ss, fld)
         @assert length(arr) == 9 "field $fld must have length 9"
-        # sanitize name (rho for ρ, Pi for Π, psi for ψ)
-        name = Symbol(replace(string(fld), "ρ"=>"rho", "Π"=>"Pi", "ψ"=>"psi"))
-        df[!, name] = arr
+        # map Greek to ASCII: ρ→rho, Π→Pi, ψ→psi, α→alpha
+        clean_name = replace(string(fld),
+                             "ρ" => "rho",
+                             "Π" => "Pi",
+                             "ψ" => "psi",
+                             "α" => "alpha")
+        df[!, Symbol(clean_name)] = arr
     end
 
     println("\n", "─"^60)
@@ -194,6 +200,9 @@ function print_ss(ss)
     # show full table, no truncation
     show(df, allrows=true, allcols=true)
 end
+
+
+
 
 
 
