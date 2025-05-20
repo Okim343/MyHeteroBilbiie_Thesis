@@ -18,8 +18,11 @@ include(joinpath(SRC,"helper_functions","steady_state_figures.jl"))  # defines s
 
 model = MyHeteroBilbiieModel()    # pulls constants from params.jl
 ss = steady_state(model)          # compute steady state
-println("ss object = ", ss)
+print_ss(ss)                     # print steady state
 
-p = steady_state_scatter(ss; size_scale=30)
+# ────────────────────────────────────────────────────────────────────────
+
+p = steady_state_scatter(ss; size_scale=30) # relationship between y_i l_i and M_i 
+
 
 savefig(p, "src/images/steady_firm_dynamic.pdf")
