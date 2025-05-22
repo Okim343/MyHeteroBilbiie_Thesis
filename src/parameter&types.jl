@@ -7,13 +7,13 @@
 
 # calibration & prior blocks
 
-const β = 0.96 # discount factor to match 4% annual interest rate from Sedlacek (2012)
+const β = 0.96 # discount factor to match 4% annual interest rate from Sedlacek (2017)
 const δ = 0.09631 # exogenous firm exit shock converted from quarters to yearly
 const θ = 3.8 # CES sectoral parameter
-const η = 2 # elasticity of substitution across sectors from Carvalho and Lee (2011)
+const η = 2 # elasticity of substitution across sectors from Carvalho and Lee (2021)
 const fE = 1 # steady-state entry cost
 const Z = 1 # initial productivity
-const χ = 0.924271 #Disutility of labor from Bilbiie (2007)
+const χ = 0.924271 #Disutility of labor from Bilbiie (2012)
 const φ = 4 # elasticity of labor supply
 const Ψ = 0.090 # measure of business opportunities
 const ϕ= 0.3 # elasticity in the entry function

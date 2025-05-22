@@ -38,7 +38,7 @@ end
 # Main steady-state routine
 # ──────────────────────────────────────────────────────────
 """
-    steady_state(model::MyHeteroBilbiieModel; tol = 1e-10)
+    steady_state(model::MyHeteroBilbiieModel; tol = 1e-15, inelasticL::Bool=false)
 
 Compute the steady state of the full heterogeneous model.
 
@@ -48,82 +48,85 @@ The returned **named tuple** contains the 3 aggregate unknowns
 
 Diagnostics such as `C` or intermediate objects (*yᵢ, lᵢ, mᵢ*) are
 computed internally but not exported.
+
+If `inelasticL=true`, the labor FOC is solved as χ = w/C (φ→0 limit).
+Otherwise it uses χ·L^(1/φ) = w/C.
 """
-function steady_state(model::MyHeteroBilbiieModel; tol = 1e-15)
+function steady_state(model::MyHeteroBilbiieModel; tol = 1e-15, inelasticL::Bool=false)
 
     ## ─── Parameters ─────────────────────────────────────────────
     β      = model.β
-    δdeath = model.δ                       # firm exit shock
-    θ      = model.θ                       # within-sector elasticity
-    η      = model.η                       # across-sector elasticity
-    α      = model.α                       # returns-to-scale vector (length I)
-    fE     = model.fE
-    Z̄      = 1.0                           # productivity normalisation
-    X      = 1.0                           # composition shock normalisation
-    χ      = model.χ
-    ϕ      = model.ϕ                       # elasticity of matching
-    Π̄      = model.Π                       # success probabilities (taken as exogenous)
-    φ      = model.φ                       # Frisch elasticity of labor supply
+    δdeath = model.δ                       # firm exit rate
+    θ      = model.θ                       # within-sector CES
+    η      = model.η                       # across-sector CES
+    α      = model.α                       # sector returns-to-scale
+    fE     = model.fE                      # entry cost
+    Z̄      = 1.0                           # productivity norm
+    X      = 1.0                           # composition shock norm
+    χ      = model.χ                       # disutility of labor
+    ϕ      = model.ϕ                       # matching elasticity
+    Π̄      = model.Π                       # success probabilities
+    φ      = model.φ                       # Frisch elasticity
 
-    I      = length(α)                     # number of sectors
-    μ      = θ / (θ - 1)                  # constant markup μ = θ/(θ-1)
+    I      = length(α)
+    μ      = θ / (θ - 1)                   # markup
 
-    ##  discount & valuation helpers
-    r      = 1/β - 1                      # from Euler: 1 = β (1+r)
-    κ      = (r + δdeath)/(1 - δdeath)      # κ = (r + δ)/(1-δ)
+    ## discount & valuation helpers
+    r      = 1/β - 1
+    κ      = (r + δdeath)/(1 - δdeath)
 
-    const_part = κ * fE / (Z̄ * (1 - 1/μ))  # appears in Cᵢ/Mᵢ
+    const_part = κ * fE / (Z̄ * (1 - 1/μ))
 
-    ## ─── Sector-level closure given a candidate wage w ─────────
+    ## ─── Sector‐level block for a candidate wage w ───────────────
     function sector_block(w)
-
         Mi = zeros(I);  Ci = similar(Mi);  ρi = similar(Mi)
-        di = similar(Mi); vi = similar(Mi); ei = similar(Mi); ψi = similar(Mi);
-         
-
-        # Internals
+        di = similar(Mi); vi = similar(Mi); ei = similar(Mi); ψi = similar(Mi)
         yi = similar(Mi); li = similar(Mi); mi = similar(Mi)
 
         for i in 1:I
             αi        = α[i]
-            p_success = Π̄[i]                  # fixed success probability
+            p_success = Π̄[i]
 
-            # (B)  Cᵢ/Mᵢ
+            # (B) Cᵢ/Mᵢ
             Ci_over_Mi = const_part * w / p_success
-            cost = (w * fE) / (Z̄ * X)
+            cost       = (w * fE) / (Z̄ * X)
 
-            # (E)  pricing condition → Mᵢ
-            Ki   = μ * w /(Z̄ * αi) * (Ci_over_Mi / Z̄)^(1/αi - 1)
-            Mi[i] = Ki^(θ - 1)
+            # (E) pricing → Mᵢ
+            Ki        = μ * w/(Z̄ * αi) * (Ci_over_Mi/Z̄)^(1/αi - 1)
+            Mi[i]     = Ki^(θ - 1)
 
-            # Back-out remaining sectoral objects
-            Ci[i] = Ci_over_Mi * Mi[i]
-            yi[i] = Ci_over_Mi
-            li[i] = (yi[i]/Z̄)^(1/αi)
-            di[i] = (1 - 1/μ) * yi[i]
-            vi[i] = di[i] / κ
-            mi[i] = δdeath/(1 - δdeath) * Mi[i]
-            ei[i] = mi[i] / (cost / vi[i])
-            ρi[i] = Mi[i]^(1/(θ - 1))          # relative price pᵢ/P
-            # version exponent 1/(1-ϕ)
-            ψi[i] = ei[i] * ( cost / vi[i] )^( 1 / (1 - ϕ) )
- 
+            # back out sectorals
+            Ci[i]     = Ci_over_Mi * Mi[i]
+            yi[i]     = Ci_over_Mi
+            li[i]     = (yi[i]/Z̄)^(1/αi)
+            di[i]     = (1 - 1/μ)*yi[i]
+            vi[i]     = di[i]/κ
+            mi[i]     = δdeath/(1 - δdeath)*Mi[i]
+            ei[i]     = mi[i]/(cost/vi[i])
+            ρi[i]     = Mi[i]^(1/(θ - 1))
+            ψi[i]     = ei[i] * (cost/vi[i])^(1/(1 - ϕ))
         end
 
-        # Aggregates
-        C = (sum(Ci .^ ((η - 1)/η)))^(η/(η - 1))   # top-level CES
-        L = sum(Mi .* li .+ ei * fE / Z̄)           # labour demand
+        # aggregates
+        C = sum(Ci .^ ((η - 1)/η))^(η/(η - 1))
+        L = sum(Mi .* li .+ ei * fE / Z̄)
 
         return (; C, L, Mi, Ci, ρi, di, vi, ei, ψi, li, yi)
     end
 
-    ## ─── Household intratemporal FOC residual g(w) ─────────────
+    ## ─── Household intratemporal FOC residual ────────────────────
     function g(w)
         blk = sector_block(w)
-        χ * blk.L^(1/φ) - w / blk.C
+        if inelasticL
+            # φ→0 limit such that L^(1/φ) = 1: χ = w/C
+            return χ - w/blk.C
+        else
+            # standard: χ·L^(1/φ) = w/C
+            return χ * blk.L^(1/φ) - w/blk.C
+        end
     end
 
-    ## ─── Outer loop: find unique w with g(w)=0 ────────────────
+    ## ─── Find wage w such that g(w)=0 via bisection ──────────────
     w_low, w_high = 1e-4, 1.0
     while sign(g(w_low)) == sign(g(w_high))
         w_high *= 2
@@ -131,34 +134,29 @@ function steady_state(model::MyHeteroBilbiieModel; tol = 1e-15)
     end
     w_star = bisection(g, w_low, w_high; tol)
 
-    ## ─── Assemble final steady-state tuple ─────────────────────
+    ## ─── Assemble and return the steady‐state named tuple ─────────
     blk = sector_block(w_star)
+    return (
+        # aggregates
+        w    = w_star,
+        L    = blk.L,
+        r    = r,
+        C    = blk.C,
 
-    ss = (
-        # ── aggregates (3) ──
-        w = w_star,
-        L = blk.L,
-        r = r,
-
-        # *C returned for convenience, not counted among unknowns
-        C = blk.C,
-
-        # ── sectoral block (7 I) ──
-        M_i      = blk.Mi,
-        C_i    = blk.Ci,
-        ρ_i    = blk.ρi,
-        v_i    = blk.vi,
-        d_i    = blk.di,
-        e_i    = blk.ei,
-        ψ_i    = blk.ψi,
-        Π_i    = Π̄,
-        α_i    = α,
-        l_i    = blk.li,
-        y_i    = blk.yi,
-        s_lag_Z = 1.0,               # Z̄₋₁
+        # sectoral blocks
+        M_i   = blk.Mi,
+        C_i   = blk.Ci,
+        ρ_i   = blk.ρi,
+        v_i   = blk.vi,
+        d_i   = blk.di,
+        e_i   = blk.ei,
+        ψ_i   = blk.ψi,
+        Π_i   = Π̄,
+        α_i   = α,
+        l_i   = blk.li,
+        y_i   = blk.yi,
+        s_lag_Z = 1.0,
     )
-
-    return ss
 end
 
 # ──────────────────────────────────────────────────────────

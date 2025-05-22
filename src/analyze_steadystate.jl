@@ -17,12 +17,15 @@ include(joinpath(SRC,"helper_functions","steady_state_figures.jl"))  # defines s
 # ────────────────────────────────────────────────────────────────────────
 
 model = MyHeteroBilbiieModel()    # pulls constants from params.jl
-ss = steady_state(model)          # compute steady state
+ss = steady_state(model)          # compute steady state for elastic labor
 print_ss(ss)                     # print steady state
+
+ss_inL = steady_state(model; inelasticL=true)          # compute steady state for elastic labor
+print_ss(ss_inL)                     # print steady state
 
 # ────────────────────────────────────────────────────────────────────────
 
-p = steady_state_scatter(ss; size_scale=30, log_y=true, log_x=true) # relationship between y_i l_i and M_i logged
+#= p = steady_state_scatter(ss; size_scale=30, log_y=true, log_x=true) # relationship between y_i l_i and M_i logged
 
 savefig(p, "src/images/steady_state/steady_firm_dynamic_log.pdf")
 
@@ -32,4 +35,4 @@ savefig(p, "src/images/steady_state/steady_firm_dynamic.pdf")
 
 p = steady_state_entry(ss; log_y=true, log_x=true) # relationship between y_i l_i and M_i logged
 
-savefig(p, "src/images/steady_state/steady_entry_log.pdf")
+savefig(p, "src/images/steady_state/steady_entry_log.pdf") =#
