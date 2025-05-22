@@ -11,7 +11,7 @@ using Plots
 const SRC = @__DIR__
 include(joinpath(SRC,"helper_functions","plot_irfs.jl"))  # defines plot_irfs(...)
 
-ctx = @dynare "src/DynareModFiles/main_ine.mod" "stoponerror";
+ctx = @dynare "src/DynareModFiles/main_ineL.mod" "stoponerror";
 
 # ──────────────────────────────────────────────────────────
 # Plotting IRFs for the aggregate shocks
