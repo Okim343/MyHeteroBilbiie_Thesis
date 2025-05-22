@@ -108,20 +108,21 @@ function steady_state(model::MyHeteroBilbiieModel; tol = 1e-15, inelasticL::Bool
         end
 
         # aggregates
-        C = sum(Ci .^ ((η - 1)/η))^(η/(η - 1))
-        L = sum(Mi .* li .+ ei * fE / Z̄)
+        C  = sum(Ci .^ ((η - 1)/η))^(η/(η - 1))
+        L  = sum(Mi .* li .+ ei * fE / Z̄)
+        Le = sum(ei * fE / Z̄)          # labor in firm production
+        Lc = L - Le                     # labor in consumption production
+        Y  = w * L + sum(di .* Mi)     # total output
 
-        return (; C, L, Mi, Ci, ρi, di, vi, ei, ψi, li, yi)
+        return (; C, L, Le, Lc, Y, Mi, Ci, ρi, di, vi, ei, ψi, li, yi)
     end
 
     ## ─── Household intratemporal FOC residual ────────────────────
     function g(w)
         blk = sector_block(w)
         if inelasticL
-            # φ→0 limit such that L^(1/φ) = 1: χ = w/C
             return χ - w/blk.C
         else
-            # standard: χ·L^(1/φ) = w/C
             return χ * blk.L^(1/φ) - w/blk.C
         end
     end
@@ -140,6 +141,9 @@ function steady_state(model::MyHeteroBilbiieModel; tol = 1e-15, inelasticL::Bool
         # aggregates
         w    = w_star,
         L    = blk.L,
+        Le   = blk.Le,
+        Lc   = blk.Lc,
+        Y    = blk.Y,
         r    = r,
         C    = blk.C,
 
@@ -159,19 +163,20 @@ function steady_state(model::MyHeteroBilbiieModel; tol = 1e-15, inelasticL::Bool
     )
 end
 
+
 # ──────────────────────────────────────────────────────────
 
 """
-Nicely print a steady‐state NamedTuple `ss` with:
-  • scalars:  w, L, r, C, s_lag_Z
-  • 9‐element vectors: M_i, C_i, ρ_i, v_i, d_i, e_i, ψ_i, Π_i, α_i, l_i, y_i
+ Nicely print a steady‐state NamedTuple `ss` with:
+   • scalars:  w, L, Le, Lc, Y, r, C, s_lag_Z
+   • 9‐element vectors: M_i, C_i, ρ_i, v_i, d_i, e_i, ψ_i, Π_i, α_i, l_i, y_i
 """
 function print_ss(ss)
     # 1) scalars
     println("─"^30)
     println(" Steady‐State Scalars ")
     println("─"^30)
-    for fld in (:w, :L, :r, :C, :s_lag_Z)
+    for fld in (:w, :L, :Le, :Lc, :Y, :r, :C, :s_lag_Z)
         @assert hasproperty(ss, fld) "ss has no field $fld"
         println(rpad(string(fld), 10), " = ", getproperty(ss, fld))
     end
@@ -183,7 +188,6 @@ function print_ss(ss)
         @assert hasproperty(ss, fld) "ss has no field $fld"
         arr = getproperty(ss, fld)
         @assert length(arr) == 9 "field $fld must have length 9"
-        # map Greek to ASCII: ρ→rho, Π→Pi, ψ→psi, α→alpha
         clean_name = replace(string(fld),
                              "ρ" => "rho",
                              "Π" => "Pi",
@@ -195,7 +199,6 @@ function print_ss(ss)
     println("\n", "─"^60)
     println(" Steady‐State Sectoral Vectors (one row per sector) ")
     println("─"^60)
-    # show full table, no truncation
     show(df, allrows=true, allcols=true)
 end
 

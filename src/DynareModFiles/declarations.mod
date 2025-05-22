@@ -6,19 +6,19 @@
 
 // ─── Predetermined & forward‐looking variables ─────────────
 @#for i in 1:I
-  var M@{i} C@{i} rho@{i} d@{i} v@{i} e@{i} psi@{i};
+  var M@{i} C@{i} rho@{i} d@{i} v@{i} e@{i} psi@{i} y@{i};
 @#endfor
-var Z X C w L;
+var Z X C w L Le Lc Y;
 
 // ─── Exogenous shocks ───────────────────────────────────────
 varexo eps_Z eps_X;
 
 // ─── Log Versions ───────────────────────────────────────
 @#for i in 1:I
-  var logM@{i} logC@{i} logd@{i} logv@{i} loge@{i};
+  var logM@{i} logC@{i} logd@{i} logv@{i} loge@{i} logy@{i};
 @#endfor
 
-var logC logw logL;
+var logC logw logL logLe logLc logY;
 
 // ─── Calibration parameters ─────────────────────────────────
 parameters

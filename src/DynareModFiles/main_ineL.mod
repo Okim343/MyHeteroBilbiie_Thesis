@@ -15,6 +15,9 @@ steady_state_model;
     L    = 0.06145534267502116;
     r    = 0.04166666666666674;
     C    = 0.05596494221025121;
+    Le   = 0.0476897504074682;
+    Lc   = 0.013765592267552959;
+    Y    = 0.0067129529404240185;
     
     // 2) Sectoral steady state (I = 9)
     M1   = 0.0002851937014842398;
@@ -112,11 +115,15 @@ steady_state_model;
         logd@{i} = log(d@{i});
         logv@{i} = log(v@{i});
         loge@{i} = log(e@{i});
+        logy@{i} = log(y@{i});
     @#endfor
 
     logC = log(C);
     logw = log(w);
     logL = log(L);
+    logLe = log(Le);
+    logLc = log(Lc);
+    logY = log(Y);
   end;
 
 

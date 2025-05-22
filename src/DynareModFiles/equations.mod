@@ -13,6 +13,7 @@
     psi@{i} - psi_bar@{i} * (X)^(1/(1-phi)) * (Z)^(1/(1-phi))                         = 0; // Z doesnt actually belong here, but since Pi is a parameter, we need to define it here to have it impact e and M (trick used by Sedlacek)
     e@{i}   - psi@{i}*(Pi_bar@{i})^(1/(phi - 1))                                      = 0;
     M@{i}   - (1-delta)*(M@{i}(-1) + Pi_bar@{i}*e@{i}(-1))                            = 0;
+    y@{i}   - C@{i}/M@{i}                                                             = 0; // This is merely for reporting the definition yi
 @#endfor
 
 // ─── 2.  Define top‐level CES aggregate ───────────────
@@ -33,6 +34,19 @@ L   = (
     @#endfor
 );
 
+Le = (
+    @#for i in 1:I
+        + (e@{i}*(fE/Z))
+    @#endfor
+);
+
+Lc = L - Le;
+
+Y = w*L
+@#for i in 1:I
+  + d@{i}*M@{i}
+@#endfor
+;
 
 // ─── 5.  Shock processes in logs ───────────────────────
 ln(Z) - rho_Z*ln(Z(-1)) - eps_Z = 0; // productivity shock
@@ -47,8 +61,12 @@ ln(X) - rho_X*ln(X(-1))- eps_X = 0;   // composition shock
     logd@{i} - log(d@{i})= 0;
     logv@{i} - log(v@{i})= 0;
     loge@{i} - log(e@{i})= 0;
+    logy@{i} - log(y@{i})= 0;
 @#endfor
 
 logC = log(C);
 logw = log(w);
 logL = log(L);
+logLe = log(Le);
+logLc = log(Lc);
+logY = log(Y);

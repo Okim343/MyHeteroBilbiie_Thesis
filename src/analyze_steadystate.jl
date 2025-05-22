@@ -21,9 +21,10 @@ model = MyHeteroBilbiieModel()    # pulls constants from params.jl
 # ────────────────────────────────────────────────────────────────────────
 
 ss = steady_state(model)          # compute steady state for elastic labor
-print_ss(ss)                     # print steady state
+println(ss)
+#print_ss(ss)                     # print steady state
 
-p = steady_state_scatter(ss; size_scale=30, log_y=true, log_x=true) # relationship between y_i l_i and M_i logged
+#= p = steady_state_scatter(ss; size_scale=30, log_y=true, log_x=true) # relationship between y_i l_i and M_i logged
 
 savefig(p, "src/images/steady_state/elastic_labor/steady_firm_dynamic_log.pdf")
 
@@ -33,15 +34,15 @@ savefig(p, "src/images/steady_state/elastic_labor/steady_firm_dynamic.pdf")
 
 p = steady_state_entry(ss; log_y=true, log_x=true) # relationship between y_i l_i and M_i logged
 
-savefig(p, "src/images/steady_state/elastic_labor/steady_entry_log.pdf")
+savefig(p, "src/images/steady_state/elastic_labor/steady_entry_log.pdf") =#
 
 
 # ────────────────────────────────────────────────────────────────────────
 
-ss_inL = steady_state(model; inelasticL=true)          # compute steady state for inelastic labor
-print_ss(ss_inL)                     # print steady state
+#= ss_inL = steady_state(model; inelasticL=true)          # compute steady state for inelastic labor
+print_ss(ss_inL)                     # print steady state =#
 
-p = steady_state_scatter(ss_inL; size_scale=30, log_y=true, log_x=true) # relationship between y_i l_i and M_i logged
+#= p = steady_state_scatter(ss_inL; size_scale=30, log_y=true, log_x=true) # relationship between y_i l_i and M_i logged
 
 savefig(p, "src/images/steady_state/inelastic_labor/steady_firm_dynamic_log.pdf")
 
@@ -51,4 +52,4 @@ savefig(p, "src/images/steady_state/inelastic_labor/steady_firm_dynamic.pdf")
 
 p = steady_state_entry(ss_inL; log_y=true, log_x=true) # relationship between y_i l_i and M_i logged
 
-savefig(p, "src/images/steady_state/inelastic_labor/steady_entry_log.pdf")
+savefig(p, "src/images/steady_state/inelastic_labor/steady_entry_log.pdf") =#
