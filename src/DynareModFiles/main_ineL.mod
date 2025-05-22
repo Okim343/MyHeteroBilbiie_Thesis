@@ -5,7 +5,7 @@
 @#include "declarations.mod"      // var … varexo … parameters …
 
 model;
-  @#include "equations.mod"
+  @#include "equations_ineL.mod"
 end;
 
 
@@ -120,7 +120,7 @@ steady_state_model;
   end;
 
 
-@#include "calibration_ine.mod"       // parameter numbers, shocks, initval …
+@#include "calibration_ineL.mod"       // parameter numbers, shocks, initval …
 
 // -------- Solve & simulate --------
 
