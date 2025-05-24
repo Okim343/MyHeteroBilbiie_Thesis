@@ -92,25 +92,6 @@ function plot_irfs(
 end
 
 
-
-
-
-"""
-Overlay multiple IRFs from a single shock in one plot.
-
-# Arguments
-- `mr::ModelResults`: the model results (e.g. `ctx.results.model_results[1]`).
-- `shock::Symbol`: which shock to plot (e.g. `:eps_Z` or `:eps_X`).
-- `vars::Vector{Symbol}`: list of variables (e.g. `[:v1, :v2, :v3]`).
-
-# Keyword Arguments
-- `horizon::Int=50`: how many periods to plot.
-- `lw::Float64=1.5`: line width for each IRF.
-
-# Returns
-- A `Plots.Plot` object with all IRFs overlaid.
-"""
-
 """
 Overlay multiple IRFs from a single shock in one plot.
 
@@ -135,6 +116,10 @@ function plot_irfs_stacked(
     lw::Float64 = 1.5,
     ncols::Int = 2
 )
+    # Determine plot title from variable names (strip trailing digits)
+    first_var_str = string(vars[1])
+    title_str = replace(first_var_str, r"\d+$" => "")
+
     # pull the IRF table and time‐axis
     irf_table = mr.irfs[shock]
     full_t     = collect(axes(irf_table, 1))
@@ -160,8 +145,9 @@ function plot_irfs_stacked(
       :cyan, :brown, :magenta, :gray
     )
 
-    # build the base plot (no grid)
+    # build the base plot (no grid), with dynamic title
     p = plot(
+      title      = title_str,
       xlabel     = "Horizon",
       ylabel     = "",
       xlim       = (first(times), last(times)),
@@ -205,3 +191,4 @@ function plot_irfs_stacked(
 
     return p
 end
+
