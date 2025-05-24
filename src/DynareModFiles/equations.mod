@@ -15,6 +15,7 @@
     M@{i}   - (1-delta)*(M@{i}(-1) + Pi_bar@{i}*e@{i}(-1))                            = 0;
     y@{i}   - C@{i}/M@{i}                                                             = 0; // This is merely for reporting the definition yi
     l@{i}   - (y@{i}/Z)^(1/alpha@{i})                                                 = 0; // This is merely for reporting the definition li
+    L@{i}   - (M@{i}*(C@{i}/(Z*M@{i}))^(1/alpha@{i}) + e@{i}*(fE/Z))                  = 0; // This is merely for reporting the definition Li
 @#endfor
 
 // ─── 2.  Define top‐level CES aggregate ───────────────
@@ -65,6 +66,7 @@ ln(X) - rho_X*ln(X(-1))- eps_X = 0;   // composition shock
     logy@{i} - log(y@{i})= 0;
     logrho@{i} - log(rho@{i})= 0;
     logl@{i} - log(l@{i})= 0;
+    logL@{i} - log(L@{i})= 0;
 @#endfor
 
 logC = log(C);

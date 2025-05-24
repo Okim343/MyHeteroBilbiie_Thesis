@@ -44,6 +44,9 @@ savefig(p, "src/images/inelastic_labor/Zshocks/irf_epsZ_rho_stacked.pdf")  # pap
 p = plot_irfs_stacked(mr, :eps_Z, [:logl1, :logl2, :logl3, :logl4, :logl5, :logl6, :logl7, :logl8, :logl9]; horizon=75, ncols=3)
 savefig(p, "src/images/inelastic_labor/Zshocks/irf_epsZ_logl_stacked.pdf")  # paper-ready PDF
 
+p = plot_irfs_stacked(mr, :eps_Z, [:logL1, :logL2, :logL3, :logL4, :logL5, :logL6, :logL7, :logL8, :logL9]; horizon=75, ncols=3)
+savefig(p, "src/images/inelastic_labor/Zshocks/irf_epsZ_logL_stacked.pdf")  # paper-ready PDF
+
 # ─────────────────────Aggreagate investment shock X─────────────────────────────────────<
 
 p = plot_irfs(mr, :eps_X, [:logLe, :logLc, :logY, :logw]; horizon=75, ncols=2)
@@ -69,3 +72,6 @@ savefig(p, "src/images/inelastic_labor/Xshocks/irf_epsZ_rho_stacked.pdf")  # pap
 
 p = plot_irfs_stacked(mr, :eps_X, [:logl1, :logl2, :logl3, :logl4, :logl5, :logl6, :logl7, :logl8, :logl9]; horizon=75, ncols=3)
 savefig(p, "src/images/inelastic_labor/Xshocks/irf_epsZ_logl_stacked.pdf")  # paper-ready PDF
+
+p = plot_irfs_stacked(mr, :eps_X, [:logL1, :logL2, :logL3, :logL4, :logL5, :logL6, :logL7, :logL8, :logL9]; horizon=75, ncols=3)
+savefig(p, "src/images/inelastic_labor/Xshocks/irf_epsZ_logL_stacked.pdf")  # paper-ready PDF

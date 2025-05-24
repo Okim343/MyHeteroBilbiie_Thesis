@@ -37,19 +37,17 @@ end
 # ──────────────────────────────────────────────────────────
 # Main steady-state routine
 # ──────────────────────────────────────────────────────────
+
 """
     steady_state(model::MyHeteroBilbiieModel; tol = 1e-15, inelasticL::Bool=false)
 
 Compute the steady state of the full heterogeneous model.
 
-The returned **named tuple** contains the 3 aggregate unknowns  
-`(w, L, r)` and the 7 per-sector unknowns  
-`(C_i, M_i, ρ_i, v_i, d_i, e_i, Π_i)`.  
+The returned **named tuple** contains the aggregates  
+`(w, L, Le, Lc, Y, r, C)` plus the per-sector vectors  
+`(M_i, C_i, ρ_i, v_i, d_i, e_i, ψ_i, Π_i, α_i, l_i, y_i, L_i)`.
 
-Diagnostics such as `C` or intermediate objects (*yᵢ, lᵢ, mᵢ*) are
-computed internally but not exported.
-
-If `inelasticL=true`, the labor FOC is solved as χ = w/C (φ→0 limit).
+If `inelasticL=true`, the labor FOC uses χ = w/C (φ→0 limit).  
 Otherwise it uses χ·L^(1/φ) = w/C.
 """
 function steady_state(model::MyHeteroBilbiieModel; tol = 1e-15, inelasticL::Bool=false)
@@ -109,12 +107,18 @@ function steady_state(model::MyHeteroBilbiieModel; tol = 1e-15, inelasticL::Bool
 
         # aggregates
         C  = sum(Ci .^ ((η - 1)/η))^(η/(η - 1))
+        # total labor
         L  = sum(Mi .* li .+ ei * fE / Z̄)
-        Le = sum(ei * fE / Z̄)          # labor in firm production
-        Lc = L - Le                     # labor in consumption production
-        Y  = w * L + sum(di .* Mi)     # total output
+        # labor to firm production
+        Le = sum(ei * fE / Z̄)
+        # labor to consumption production
+        Lc = L - Le
+        # total output
+        Y  = w * L + sum(di .* Mi)
+        # sectoral labor vector
+        L_i = Mi .* li .+ ei * fE / Z̄
 
-        return (; C, L, Le, Lc, Y, Mi, Ci, ρi, di, vi, ei, ψi, li, yi)
+        return (; C, L, Le, Lc, Y, Mi, Ci, ρi, di, vi, ei, ψi, li, yi, L_i)
     end
 
     ## ─── Household intratemporal FOC residual ────────────────────
@@ -148,20 +152,22 @@ function steady_state(model::MyHeteroBilbiieModel; tol = 1e-15, inelasticL::Bool
         C    = blk.C,
 
         # sectoral blocks
-        M_i   = blk.Mi,
-        C_i   = blk.Ci,
-        ρ_i   = blk.ρi,
-        v_i   = blk.vi,
-        d_i   = blk.di,
-        e_i   = blk.ei,
-        ψ_i   = blk.ψi,
-        Π_i   = Π̄,
-        α_i   = α,
-        l_i   = blk.li,
-        y_i   = blk.yi,
+        M_i    = blk.Mi,
+        C_i    = blk.Ci,
+        ρ_i    = blk.ρi,
+        v_i    = blk.vi,
+        d_i    = blk.di,
+        e_i    = blk.ei,
+        ψ_i    = blk.ψi,
+        Π_i    = Π̄,
+        α_i    = α,
+        l_i    = blk.li,
+        y_i    = blk.yi,
+        L_i    = blk.L_i,
         s_lag_Z = 1.0,
     )
 end
+
 
 
 # ──────────────────────────────────────────────────────────
@@ -169,7 +175,7 @@ end
 """
  Nicely print a steady‐state NamedTuple `ss` with:
    • scalars:  w, L, Le, Lc, Y, r, C, s_lag_Z
-   • 9‐element vectors: M_i, C_i, ρ_i, v_i, d_i, e_i, ψ_i, Π_i, α_i, l_i, y_i
+   • 9‐element vectors: M_i, C_i, ρ_i, v_i, d_i, e_i, ψ_i, Π_i, α_i, l_i, y_i, L_i
 """
 function print_ss(ss)
     # 1) scalars
@@ -181,8 +187,8 @@ function print_ss(ss)
         println(rpad(string(fld), 10), " = ", getproperty(ss, fld))
     end
 
-    # 2) sectoral vectors (including α_i)
-    vec_fields = (:M_i, :C_i, :ρ_i, :v_i, :d_i, :e_i, :ψ_i, :Π_i, :α_i, :l_i, :y_i)
+    # 2) sectoral vectors 
+    vec_fields = (:M_i, :C_i, :ρ_i, :v_i, :d_i, :e_i, :ψ_i, :Π_i, :α_i, :l_i, :y_i, :L_i)
     df = DataFrame(sector = 1:9)
     for fld in vec_fields
         @assert hasproperty(ss, fld) "ss has no field $fld"
@@ -201,6 +207,7 @@ function print_ss(ss)
     println("─"^60)
     show(df, allrows=true, allcols=true)
 end
+
 
 
 
