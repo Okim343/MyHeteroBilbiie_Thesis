@@ -20,37 +20,41 @@ model = MyHeteroBilbiieModel()    # pulls constants from params.jl
 
 # ────────────────────────────────────────────────────────────────────────
 
+outdir = joinpath(@__DIR__, "..", "src", "images", "steady_state", "elastic_labor")
+mkpath(outdir)
+
 ss = steady_state(model)          # compute steady state for elastic labor
-println(ss)
 print_ss(ss)                     # print steady state
 
 p = steady_state_scatter(ss; size_scale=30, log_y=true, log_x=true) # relationship between y_i l_i and M_i logged
 
-savefig(p, "src/images/steady_state/elastic_labor/steady_firm_dynamic_log.pdf")
+savefig(p, joinpath(outdir,"steady_firm_dynamic_log.pdf"))
 
 p = steady_state_scatter(ss; size_scale=30) # relationship between y_i l_i and M_i 
 
-savefig(p, "src/images/steady_state/elastic_labor/steady_firm_dynamic.pdf")
+savefig(p, joinpath(outdir,"steady_firm_dynamic.pdf"))
 
 p = steady_state_entry(ss; log_y=true, log_x=true) # relationship between y_i l_i and M_i logged
 
-savefig(p, "src/images/steady_state/elastic_labor/steady_entry_log.pdf")
+savefig(p, joinpath(outdir,"steady_entry_log.pdf"))
 
 
 # ────────────────────────────────────────────────────────────────────────
 
+outdir = joinpath(@__DIR__, "..", "src", "images", "steady_state", "inelastic_labor")
+mkpath(outdir)
+
 ss_inL = steady_state(model; inelasticL=true)          # compute steady state for inelastic labor
-println(ss_inL)
 print_ss(ss_inL)                     # print steady state
 
 p = steady_state_scatter(ss_inL; size_scale=30, log_y=true, log_x=true) # relationship between y_i l_i and M_i logged
 
-savefig(p, "src/images/steady_state/inelastic_labor/steady_firm_dynamic_log.pdf")
+savefig(p, joinpath(outdir,"steady_firm_dynamic_log.pdf"))
 
 p = steady_state_scatter(ss_inL; size_scale=30) # relationship between y_i l_i and M_i 
 
-savefig(p, "src/images/steady_state/inelastic_labor/steady_firm_dynamic.pdf")
+savefig(p, joinpath(outdir,"steady_firm_dynamic.pdf"))
 
 p = steady_state_entry(ss_inL; log_y=true, log_x=true) # relationship between y_i l_i and M_i logged
 
-savefig(p, "src/images/steady_state/inelastic_labor/steady_entry_log.pdf")
+savefig(p, joinpath(outdir,"steady_entry_log.pdf"))
