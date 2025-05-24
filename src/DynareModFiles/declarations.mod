@@ -6,7 +6,7 @@
 
 // ─── Predetermined & forward‐looking variables ─────────────
 @#for i in 1:I
-  var M@{i} C@{i} rho@{i} d@{i} v@{i} e@{i} psi@{i} y@{i};
+  var M@{i} C@{i} rho@{i} d@{i} v@{i} e@{i} psi@{i} y@{i} l@{i};
 @#endfor
 var Z X C w L Le Lc Y;
 
@@ -15,7 +15,7 @@ varexo eps_Z eps_X;
 
 // ─── Log Versions ───────────────────────────────────────
 @#for i in 1:I
-  var logM@{i} logC@{i} logd@{i} logv@{i} loge@{i} logy@{i};
+  var logM@{i} logC@{i} logrho@{i} logd@{i} logv@{i} loge@{i} logy@{i} logl@{i};
 @#endfor
 
 var logC logw logL logLe logLc logY;

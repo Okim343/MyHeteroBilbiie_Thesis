@@ -29,3 +29,5 @@ src/images/
 # Uncomment if you only want to keep .mod files and exclude everything else
 src/DynareModFiles/*
 !src/DynareModFiles/*.mod
+
+handling_figs.ipynb
