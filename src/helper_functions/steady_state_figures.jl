@@ -8,28 +8,26 @@ pgfplotsx()
 
 # Arguments
 - `ss`: a NamedTuple or struct with fields
-    - `ss.y_i`::AbstractVector    (firm‐level output yᵢ)
-    - `ss.l_i`::AbstractVector    (firm‐level employment lᵢ)
-    - `ss.M_i`::AbstractVector    (number of firms Mᵢ)
-    - `ss.α_i`::AbstractVector    (technology parameter αᵢ)
+    - `ss.y_i`::AbstractVector    (sectoral output yᵢ)
+    - `ss.l_i`::AbstractVector    (sectoral employment lᵢ)
+    - `ss.M_i`::AbstractVector    (# of firms Mᵢ)
+    - `ss.α_i`::AbstractVector    (technology αᵢ)
 
 # Keyword Arguments
-- `size_scale::Real=30`      maximum marker size
-- `min_marker::Real=5`       minimum marker size
-- `palette_name::Symbol=:tab10`  color palette name from Plots
-- `alpha::Real=0.8`          marker transparency
-- `buffer_frac::Real=0.2`    fraction of range to pad the axes
-- `log_x::Bool=false`        log‐scale x?
-- `log_y::Bool=false`        log‐scale y?
+- `size_scale::Real=6`      maximum marker size
+- `min_marker::Real=5`      minimum marker size
+- `alpha::Real=0.8`         marker transparency
+- `buffer_frac::Real=0.2`   axis‐padding fraction
+- `log_x::Bool=false`       log‐scale x?
+- `log_y::Bool=false`       log‐scale y?
 """
 function steady_state_scatter(ss;
-      size_scale::Real     = 6,
-      min_marker::Real     = 5,
-      palette_name::Symbol = :tab10,
-      alpha::Real          = 0.8,
-      buffer_frac::Real    = 0.2,
-      log_x::Bool          = false,
-      log_y::Bool          = false
+      size_scale::Real  = 6,
+      min_marker::Real  = 5,
+      alpha::Real       = 0.8,
+      buffer_frac::Real = 0.2,
+      log_x::Bool       = false,
+      log_y::Bool       = false
     )
 
     # unpack
@@ -49,8 +47,11 @@ function steady_state_scatter(ss;
     Mnorm   = (M .- minimum(M)) ./ (maximum(M) - minimum(M) + eps())
     markers = Mnorm .* (size_scale - min_marker) .+ min_marker
 
-    # pick colors
-    cols = palette(palette_name, N)
+    # fixed 9‐color palette matching the IRFs
+    palette = (
+      :firebrick, :forestgreen, :navy, :chocolate, :mediumpurple,
+      :teal,      :saddlebrown,  :orchid,  :dimgray
+    )
 
     # dynamic axis limits
     x_min, x_max = minimum(xdata), maximum(xdata)
@@ -63,20 +64,33 @@ function steady_state_scatter(ss;
     # axis labels
     xlabel = log_x ? "log yᵢ (output)"     : "yᵢ (output)"
     ylabel = log_y ? "log lᵢ (employment)" : "lᵢ (employment)"
-    title  = ""
 
-    # build plot
+    # build base plot
     plt = plot(
       xlabel      = xlabel,
       ylabel      = ylabel,
-      title       = title,
+      title       = "",
       legend      = :outerright,
       legendtitle = "# firms Mᵢ:",
       xlim        = xlims,
       ylim        = ylims,
     )
 
-    # plot each bubble, embedding α‐value in its legend label
+    # add 45° line
+    line_min = max(xlims[1], ylims[1])
+    line_max = min(xlims[2], ylims[2])
+    if line_min < line_max
+        plot!(
+          plt,
+          [line_min, line_max],
+          [line_min, line_max];
+          linestyle = :dash,
+          color     = :black,
+          label     = "45°"
+        )
+    end
+
+    # plot each bubble with sector‐specific color
     for i in 1:N
       scatter!(
         plt,
@@ -85,14 +99,17 @@ function steady_state_scatter(ss;
         markerstrokewidth = 0.5,
         markerstrokecolor = :black,
         alpha             = alpha,
-        color             = cols[i],
-        # use a LaTeXString so α renders nicely
-        label = LaTeXString("sector $(i)\\,(\\alpha=$(round(αs[i], digits=3)))"),
+        color             = palette[i],
+        label             = LaTeXString(
+                              "sector $(i)\\,(\\alpha=$(round(αs[i], digits=3)))"
+                            ),
       )
     end
 
     return plt
 end
+
+
 # ────────────────────────────────────────────────────────────────────────
 
 """
@@ -108,8 +125,7 @@ Plot steady‐state entry: potential entrants eᵢ vs. successful entrants mᵢ 
     • `ss.α_i`  :: AbstractVector  (technology parameters)
 
 # Keyword Arguments
-- `size_scale::Real=8`
-- `palette_name::Symbol=:tab10`
+- `size_scale::Real=4`
 - `alpha::Real=0.8`
 - `buffer_frac::Real=0.2`
 - `log_x::Bool=false`
@@ -117,7 +133,6 @@ Plot steady‐state entry: potential entrants eᵢ vs. successful entrants mᵢ 
 """
 function steady_state_entry(ss;
       size_scale::Real     = 4,
-      palette_name::Symbol = :tab10,
       alpha::Real          = 0.8,
       buffer_frac::Real    = 0.2,
       log_x::Bool          = false,
@@ -139,8 +154,11 @@ function steady_state_entry(ss;
     xdata = log_x ? log.(eₖ) : eₖ
     ydata = log_y ? log.(mₖ) : mₖ
 
-    # pick N distinct colors
-    cols = palette(palette_name, N)
+    # fixed 9‐color palette matching the IRFs
+    palette = (
+      :firebrick, :forestgreen, :navy, :chocolate, :mediumpurple,
+      :teal,      :saddlebrown,  :orchid,  :dimgray
+    )
 
     # dynamic axis limits
     x_min, x_max = minimum(xdata), maximum(xdata)
@@ -153,12 +171,11 @@ function steady_state_entry(ss;
     # labels
     xlabel = log_x ? "log eᵢ (potential entrants)"  : "eᵢ (potential entrants)"
     ylabel = log_y ? "log mᵢ (successful entrants)" : "mᵢ (successful entrants)"
-    title  = ""
 
     plt = plot(
       xlabel      = xlabel,
       ylabel      = ylabel,
-      title       = title,
+      title       = "",
       legend      = :outerright,
       legendtitle = "sector (Πᵢ)",
       xlim        = xlims,
@@ -174,11 +191,11 @@ function steady_state_entry(ss;
         markerstrokewidth = 0.5,
         markerstrokecolor = :black,
         alpha             = alpha,
-        color             = cols[i],
+        color             = palette[i],    # fixed sector color
         label             = "sector $i (Πᵢ=$(round(Πₖ[i], digits=3)))",
       )
 
-      # annotate alpha_i *on top* of the bubble
+      # annotate alpha_i on top of the bubble
       annotate!(
         plt,
         xdata[i], ydata[i],

@@ -48,7 +48,7 @@ function plot_irfs(
       linewidth = lw,
       size      = (400*ncols, 300*nrows),
       grid      = false,    # turn off all grids
-      color     = :red      # default series color
+      color     = :firebrick      # default series color
     )
 
     for (i,var) in enumerate(vars)
@@ -141,8 +141,8 @@ function plot_irfs_stacked(
 
     # simple color palette
     palette = (
-      :red, :green, :blue, :orange, :purple,
-      :cyan, :brown, :magenta, :gray
+      :firebrick, :forestgreen, :navy, :chocolate, :mediumpurple,
+      :teal,      :saddlebrown,  :orchid,  :dimgray
     )
 
     # build the base plot (no grid), with dynamic title
