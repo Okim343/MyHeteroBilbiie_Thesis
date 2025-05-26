@@ -120,6 +120,16 @@ steady_state_model;
     L8   = 0.0070429129612126495;
     L9   = 0.04591891361555157;
 
+    Y1   = 6.606053193393887e-6;
+    Y2   = 1.780459378097958e-5;
+    Y3   = 3.398805634985012e-5;
+    Y4   = 6.726535068903912e-5;
+    Y5   = 0.0001272045560805968;
+    Y6   = 0.00023457528801946315;
+    Y7   = 0.0004447982167789707;
+    Y8   = 0.0007696946654416343;
+    Y9   = 0.005011016160090091;
+
   // 3) Exogenous state shifters
   Z     = 1.0;
   Zlag  = 1.0;
@@ -138,6 +148,7 @@ steady_state_model;
         logrho@{i} = log(rho@{i});
         logl@{i} = log(l@{i});
         logL@{i} = log(L@{i});
+        logY@{i} = log(Y@{i});
     @#endfor
 
     logC = log(C);
@@ -159,6 +170,6 @@ check;
 // model_info ;
 // model_diagnostics;
 
-stoch_simul(order=1, irf=75, noprint) ;
+stoch_simul(order=1, irf=75) ;
 
 

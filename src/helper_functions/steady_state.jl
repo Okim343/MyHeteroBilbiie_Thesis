@@ -45,7 +45,7 @@ Compute the steady state of the full heterogeneous model.
 
 The returned **named tuple** contains the aggregates  
 `(w, L, Le, Lc, Y, r, C)` plus the per-sector vectors  
-`(M_i, C_i, ρ_i, v_i, d_i, e_i, ψ_i, Π_i, α_i, l_i, y_i, L_i)`.
+`(M_i, C_i, ρ_i, v_i, d_i, e_i, ψ_i, Π_i, α_i, l_i, y_i, L_i, Y_i)`.
 
 If `inelasticL=true`, the labor FOC uses χ = w/C (φ→0 limit).  
 Otherwise it uses χ·L^(1/φ) = w/C.
@@ -106,19 +106,17 @@ function steady_state(model::MyHeteroBilbiieModel; tol = 1e-15, inelasticL::Bool
         end
 
         # aggregates
-        C  = sum(Ci .^ ((η - 1)/η))^(η/(η - 1))
-        # total labor
-        L  = sum(Mi .* li .+ ei * fE / Z̄)
-        # labor to firm production
-        Le = sum(ei * fE / Z̄)
-        # labor to consumption production
-        Lc = L - Le
-        # total output
-        Y  = w * L + sum(di .* Mi)
-        # sectoral labor vector
-        L_i = Mi .* li .+ ei * fE / Z̄
+        C   = sum(Ci .^ ((η - 1)/η))^(η/(η - 1))
+        L   = sum(Mi .* li .+ ei * fE / Z̄)
+        Le  = sum(ei * fE / Z̄)
+        Lc  = L - Le
+        Y   = w * L + sum(di .* Mi)
 
-        return (; C, L, Le, Lc, Y, Mi, Ci, ρi, di, vi, ei, ψi, li, yi, L_i)
+        # sectoral labor and output vectors
+        L_i = Mi .* li .+ ei * fE / Z̄
+        Y_i = w .* L_i .+ di .* Mi
+
+        return (; C, L, Le, Lc, Y, Mi, Ci, ρi, di, vi, ei, ψi, li, yi, L_i, Y_i)
     end
 
     ## ─── Household intratemporal FOC residual ────────────────────
@@ -143,13 +141,13 @@ function steady_state(model::MyHeteroBilbiieModel; tol = 1e-15, inelasticL::Bool
     blk = sector_block(w_star)
     return (
         # aggregates
-        w    = w_star,
-        L    = blk.L,
-        Le   = blk.Le,
-        Lc   = blk.Lc,
-        Y    = blk.Y,
-        r    = r,
-        C    = blk.C,
+        w     = w_star,
+        L     = blk.L,
+        Le    = blk.Le,
+        Lc    = blk.Lc,
+        Y     = blk.Y,
+        r     = r,
+        C     = blk.C,
 
         # sectoral blocks
         M_i    = blk.Mi,
@@ -164,9 +162,11 @@ function steady_state(model::MyHeteroBilbiieModel; tol = 1e-15, inelasticL::Bool
         l_i    = blk.li,
         y_i    = blk.yi,
         L_i    = blk.L_i,
+        Y_i    = blk.Y_i,
         s_lag_Z = 1.0,
     )
 end
+
 
 
 
@@ -175,7 +175,7 @@ end
 """
  Nicely print a steady‐state NamedTuple `ss` with:
    • scalars:  w, L, Le, Lc, Y, r, C, s_lag_Z
-   • 9‐element vectors: M_i, C_i, ρ_i, v_i, d_i, e_i, ψ_i, Π_i, α_i, l_i, y_i, L_i
+   • 9‐element vectors: M_i, C_i, ρ_i, v_i, d_i, e_i, ψ_i, Π_i, α_i, l_i, y_i, L_i, Y_i
 """
 function print_ss(ss)
     # 1) scalars
@@ -188,7 +188,10 @@ function print_ss(ss)
     end
 
     # 2) sectoral vectors 
-    vec_fields = (:M_i, :C_i, :ρ_i, :v_i, :d_i, :e_i, :ψ_i, :Π_i, :α_i, :l_i, :y_i, :L_i)
+    vec_fields = (
+      :M_i, :C_i, :ρ_i, :v_i, :d_i, :e_i, :ψ_i,
+      :Π_i, :α_i, :l_i, :y_i, :L_i, :Y_i
+    )
     df = DataFrame(sector = 1:9)
     for fld in vec_fields
         @assert hasproperty(ss, fld) "ss has no field $fld"
