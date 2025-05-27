@@ -31,3 +31,10 @@ src/DynareModFiles/*
 !src/DynareModFiles/*.mod
 
 handling_figs.ipynb
+
+# 1) Ignore all files and folders
+src/Thesis/*
+
+# 2) Un-ignore the two files we want
+!src/Thesis/main.tex
+!src/Thesis/master_thesis.bib
