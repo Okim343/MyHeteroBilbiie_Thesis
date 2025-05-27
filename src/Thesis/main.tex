@@ -471,9 +471,10 @@ The integration of firm heterogeneity and endogenous entry into macroeconomics h
 in this thesis is: How important is firm heterogeneity for macroeconomic fluctuations? Although \textcite{bilbiie2012endogenous} show that 
 pro-cyclical startup entry amplifies business-cycle volatility, they treat all entrants as technologically identical, while \textcite{sedlavcek2017growth} 
 highlight how recessions skew the composition of entrants through matching frictions but do so outside a love-of-variety RBC setting and with a different question of
-firm employment in mind. By embedding Sedláček–Sterk’s technology-choice and matching block inside the BGM framework and adding a macro-level stock-of-ideas shock, 
+firm employment in mind. By embedding Sedláček–Sterk’s technology-choice and matching block inside the BGM framework, 
 this thesis delivers a DSGE model in which sector-specific returns-to-scale heterogeneity, entry-stage matching frictions, and endogenous idea supply shocks jointly shape 
-and enrich the classic RBC shock propagation mechanisms.
+and enrich the classic RBC shock propagation mechanisms. The model delivers a better picture of how aggreagte shocks can affect different types of firms in the economy, and
+how this heterogeneity in turn affects aggregate outcomes through rich firm dynamics not explored in the standard BGM framework.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -482,18 +483,103 @@ and enrich the classic RBC shock propagation mechanisms.
 \section{Model}
 \label{sec:model}
 
+In this section, I briefly lay out the firm side in the baseline BGM model with no capital and CES preferences in subsection \ref{sec:model-bilbiie}, explain the Sedláček–Sterk
+heterogeneity and matching friction mechanisms in subsection \ref{sec:model-sedlacek}, and finally, fully characterize the main model and the departures made
+from the standard BGM framework in subsection \ref{sec:model-mine}. 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Baseline Bilbiie-Ghironi Framework (CES Preferences)}
 \label{sec:model-bilbiie}
 
+In the original BGM framework, the key elements of the firm side are fully characterized by the production/labor decision, a pricing decision, 
+and an entry decision pinned down by a free entry condition in equilibrium. I do not fully explore the consumer side of the framework yet for the sake of breviety, since it is analogous to the consumer side in the main model which will be 
+explained in detail later. As described before in section \ref{sec:literature}, each firm (or production line) produces a unique variety $\omega$ using labor as their single 
+production factor, with the production function 
+\[
+    y_t(\omega) = Z_t \cdot l_t(\omega),
+\]
+where $Z_t$ is the exogenous aggregate productivity level and $l_t(\omega)$ is the firm's labor input. Consumers have CES preferences over a continuum
+of varieties 
+\[
+    C_t = \left[\int_{\omega \in \Omega_t} c_t(\omega)^{\frac{\theta-1}{\theta}}\,d\omega\right]^{\frac{\theta}{\theta-1}},
+\]
+
+which implies a consumption-based price index and constant markups for the firm. Solving the firm's pricing problem we arrive in the equilibrium pricing
+condition of
+
+ \[
+    \rho_t(\omega) = \frac{p_t(\omega)}{P_t} =  \mu \cdot \frac{w_t}{Z_t},
+ \]
+
+with $\mu=\frac{\theta}{\theta-1}$ and marginal costs corresponding to $\frac{w_t}{Z_t}$, which are simetrical across firms/varieties.
+
+In the entry block, firms face a sunk entry cost $f_{E,t}$, expressed in effective labor units, and once firms have sucessfully entered, they survive
+with probability $(1-\delta)$, where $\delta \in (0,1)$ is a "death shock". The law of motion dictating the total number of producers is 
+
+    \[
+    N_t = (1-\delta)(N_{t-1} + N_{e,t-1}),
+    \]
+where $N_{e,t}$ is the measure of new entrants, which face a time-to-build lag before entering. In equilibrium, the free-entry condition equates the expected present value of a firm's
+future profit stream to the sunk cost in units of the consumption good, such that entry occurs until firm value is equalized with entry cost:
+
+\[
+    v_t(w) = \frac{w_t f_{E,t}}{Z_t}.
+\]
+
+Prospective entrants compute their expected post-entry value $v_t(\omega)$ given the present discounted value of their expected stream of profits
+$\{d_s(\omega)\}_{s=t+1}^\infty$: 
+$$v_{t}(\omega) = E_t \sum_{s = t+1}^{\infty} \left[ \beta (1 - \delta) \right]^{s - t} \left( \frac{C_{s}}{C_{t}} \right)^{-1} d_{s}(\omega).$$
+
+In the BGM framework, this his also represents in the value of incumbent firms after production has happened, which is relevant for the household's investment decision.
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{The Sedlacek Heterogeneity Mechanism}
+\subsection{The Sedláček–Sterk Heterogeneity Mechanism}
 \label{sec:model-sedlacek}
 
+I abstract away from almost all other relevant model aspects presented by \textcite{sedlavcek2017growth} 
+in this section to focus on two key mechanisms: the technology/returns-to-scale choice and the entry-stage 
+matching friction. Before entry, each prospective entrepreneur/startup chooses a technology type $i\in\{1,\dots,I\}$,
+which pins down the constant-returns-to-scale parameter $\alpha_i\in(0,1)$. Once active, an incumbent of age $a$ 
+produces according to 
+\[
+y_{i,a,t}=A_t\,n_{i,a,t}^{\alpha_i},
+\]
+where $A_t$ is aggregate TFP and $n_{i,a,t}$ denotes employment. The heterogeneity in $\alpha_i$ implies 
+heterogeneous optimal sizes for different startups, with size refering to the size of employment $n_{i,a,t}$ . Low-$\alpha_i$ firms remain small due to smaller scalability, whereas high-$\alpha_i$ firms can scale 
+to thousands of workers over their life-cycle, matching empirical cohort size distributions. 
 
+After a business-idea/technology-type is chosen, the firms faces the entry-stage matching friction. Let $e_{i,t}$ be
+the measure of aspiring entrants that select technology $i$ at time $t$, and let $\psi_{i,t}$ denote the stock 
+of business opportunities of type $i$ (with $\sum_i\psi_{i,t}=\Psi$). Because multiple entrants may chase the same idea, only
+a fraction does actually succed. Sucessful startups $m_{i,t}$ are generated by a Cobb-Douglas matching function
+
+\[
+m_{i,0,t}=e_{i,t}^{\phi}\psi_{i,t}^{\,1-\phi},
+\]
+where $\phi\in(0,1)$ is the matching elasticity, such that the sucess probability is pinned down by:
+
+\[
+P_{i,t}\;=\;\frac{m_{i,0,t}}{e_{i,t}}=e_{i,t}^{\,\phi-1}\psi_{i,t}^{\,1-\phi}.
+\]
+
+After paying the sunk entry cost $\chi$, a potential entrant earns expected value a potential entrant earns 
+expected value $P_{i,t}V_{i,0,t}(0,F_t)$, where $V_{i,0,t}$ is the value of a newborn firm at time $t$ for technology type $i$.
+Free entry therefore requires
+\[
+\chi \;=\;P_{i,t}V_{i,0,t}(0,F_t)\qquad\forall i,  \tag{FE}
+\]
+which pins down $P_{i,t}$ (and hence $m_{i,0,t}$) endogenously. In their quantitative implementation, the authors treat the 
+probability $P_{i,t}$ as a fixed parameter due to data avaliability issues with $\psi_{i,t}$, which is a strategy also adopted
+the main model presented later on.
+
+The interaction between these two mechanisms creates rich firm dynamics. Because higher-$\alpha_i$ technologies yield 
+larger $V_{i,0,t}$, condition (FE) forces their $P_{i,t}$ to fall—i.e.\ they face tougher matching—so shocks that 
+shift the opportunity mix $\psi_{i,t}$ endogenously tilt the composition of entrants toward or away from high-growth firms. 
+This joint mechanism of technology heterogeneity and matching frictions drives the persistent 
+cohort‐quality effects documented before in section \ref{sec:literature}. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
