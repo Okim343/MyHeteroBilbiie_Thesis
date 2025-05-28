@@ -12,6 +12,7 @@
 \usepackage{mathtools}
 \usepackage{amssymb}
 \usepackage{geometry}
+\usepackage{tabularx}
 \usepackage[
 backend=biber,
 style=apa,
@@ -290,7 +291,7 @@ Matriculation Number: & 50182495
 \newpage
 \begin{abstract} % Create abstract
 
-.
+Hello this is abstract bro.
 
 \begin{center}
 \rule{10cm}{0.4pt}
@@ -600,7 +601,7 @@ by a sectoral diversity in returns-to-scale parameters, as will be explored late
 
 \medskip
 \medskip
-\noindent\emph{Households}
+\noindent\textbf{Households}
 \medskip
 
 The household framework is nearly identical to the one found in BGM, with the only difference being in their preference specification. There is a 
@@ -630,14 +631,14 @@ functional form of preferences within and across sectors below.
 
 \medskip
 \medskip
-\noindent\emph{Firms}
+\noindent\textbf{Firms}
 \medskip
 
 The firm block is defined as a collection of $I$ heterogeneous sectors with $M_{i,t}$ homogeneous firms each, 
 facing two decisions: In which sector to enter and labor demand for each period after entering. There is continuum of monopolistically competitive
 firms, each producing a different variety $\omega \in \Omega$, with one factor: Labor. 
-Aggregate labor productivity is index by $Z_t$ (effectiveness of one unit of labor), which is 
-exogenous, equal accross sectors, and follows an $AR(1)$ process (in logarithms). For a firm that chooses sector $i$, the production function becomes
+Aggregate labor productivity is indexed by $Z_t$ (effectiveness of one unit of labor), which is 
+exogenous, equal across sectors, and follows an $AR(1)$ process (in logarithms). For a firm that chooses sector $i$, the production function becomes
 $y_{i,t}(\omega) = Z_t \cdot l_{i,t}(\omega)^{\alpha_i}$. Similar to the Sedláček–Sterk framework, firms chose a technology type/business-idea $i$ 
 that determines their returns-to-scale parameter $\alpha_i$ and thus directly influences their marginal product of labor.
 
@@ -648,9 +649,21 @@ To produce a certain output level $y$, firms minimizes their labor cost in a sta
 \[
     \min_{l_{i,t}(\omega)} \; w_t\,l_{i,t}(\omega) \quad \text{subject to} \quad y = Z_t \cdot l_{i,t}^{\alpha_i}(\omega),
 \]
-such that the optimal labor demand is then given at time $t$ in sector $i$ by $l_{i,t}^*(\omega) = \left(\frac{y}{Z_t}\right)^{\frac{1}{\alpha_i}}.$
+such that the optimal labor demand is then given at time $t$ in sector $i$ by 
+\begin{equation}
+  l_{i,t}^*(\omega) = \left(\frac{y}{Z_t}\right)^{\frac{1}{\alpha_i}},\label{eq:labourClearing}
+\end{equation}
+and therefore marginal costs are expressed as
+\begin{equation}
+  \text{MC}_{i,t} = \frac{w_t}{\alpha_i Z_t}\left(\frac{y_{i,t}}{Z_t}\right)^{\!1/\alpha_i-1},\label{eq:marginalcost}
+\end{equation}
+which, differently from BGM, are sector specific and depend directly on the returns-to-scale parameter $\alpha_i$.
+With CES preferences, firms set relative prices as constant markups over marginal costs 
 
-With CES preferences, firms set relative prices as constant markups over maginal costs $$\rho_{i,t}(\omega) = \mu MC_{i,t}.$$
+\begin{equation}
+  \rho_{i,t}(\omega) = \mu MC_{i,t}.\label{eq:pricing}
+\end{equation}
+
 As in BGM, but at the sectoral level, I assume a conditional symmetric firm equilibrium, where firms from the same sector 
 are symmetric over prices, quantities and values. 
 This implies that $p_{i,t}(\omega) = p_{i,t}, \ \rho_{i,t}(\omega) = \rho_{i,t}   , \   l_{i,t}(\omega) = l_{i,t}   , 
@@ -658,13 +671,16 @@ This implies that $p_{i,t}(\omega) = p_{i,t}, \ \rho_{i,t}(\omega) = \rho_{i,t} 
 \frac{p_{i,t}}{P_{i,t}} = \rho_{i,t} = \rho(M_{i,t})$. 
 
 Therefore, profits/dividends for all firms in sector $i$ are identical and given by
-$$d_{i,t} = \left( 1-\frac{1}{\mu}\right)\frac{C_{i,t}}{M_{i,t}},$$
+\begin{equation}
+  d_{i,t} = \Bigl(1-\tfrac1\mu\Bigr)\frac{C_{i,t}}{M_{i,t}}. \label{eq:profit}
+\end{equation}
+
 where $y_{i,t} = \frac{C_{i,t}}{M_{i,t}}$ since all firms are symmetrical and supply equal amounts of demand in their sector, analogous to firm-level
 output in the BGM framework but adapted for the sectoral framework.
 
 \medskip
 \medskip
-\noindent\emph{Firm Entry with Uncertainty}
+\noindent\textbf{Firm Entry with Uncertainty}
 \medskip
 
 The matching friction mechanism found in \textcite{sedlavcek2017growth} is adapted to the RBC framework presented here, such that firms face matching 
@@ -673,7 +689,7 @@ producing product lines an and unbounded mass of prospective entrants. The entra
 profits $d_{i,s}$ in every period $s\ge t+1$ as well as $\delta$ $\forall t$. Prospective entrants choose a technology type $i$ and corresponding sector.
 Let technology types reflect returns-to-scale in increasing order such that $i = 1$ is lowest and $i = I$ is the highest. 
 Let $e_{i,t}$ denote the measure of entrants choosing $i$ at time $t$. Not every attempt to enter is successful. The Cobb-Douglas  matching function 
-is given by $$m_{i,t}= e_{i,t}^{\phi}\,\psi_{i,t}^{\,1-\phi},$$ such that $m_{i,t}$ are the successful entrants. $\psi_{i,t}$ is the measure of 
+is given by $m_{i,t}= e_{i,t}^{\phi}\,\psi_{i,t}^{\,1-\phi}$ such that $m_{i,t}$ are the successful entrants. $\psi_{i,t}$ is the measure of 
 business opportunities for type $i$ at time $t$ and $\phi$ is a matching elasticity common across all types. 
 
 In contrast with the Sedláček–Sterk formulation, in this new framework the overall measure of business ideas \(\Psi\) is not necessarily held constant,
@@ -681,31 +697,37 @@ being affected over time due to an exogenous aggregate stock of ideas shock \(X_
 the original formulation investigates how the composition of cohorts influences employment, whereas my model framework is interested in the aggregate 
 effects of more business ideas being avaliable, not a shift in their distribution. To stay consistent with this new formulation, I specify the measure 
 of business opportunities for technology \(i\) as 
-    \[
-    \psi_{i,t} =X_t^{\frac{1}{1-\phi}}\,\bar{\psi}_i,
-    \]
+\begin{equation}
+  \psi_{i,t} =X_t^{\frac{1}{1-\phi}}\,\bar{\psi}_i, \label{eq:psilaw}
+\end{equation}
 where \(\bar{\psi}_i\) is the steady-state measure of business opportunities for technology \(i\), $X_t$ follows an AR(1) process of the type 
 $X_t = 1 - \rho_X + \rho_X X_{t-1} + \epsilon^X_t$ where $\rho_X$ is a persistence parameter and $\epsilon^X_t$ are i.i.d innovations 
-normally distributed with mean zero and variance $\sigma_X$. Consequently, the probability of a sucessful startup in sector $i$ is then:
-$$\Pi_{i,t} = \frac{m_{i,t}}{e_{i,t}} = e_{i,t}^{\phi-1}\,\psi_{i,t}^{\,1-\phi}.$$
-
+normally distributed with mean zero and variance $\sigma_X$. Consequently, the probability of a successful startup in sector $i$ is then:
+\begin{equation}
+  \Pi_{i,t} = \frac{m_{i,t}}{e_{i,t}} = e_{i,t}^{\phi-1}\,\psi_{i,t}^{\,1-\phi}. \label{eq:probability}
+\end{equation}
 Before entry, as in the BGM framework, prospective entrants compute their expected post-entry value by discounting the value of their expected stream
 of profits $\{d_{i,s}\}_{s=t+1}^\infty$ as
-$$v_{i,t}(\omega) = E_t \sum_{s = t+1}^{\infty} \left[ \beta (1 - \delta) \right]^{s - t} \left( \frac{C_{i,s}}{C_{i,t}} \right)^{-1} d_{i,s}(\omega),$$
+\begin{equation}
+  v_{i,t} = E_t \sum_{s = t+1}^{\infty} \left[ \beta (1 - \delta) \right]^{s - t} \left( \frac{C_{i,s}}{C_{i,t}} \right)^{-1} d_{i,s}, \label{eq:value}
+\end{equation}
 and thus entry occurs until firm value is equalized with entry cost, yielding the free entry condition for sector $i$ 
-$$\Pi_{i,t}v_{i,t} = f_{E,t}w_t/Z_t,$$ 
+\begin{equation}
+  \Pi_{i,t}v_{i,t} = f_{E,t}w_t/Z_t , \label{eq:freeentry}
+\end{equation}
 for all $i \in (1,2,..., I)$. This entry framework yields the new sectoral law of motion that dictates the number of incumbents in sector $i$, 
 given by the following expression
-$$M_{i,t+1} = (1-\delta)(M_{i,t} + \Pi_{i,t}e_{i,t}).$$
-
-An important observation is that, as the demostrated in BGM, there is no option value for waiting, since there remains no 
+\begin{equation}
+  M_{i,t+1} = (1-\delta)(M_{i,t} + \Pi_{i,t}e_{i,t}). \label{eq:entrants}
+\end{equation}
+An important observation is that, as the demonstrated in BGM, there is no option value for waiting, since there remains no 
 idiosyncratic/firm-specific uncertainty and exit constitutes an exogenous process, meaning that uncertainty related to firm death is also aggregate. 
-Despite the introduction of matching frictions, every potetial entrant faces the same matching probabilities $\Pi_{i,t}$ for each sector $i$ 
+Despite the introduction of matching frictions, every potential entrant faces the same matching probabilities $\Pi_{i,t}$ for each sector $i$ 
 determined by aggregate conditions that are not firm-dependent\footnote{See the Appendix for the expanded BGM proof for my framework.}.
 
 \medskip
 \medskip
-\noindent\emph{Preference Specification and Markups}
+\noindent\textbf{Preference Specification and Markups}
 \medskip
 
 To capture heterogeneity across technology types, I adopt a two-layer aggregation process that nests the Dixit--Stiglitz framework at both 
@@ -735,12 +757,15 @@ It follows that the household's demand for each good and sectoral good is
 $c_{i,t}(\omega) = \left(\frac{p_{i,t}}{P_{i,t}}\right)^{-\theta}C_{i,t}$ and 
 $C_{i,t} = \left(\frac{P_{i,t}}{P_t}\right)^{-\eta}C_t$. Additionally, the markup and the within/across sector benefit of variety are 
 independent of the number of goods, and related by $\epsilon = \mu -1 = 1/ (\theta-1)$. The CES expressions are then: 
-$\mu(M_{i,t}) = \mu = \frac{\theta}{\theta - 1}, \  \rho(M_{i,t}) = M_{i,t}^{\mu - 1} = \left(M_{i,t}\right)^{\frac{1}{\theta - 1}}, 
-\   \epsilon_{\text{within}}(M_{i,t}) = \mu - 1 , \ \epsilon_{\text{across}}(N_{t}) = \eta - 1$
+$\mu(M_{i,t}) = \mu = \frac{\theta}{\theta - 1}, 
+\   \epsilon_{\text{within}}(M_{i,t}) = \mu - 1 , \ \epsilon_{\text{across}}(N_{t}) = \eta - 1$ and most notably 
+\begin{equation}
+  \rho(M_{i,t}) = M_{i,t}^{\mu - 1} = \left(M_{i,t}\right)^{\frac{1}{\theta - 1}}. \label{eq:lovevariety}
+\end{equation}
 
 \medskip
 \medskip
-\noindent\emph{Household Problem}
+\noindent\textbf{Household Problem}
 \medskip
 
 As stated before in section \ref{sec:model-bilbiie}, the household problem here is analogous to the one found in BGM, since the consumers are
@@ -766,24 +791,37 @@ where the left side represents expenditures including the purchase of new assets
 including the dividends from firms, returns on bond stocks and labor income.
 
 From this framework, I derive the first-order conditions of the household for optimal behaviour by solving the utility maximization problem,
-yielding the Euler equation for bonds $$(C_t)^{-1} = \beta (1 + r_{t+1}) E_t \left[ (C_{t+1})^{-1} \right],$$ 
-the Euler equation for share holdings $$v_t = \beta (1 - \delta) E_t \left[ \left( \frac{C_{t+1}}{C_t} \right)^{-1} (v_{t+1} + d_{t+1}) \right],$$ 
-which if iterated forward yields the aggregate version of the firm valuation equation seen before, and finally the intratemporal 
-first-order condition $$\chi\,L_{t}^{1/\varphi}=\frac{w_t}{C_t},$$ where $\varphi$ represents the frisch-elasticity of labor and $\chi$ is the
+yielding the Euler equation for bonds 
+\begin{equation}
+(C_t)^{-1} = \beta (1 + r_{t+1}) E_t \left[ (C_{t+1})^{-1} \right], \label{eq:eulerbonds}
+\end{equation}
+the Euler equation for share holdings in the fund of firms 
+\begin{equation}
+v_t = \beta (1 - \delta) E_t \left[ \left( \frac{C_{t+1}}{C_t} \right)^{-1} (v_{t+1} + d_{t+1}) \right], \label{eq:Eulershares}
+\end{equation}
+which, if iterated forward, yields the aggregate version of the relationship expressed by the firm valuation equation \eqref{eq:value}, and finally the intratemporal 
+first-order condition 
+\begin{equation}
+\chi\,L_{t}^{1/\varphi}=\frac{w_t}{C_t}, \label{eq:intratemp}
+\end{equation}
+where $\varphi$ represents the frisch-elasticity of labor and $\chi$ is the
 disutility of labor, as before.
 
 \medskip
 \medskip
-\noindent\emph{Aggregate Accounting, Equilibrium and the Labor Market}
+\noindent\textbf{Aggregate Accounting, Equilibrium and the Labor Market}
 \medskip
 
 Under equilibrium, the following conditions hold for market clearing: $B_{t+1} = B_t=0$ and $x_{t+1}=x_t=1$ $\forall t$. Therefore, by applying these
-equilibrium conditions to the household budget constraint and desaggregating firm-level variables, I arrive at the aggregate accounting identity
-$$C_t + v_t\mathcal{E}_t= w_t.L_t + d_tN_t \;\Leftrightarrow\;C_t + \sum_iv_{i,t}e_{i,t}= w_t.L_t + \sum_id_{i,t}M_{i,t},$$ which states that the 
-expenditure in consumption and investment in new firms must be equal to the income derived from labor and firm dividends in equilibrium.
+equilibrium conditions to the household budget constraint and disaggregating firm-level variables, I arrive at the aggregate accounting identity
+\begin{equation}
+C_t + v_t\mathcal{E}_t= w_t.L_t + d_tN_t \;\Leftrightarrow\;C_t + \sum_iv_{i,t}e_{i,t}= w_t.L_t + \sum_id_{i,t}M_{i,t}, \label{eq:aggaccount}
+\end{equation}
+which states that the expenditure in consumption and investment in new firms must be equal to the income derived from labor and 
+firm dividends in equilibrium.
 
-Similar to the dynamic in the BGM benchline model, and in contrast to the standard one-sector RBC model of \textcite{campbell1994inspecting}, 
-the model presented here is has two "macro-sectors", such that one employs part of the labor supply to produce consumption goods and the other
+Similar to the dynamic in the BGM baseline model, and in contrast to the standard one-sector RBC model of \textcite{campbell1994inspecting}, 
+the model presented here has two "macro-sectors", such that one employs part of the labor supply to produce consumption goods and the other
 sector employs the rest of the labor supply to establish new production-lines/firms. Consequently, the economy's GDP $Y_t$ is simultaneously
 equal to total income $w_t.L_t + \sum_id_{i,t}M_{i,t}$ and the total output of the economy $C_t + \sum_iv_{i,t}e_{i,t}$, and $v_{i,t}$ represents 
 the relative price of investment in terms of consumption.
@@ -791,15 +829,82 @@ the relative price of investment in terms of consumption.
 As a direct consequence of the two-sector nature of my model, the labor market equilibrium is characterized by $L^C_t+L^E_t = L_t$, that is, 
 the total labor is equal to the labor used in production $L^C_t = \sum_iM_{i,t}\ell_{i,t}$ at time $t$ plus the total labor 
 used to build firms $L^E_t = \sum_ie_{i,t} f_{E,t}/Z_t$ at time $t$. Entry determines the amount of labor allocated to setting 
-up new production lines, such that entry at time $t$ affects labor demand in time $t+1$. Matching frictions, however, introduce a dynamic where
-not all the labor spent in building new firms is actually fruitful. Labor is used at producing firms that might not actually survive the matching
-process, especially for highly scalable sectors that have lower probabilities of succesfull entry.
+up new production lines, such that entry at time $t$ affects labor demand in time $t+1$. Therefore, aggregate labor clearing can be expressed as
+\begin{equation}
+ L_t = \underbrace{\sum_i M_{i,t}l_{i,t}}_{\text{production}} + \underbrace{\sum_i e_{i,t}f_{E,t}/Z_t}_{\text{entry}}.\label{eq:AgglabourClearing}
+\end{equation}
+Matching frictions, however, introduce a dynamic where not all the labor spent in building new firms is actually fruitful. 
+Labor is used at producing firms that might not actually survive the matching
+process, especially for highly scalable sectors that have lower probabilities of successful entry.
+
+\medskip
+\medskip
+\noindent\textbf{Characterizing Equilibrium}
+\medskip
+
+Given predetermined variables $M_{i,t}$, $\psi_{i,t}$, $r_t$ and exogenous shocks $(Z_{t},X_{t}, f_{E,t})$\footnote{Note: I treat 
+$f_{E,t}$ as a parameter during quantitative exercises}, the intra-period sequence in the model goes as follows: i) Given their preferences, households
+choose $\{C_t,L_t,B_{t+1},x_{t+1}\}$; ii) Incumbent firms hire labor, set prices, produce and pay dividends in all sectors;
+iii) Potential entrants pay the sunk entry cost $f_{E,t}w_t/Z_t$.  Matching occurs with probability $\Pi_{i,t}$ and 
+successful entrants $m_{i,t}$ join $M_{i,t+1}$ in all sectors $i$ (time-to-build); iv) Exogenous shocks $(Z_{t+1},X_{t+1})$ realise and 
+date $t{+}1$ begins.
+
+Out of the 15 main equations highlighted above, many of the variables introduced are merely definitions and/or identities that add no new 
+information to the system. 
+For instance, the definition of firm level output and labor demand \eqref{eq:labourClearing} simply build $y_{i,t}$ and $l_{i,t}$ 
+once \( C_{i,t} \), \( M_{i,t} \) are known. Additionally, the aggregate consumption index $C_t$ is not included since it is mechanically 
+defined once $C_{i,t}$ is known for each sector, adding no information to the system. Therefore, I do not include 
+the aggregate goods clearing condition as an equilibrium condition, since it does not pin down any additional variable.
+Furthermore, nominal variables like $P_{i,t}$ and $p_{i,t}$ are not solved for, since, with CES preferences, blocks 
+\eqref{eq:pricing} and \eqref{eq:lovevariety} solve for the real/relative sectoral price $\rho_{i,t}$
+
+
+Therefore, equilibrium can be characterized as follows: Given exogenous processes $(Z_t,X_t,f_{E,t})$, initial masses $\{M_{i,0}\}$, 
+and a top-level price numéraire $P_t \equiv 1$ as a nominal anchor, I summarize equilibrium as a sequence 
+\[
+\bigl\{\,w_t^*,L_t^*,r_{t}^*,\bigl\{
+        M_{i,t}^*,C_{i,t}^*,\rho_{i,t}^*,d_{i,t}^*,v_{i,t}^*,e_{i,t}^*,\psi_{i,t}^*,\Pi_{i,t}^*\bigr\}^I_{(i=1,\dots,I)}\bigr\}.
+\]
+of 3 + 8$I$ endogenous variables, with 3 variables being predetermined at time $t$ ($M_{i,t}$, $r_t$ and $\psi_{i,t}$), 
+satisfying the simplified system of equilibrium conditions in Table \ref{tb:eqconditions} out of all the relevant equations explored in section \ref{sec:model-mine}
+
+\begin{table}[H]
+\centering
+\renewcommand{\arraystretch}{1.4}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.4cm} >{\raggedright\arraybackslash}p{3.5cm} X c@{}}
+\toprule
+\textbf{} & \textbf{Type} & \textbf{Equation(s) in Section 3} & \textbf{Dimension} \\
+\midrule
+1 & Pricing Rule in sector $i$ & \(  \rho_{i,t} = \mu \, \frac{w_t}{\alpha_i Z_t}\left(\frac{y_{i,t}}{Z_t}\right)^{\!1/\alpha_i-1}  \quad \text{combining \eqref{eq:pricing} and \eqref{eq:marginalcost}} \) & \( I \) \\
+2 & Variety Effect in sector $i$ & \(  \rho_{i,t} = M_{i,t}^{\frac{1}{\theta-1}}  \quad \text{ from \eqref{eq:lovevariety}} \) & \( I \) \\
+3 & Profits in sector $i$ & \(d_{i,t} = \Bigl(1-\tfrac1\mu\Bigr)\frac{C_{i,t}}{M_{i,t}} \quad \text{ from \eqref{eq:profit}}\) & \( I \) \\
+4 & Firm valuation in sector $i$ & \(v_{i,t}=\beta(1-\delta)E_t\Bigl[\bigl(C_{i,t+1}/C_{i,t}\bigr)^{-1}\bigl(v_{i,t+1}+d_{i,t+1}\bigr)\Bigr]\quad \text{from \eqref{eq:value}}\) & \( I \) \\
+5 & Free entry in sector $i$ & \(  \Pi_{i,t}=\frac{f_{E,t}\,w_t}{Z_tv_{i,t}}  \quad \text{ from \eqref{eq:freeentry}} \) & \( I \) \\
+6 & Stock of ideas in sector $i$ & \(  \psi_{i,t}=X_t^{\frac{1}{1-\phi}}\psi_i^{ss}  \quad \text{ from \eqref{eq:psilaw}} \) & \( I \) \\
+7 & Matching definition & \( e_{i,t} = \psi_{i,t}\bigl(\Pi_{i,t}\bigr)^{\frac{1}{\phi-1}} \quad \text{from \eqref{eq:probability}} \) & \( I \) \\
+8 & Number of firms in sector $i$ & \( M_{i,t+1} = (1-\delta)\bigl(M_{i,t}+e_{i,t}\Pi_{i,t}\bigr) \quad \text{from \eqref{eq:entrants}} \) & \( I \) \\
+9 & Intra-temporal labour FOC & \( \chi L_t^{1/\phi} = \frac{w_t}{C_t} \quad \text{from \eqref{eq:intratemp}} \) & \( 1 \) \\
+10 & Inter-temporal Euler (bonds) & \(1 = \beta(1+r_{t+1})E_t\Bigl[\tfrac{C_t}{C_{t+1}}\Bigr] \quad \text{from \eqref{eq:eulerbonds}} \) & \( 1 \) \\
+11 & Aggregate Labor Identity & \( L_t=\sum_i(M_{i,t}\ell_{i,t}+e_{i,t} f_{E,t}/Z_t) \ \  \ \text{from \eqref{eq:AgglabourClearing}}\) & \( 1 \) \\
+\midrule
+\multicolumn{3}{r}{\textbf{Total independent conditions}} & \( 3 + 8I \) \\
+\bottomrule
+\end{tabularx}
+\caption{Equilibrium Equations and Dimensionality}
+\label{tb:eqconditions}
+\end{table}
+
+The household Euler equation for shares is left out of the list of equilibrium conditions as in BGM because it represents the same relationship 
+as the firm valuation equation but at an "average" aggregate level. Since I am interested in the sectoral profit and firm value dynamics, I omit it from the 
+equilibrium conditions. Finally, when building the "$3 + 8I$" system, I keep only three unknowns per sector for the 
+matching-entry block, $ e_{i,t},  \psi_{i,t}$ and $\Pi_{i,t}$. The auxiliary object \( m_{i,t} \) is left out of the list, 
+precisely because it is mechanically pinned-down once \( (M_{i,t}, e_{i,t}, \psi_{i,t},\Pi_{i,t}) \) are known.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Model Solution and Dynamics}
+\section{Model Solution and Properties}
 \label{sec:solution}
 
 
