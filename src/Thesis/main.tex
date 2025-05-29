@@ -655,10 +655,11 @@ such that the optimal labor demand is then given at time $t$ in sector $i$ by
 \end{equation}
 and therefore marginal costs are expressed as
 \begin{equation}
-  \text{MC}_{i,t} = \frac{w_t}{\alpha_i Z_t}\left(\frac{y_{i,t}}{Z_t}\right)^{\!1/\alpha_i-1},\label{eq:marginalcost}
+  \text{MC}_{i,t} = \frac{w_t}{\alpha_i Z_t}\left(\frac{y_{i,t}(\omega)}{Z_t}\right)^{\!1/\alpha_i-1},\label{eq:marginalcost}
 \end{equation}
-which, differently from BGM, are sector specific and depend directly on the returns-to-scale parameter $\alpha_i$.
-With CES preferences, firms set relative prices as constant markups over marginal costs 
+which, differently from BGM, are sector specific and depend directly on the returns-to-scale parameter $\alpha_i$. However, the BGM
+marginal cost expression is retrievable by setting $\alpha_i = 1, \, \forall i \in (i,1,...,I)$. With CES preferences, firms set relative
+prices as constant markups over marginal costs 
 
 \begin{equation}
   \rho_{i,t}(\omega) = \mu MC_{i,t}.\label{eq:pricing}
@@ -805,7 +806,9 @@ first-order condition
 \chi\,L_{t}^{1/\varphi}=\frac{w_t}{C_t}, \label{eq:intratemp}
 \end{equation}
 where $\varphi$ represents the frisch-elasticity of labor and $\chi$ is the
-disutility of labor, as before.
+disutility of labor, as before\footnote{As in BGM, I omit the transversality conditions for bonds and shares that must be satisfied to
+ensure optimality. Additionally, the interest rate is determined residually since it appears only in the Euler equation for bonds and is pinned
+down once consumption is known.}.
 
 \medskip
 \medskip
@@ -912,6 +915,91 @@ precisely because it is mechanically pinned-down once \( (M_{i,t}, e_{i,t}, \psi
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Sector–by–Sector Steady State}
 \label{sec:solution-steadystate}
+
+To derive the steady-state expressions for all variables, I divide the solution into $I$ sectoral blocks and one aggregate block, to stay consistent
+with the formulation of equilibrium in section \ref{sec:model-mine}. I normalize aggregate productivity $Z = 1$ and set the stock of ideas shock
+$X = 1$ in steady state, but I keep the variables in the expressions for tractability. Every variable is constant over time and thus time subscripts
+are dropped. Otherwise, the notation matches the main model description in section \ref{sec:model-mine}.
+
+From the intertemporal Euler equation for bonds, the steady-state interest rate is already pinned down by $1+r = \beta^{-1}$. I follow 
+BGM and \textcite{campbell1994inspecting} and make use of $1+r = \beta^{-1}$ to treat $r$ as a parameter in the solution. The firm valuation
+equation \eqref{eq:value} together with the definition $\kappa=\frac{r+\delta}{1-\delta}$ yields $v_i = d_i/\kappa$, which captures a premium for
+the expected firm destruction, since a higher $\delta$ brings down the price of the investment "good" (\textit{ceteris paribus}). Combining 
+this expression with the free-entry condition \eqref{eq:freeentry}and substituting in the definition of profits \eqref{eq:profit} I arrive at  
+\begin{equation}
+  \frac{C_i}{M_i}=\frac{\kappa\,w f_E}{Z\Pi_i(1-1/\mu)}, \label{eq:CoverM}
+\end{equation}
+which pins down the ratio between sectoral consumption and the number of firms as a function of model parameters and the probability of successful 
+entry in sector $i$, which is also the definition of firm-level output $y_i$. This expression helps pin down in steady state all 
+variables dependent on $y_i$ such as $\ell_i$ with equation \eqref{eq:labourClearing}, $MC_i$ with equation \eqref{eq:marginalcost} and 
+$\rho_i$ with \eqref{eq:pricing}. 
+
+Expression \eqref{eq:CoverM} hints at the fundamental role that competition plays in pinning down firm-level
+behaviour in the conditional symmetric firm equilibrium. Almost counterintuitively, an increase in the death-rate, real wage or sunk entry-cost all lead
+to an increase in the firm-level output and labor demand, given that all these changes decrease the incentives for entering sector $i$. This, in turn,
+means that active incumbents in sector $i$ have less competing firms with whom to share the market with, leading to a higher level of output and larger
+firm size despite the negative impact of an increase in wages and the death rate. 
+
+The heterogeneous behavior of potential entrants and active incumbents comes from the fact that, after the forward-looking choice of entry, 
+successful entrants only perform the myopic-static choice of optimal labor demand every period, and do not take into consideration their probability
+of death, since exit is an exogenous process. Additionally, the negative impact of a wage surge on the labor decision is counterbalanced by the 
+positive impact of a decrease in incumbents due to rising entry costs on within-sector competition, hence the positive impact of wage on firm-level output 
+and employment.
+
+Finally, an increase in the probability of successful matching also drives up entry, since an increase in $\Pi_i$ raises the expected payoff of attempting
+an entry in sector $i$. In steady state, wage rises one-to-one with productivity since the marginal product of labor (MPL) is 
+$MPL_i = \alpha_i Z l_i^{\alpha_i -1}$, such that only the ratio $w/Z$ actually matters, and thus a momentary increase in $Z$ has no direct impact
+on firm-level output in a steady-state static equilibrium. Markups also have an interesting impact on firm-level output and size, where an increase in markups drives down firm level output
+despite driving firm-level profits up, since again, entry appears more attractive to prospective entrepreneurs, leading to more competition and lower
+output.
+
+% By equating the relative-price expression \eqref{eq:pricing} combined with the definition of marginal costs 
+% \eqref{eq:marginalcost} with the love-for-variety expression \eqref{eq:lovevariety}, and inserting expression \eqref{eq:CoverM}, the result is
+% one scalar equation pinning down $M_i$ in steady state as a function of model parameters and $\Pi_i$:
+% \begin{equation}
+%   M_i^{\frac1{\theta-1}} =\mu\,\frac{w}{Z\alpha_i}\Bigl[\frac{\kappa\,w\,f_E}{Z(1-1/\mu)\,\Pi_i}\Bigr]^{\frac1{\alpha_i}-1}. \label{eq:Misolated}
+% \end{equation}
+% This expression allows the determinants in steady state of the number of firms/production lines to be more clearly visualized. Higher markups, as
+% discussed for expression \eqref{eq:CoverM}, lead to higher prospective profits and a higher number prospective and successful entrants. However, 
+% the same higher markup also hinders household demand for goods, which pushes down profits and thus the expected value of entry. When technology is 
+% sufficiently scalable (high $\alpha_i$), the per-unit-profit gain outweighs the quantity loss, so the positive channel dominates and $M_i$ rises. 
+
+% An increase in the $w/Z$ ratio for, say, an increase in the real wage, leads to a smaller number of active incumbents due to higher entry costs 
+% and operating costs, hindering entry attempts.\textbf{FINISH LATER}
+
+As for the sectoral entry-matching block, combining the law-of-motion of incumbents \eqref{eq:entrants} and the matching 
+definition \eqref{eq:probability} both in steady state yields 
+\begin{equation}
+m_i= e_i\Pi_i= \frac{\delta}{1-\delta}M_i. \label{steadyentrants} 
+\end{equation}
+That is, the number of successful new entrants $m_i$ makes up for the exogenous destruction of new firms, and the 
+number of prospective new entrants $e_i$ also compensates for the probability $\Pi_i$ in each sector of successful
+matching actually taking place.
+
+The aggregate accounting identity \eqref{eq:aggaccount} in steady state is also particularly informative when it
+comes to understanding the general structure of the model. By substituting in the free entry condition 
+\eqref{eq:freeentry}, matching probability definition \eqref{eq:probability} and the law of motion of incumbents \eqref{eq:entrants} all
+in steady state, the identity now becomes:
+\begin{equation}
+C + \frac{w f_E}{Z}\frac{\delta}{1-\delta}\sum_iM_{i}= w.L + \frac{w f_E}{Z}\kappa \sum_i\frac{M_i}{\Pi_i}. \label{aggsteadystate} 
+\end{equation}
+The same general idea of matching expenditure (consumption plus investment) with income (labor income plus dividends)
+in a two "macro-sector" economy remains. However, investment and dividends can be broken down into further detail. 
+
+Investment, on one hand, now captures the replacement principle seen in the classical RBC model 
+(See \cite{campbell1994inspecting}) more clearly, where investment is made at steady state as pure maintenance to keep the variety/firm stock from shrinking. Therefore,
+a higher death rate immediately requires more labor being spent on producing new firms. Dividends, on the other hand, represent in
+steady state the profits required to finance this replacement. A higher death rate, through $\kappa$, makes households require 
+higher payoffs to keep financing new entry. Better matching in the form a higher $\Pi_i$ also frees up profits that can go to 
+consumption or lower labor effort, an effect that is masked in the non-static version \eqref{eq:aggaccount} because $e_{i,t}$ 
+simultaneously adjusts on the investment side.
+
+The steady state specification for all other variables in the system can be found in the appendix \textbf{WHERE???}. The blocks are,
+as discussed previously, divided into sectoral and aggregate. Due to concerns introduced by the heterogeneous sectoral blocks, no
+one-size-fits-all closed form steady state solution can be found, mainly due to the real wage. For that matter, I solve for the
+steady state values of all variables using an outer-inner loop dynamic explored in the following section \ref{sec:solution-num}.
+Subsequently, I explore these results in section \ref{sec:solution-properties}, with a particular focus on firm dynamics, the
+composition of the firm sector, and the implications of introducing heterogeneity through the returns-to-scale parameter $\alpha_i$.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
