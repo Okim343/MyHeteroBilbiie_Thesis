@@ -949,9 +949,10 @@ and employment.
 Finally, an increase in the probability of successful matching also drives up entry, since an increase in $\Pi_i$ raises the expected payoff of attempting
 an entry in sector $i$. In steady state, wage rises one-to-one with productivity since the marginal product of labor (MPL) is 
 $MPL_i = \alpha_i Z l_i^{\alpha_i -1}$, such that only the ratio $w/Z$ actually matters, and thus a momentary increase in $Z$ has no direct impact
-on firm-level output in a steady-state static equilibrium. Markups also have an interesting impact on firm-level output and size, where an increase in markups drives down firm level output
-despite driving firm-level profits up, since again, entry appears more attractive to prospective entrepreneurs, leading to more competition and lower
-output.
+on firm-level output in a steady-state static equilibrium. Markups also have an interesting impact on firm-level output and size, where an increase in 
+markups drives firm-level profits-per-unit up which makes entry appear more attractive to prospective entrepreneurs, raising $M_i$.
+On top of that, however, higher markups also drive household demand for goods down since they increase relative prices, 
+lowering $C_i$. These two effects combined make rising markups lower firm-level output substantially.
 
 % By equating the relative-price expression \eqref{eq:pricing} combined with the definition of marginal costs 
 % \eqref{eq:marginalcost} with the love-for-variety expression \eqref{eq:lovevariety}, and inserting expression \eqref{eq:CoverM}, the result is
@@ -1006,6 +1007,73 @@ composition of the firm sector, and the implications of introducing heterogeneit
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Numerically Solving the Steady State}
 \label{sec:solution-num}
+
+In practice, the steady state routine is a two‐tier guess‐and‐verify scheme. 
+First, I propose a trial real wage \(w^{(0)}\) that the household and firms would face. 
+Given this provisional wage, each sector solves its conditional problem, pinning down \(M_i\) initially, after which $e_i$
+and \(C_i\) follow algebraically, yielding firm-level output, labour, profits and value. 
+These quantities are then aggregated to compute total consumption \(C(w^{(0)})\) and labour \(L(w^{(0)})\), allowing the
+evaluation of the household FOC residual
+\begin{equation}
+g\bigl(w^{(0)}\bigr) \;=\; \chi\,L(w^{(0)})^{1/\varphi} \;-\; \frac{w^{(0)}}{C\bigl(w^{(0)}\bigr)}. \label{bisection}
+\end{equation}
+
+The routine then updates the wage guess until \(g(w)=0\), at which point, the last sectoral solutions constitute 
+the general equilibrium steady state values for the sectoral variables, which are then aggregated to compute total quantities.
+The exogenous inputs used to pin down the steady-state quantities are summarized in Table \ref{tb:exoinputs}. They are broken
+down based on the block of the model where they have a direct impact. As mentioned in section \ref{sec:model-sedlacek}, 
+there is no empirical counter-part to the stock of ideas variable $\psi_i$, only to the matching probability $\Pi_i$.
+Therefore, as in \textcite{sedlavcek2017growth}, I take backed-out steady-state values for $\Pi_i$ from BDS firm data 
+in the steady-state calculations performed here. The exact calibration used in steady-state calculations and in the 
+quantitative exercise is discussed in depth in section \ref{sec:quant-cal}.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{Block} & \textbf{Parameters} \\ \midrule
+Preferences & $\,\beta,\,\chi,\,\varphi\quad\bigl(r=\beta^{-1}-1,\;
+                 \kappa=\dfrac{\,r+\delta\,}{1-\delta}\bigr)$ \\[4pt]
+Technology  & $\,\theta>1,\;\eta>1,\;Z\;(=1),\;
+               \{\,\alpha_i\}_{i=1}^{I},\; \{\,\Pi_i\}_{i=1}^{I}$ \\[4pt]
+Entry / matching & $\,f_E,\;\delta,\;\phi,\;X\;(=1)$ \\[4pt]
+Markup constant & $\,\displaystyle
+                   \mu=\frac{\theta}{\theta-1}$ \\ \bottomrule
+\end{tabular}
+\caption{Exogenous inputs for the steady-state routine}
+\label{tb:exoinputs}
+\end{table}
+
+ 
+The main variables that I am interested in are the 3 + 8$I$ endogenous variables from equilibrium, but the routine also
+pins down the whole system including the other variable definitions. Every sectoral variable is expressed as a function of 
+the single scalar $w$, the current real wage guess. By equating the cost-based relative price \eqref{eq:pricing} with the 
+love-for-variety expression \eqref{eq:lovevariety} 
+and plugging in \eqref{eq:CoverM}, the result is a single scalar equation for $M_i$ as a function of the model parameters,
+the real wage, and the matching probability:
+\begin{equation}
+  M_i^{\frac1{\theta-1}}
+=\mu\,\frac{w}{Z\alpha_i}
+\Bigl[\frac{\kappa\,w\,f_E}{Z(1-1/\mu)\,\Pi_i^*}\Bigr]^{\frac1{\alpha_i}-1}, \label{Mscalar}
+\end{equation}
+
+Solving \eqref{Mscalar} numerically for each sector given the current wage guess yields the
+steady-state number of varieties/firms. After this step, I pin down the sectoral consumption level $C_i$ using 
+\eqref{eq:CoverM} (and thus firm-level output $y_i$ and employment $l_i$ are also mechanically defined), the relative 
+price $\rho_i$ using \eqref{eq:lovevariety}, firm-level profits $d_i$ using \eqref{eq:profit}, firm value $v_i$ using 
+$v_i = d_i/\kappa$ and the number of prospective entrants $e_i$ using \eqref{steadyentrants} (which pins down both $m_i$
+and $\psi_i$ by the matching probability definition \eqref{eq:probability}).
+
+Subsequently, the aggregate final quantities such as $C$ and $L$ are mechanically determined. Consequently, the outer loop
+using the intratemporal household FOC can be closed by finding the unique $w^*$ such that $g(w^*)= 0$. Since \eqref{bisection} is a 
+one-dimensional monotone function (when $w$ rises, labor demand $L(w)$ falls and consumption $C(w)$ rises, 
+hence $g(w)$ is strictly decreasing), a unique root exists, and a bisection algorithm converges fast. At convergence, the set
+\[
+\bigl\{\,w^*,L^*,r^*,\bigl\{
+        C_i^*,M_i^*,\rho_i^*,d_i^*,v_i^*,e_i^*, \psi_i^*\bigr\}^I_{(i=1,\dots,I)}\bigr\},
+\]
+satisfies all equilibrium conditions listed on Table \ref{tb:eqconditions}, with all other variables being pinned from their definitions
+and from the numéraire being $P \equiv 1$.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
