@@ -332,7 +332,7 @@ Hello this is abstract bro.
 
 
 I first start this review of the literature by addressing \textcite{bilbiie2012endogenous} (henceforth BGM), since it represents the core framework behind the model developed in this thesis. 
-BGM expand on a classic RBC model\footnote{See \textcite{campbell1994inspecting}} by introducing monopolistic competition and endogenous firm entry for both a CES preferences and a translog preferences framework. 
+BGM expand on a classic RBC model\footnote{See \textcite{campbell1994inspecting}} by introducing monopolistic competition and endogenous firm entry for both a C.E.S.preferences and a translog preferences framework. 
 Firms incur a one-time sunk entry cost to enter and then start producing after one period with constant returns (time-to-build). 
 This one-time sunk entry cost is interpreted in the model as an "investment" paid in effective labor units to create a new firm/variety. Consequently, the economy has two sectors. 
 A production sector where incumbent firms produce output using labor and (as an additional exercise) physical capital, and an "entry" or variety-expanding sector, where labor can be used to create new firms/varieties. 
@@ -485,13 +485,13 @@ how this heterogeneity in turn affects aggregate outcomes through rich firm dyna
 \section{Model}
 \label{sec:model}
 
-In this section, I briefly lay out the firm side in the baseline BGM model with no capital and CES preferences in subsection \ref{sec:model-bilbiie}, explain the Sedláček–Sterk
+In this section, I briefly lay out the firm side in the baseline BGM model with no capital and C.E.S.preferences in subsection \ref{sec:model-bilbiie}, explain the Sedláček–Sterk
 heterogeneity and matching friction mechanisms in subsection \ref{sec:model-sedlacek}, and finally, fully characterize the main model and the departures made
 from the standard BGM framework in subsection \ref{sec:model-mine}. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Baseline Bilbiie-Ghironi Framework (CES Preferences)}
+\subsection{Baseline Bilbiie-Ghironi Framework (C.E.S.Preferences)}
 \label{sec:model-bilbiie}
 
 In the original BGM framework, the key elements of the firm side are fully characterized by the production/labor decision 
@@ -501,7 +501,7 @@ production factor, with the production function
 \[
     y_t(\omega) = Z_t \cdot l_t(\omega),
 \]
-where $Z_t$ is the exogenous aggregate productivity level and $l_t(\omega)$ is the firm's labor input. Consumers have CES preferences over a continuum
+where $Z_t$ is the exogenous aggregate productivity level and $l_t(\omega)$ is the firm's labor input. Consumers have C.E.S.preferences over a continuum
 of varieties 
 \[
     C_t = \left[\int_{\omega \in \Omega_t} c_t(\omega)^{\frac{\theta-1}{\theta}}\,d\omega\right]^{\frac{\theta}{\theta-1}},
@@ -659,7 +659,7 @@ and therefore marginal costs are expressed as
   \text{MC}_{i,t} = \frac{w_t}{\alpha_i Z_t}\left(\frac{y_{i,t}(\omega)}{Z_t}\right)^{\!1/\alpha_i-1},\label{eq:marginalcost}
 \end{equation}
 which, differently from BGM, are sector specific and depend directly on the returns-to-scale parameter $\alpha_i$. However, the BGM
-marginal cost expression is retrievable by setting $\alpha_i = 1, \, \forall i \in (i,1,...,I)$. With CES preferences, firms set relative
+marginal cost expression is retrievable by setting $\alpha_i = 1, \, \forall i \in (i,1,...,I)$. With C.E.S.preferences, firms set relative
 prices as constant markups over marginal costs 
 
 \begin{equation}
@@ -758,7 +758,7 @@ such that consumers can also substitute between sectoral bundles.
 It follows that the household's demand for each good and sectoral good is 
 $c_{i,t}(\omega) = \left(\frac{p_{i,t}}{P_{i,t}}\right)^{-\theta}C_{i,t}$ and 
 $C_{i,t} = \left(\frac{P_{i,t}}{P_t}\right)^{-\eta}C_t$. Additionally, the markup and the within/across sector benefit of variety are 
-independent of the number of goods, and related by $\epsilon = \mu -1 = 1/ (\theta-1)$. The CES expressions are then: 
+independent of the number of goods, and related by $\epsilon = \mu -1 = 1/ (\theta-1)$. The C.E.S.expressions are then: 
 $\mu(M_{i,t}) = \mu = \frac{\theta}{\theta - 1}, 
 \   \epsilon_{\text{within}}(M_{i,t}) = \mu - 1 , \ \epsilon_{\text{across}}(N_{t}) = \eta - 1$ and most notably 
 \begin{equation}
@@ -859,7 +859,7 @@ For instance, the definition of firm level output and labor demand \eqref{eq:lab
 once \( C_{i,t} \), \( M_{i,t} \) are known. Additionally, the aggregate consumption index $C_t$ is not included since it is mechanically 
 defined once $C_{i,t}$ is known for each sector, adding no information to the system. Therefore, I do not include 
 the aggregate goods clearing condition as an equilibrium condition, since it does not pin down any additional variable.
-Furthermore, nominal variables like $P_{i,t}$ and $p_{i,t}$ are not solved for, since, with CES preferences, blocks 
+Furthermore, nominal variables like $P_{i,t}$ and $p_{i,t}$ are not solved for, since, with C.E.S.preferences, blocks 
 \eqref{eq:pricing} and \eqref{eq:lovevariety} solve for the real/relative sectoral price $\rho_{i,t}$
 
 
@@ -1170,20 +1170,13 @@ By sector 9, the sucess rate is so minimal that curve starts to invert on itself
 Figure \ref{fig:steady-output-log}, the low-matching-probability effect starts to dominate the high-net-present-value effect, beginning
 to showcase a "Laffer-like" (\cite{laffer1974balance}) relationship between $e_i$ and $m_i$.
 
-Interpreting the flow of prospective entrants $e_i$ as investment outlay, another insight about the model appears. Namely,
-that Figure \ref{fig:steady-entry-log} can be re-read almost one-for-one as a sector-specific capital-production function $m_i = F_i(e_i)$.
+Interpreting the flow of prospective entrants $e_i$ as investment outlay, another insight about Figure \ref{fig:steady-entry-log} appears.
+Namely, that it can be re-read almost one-for-one as a sector-specific capital-production function $m_i = F_i(e_i)$.
 Therefore, the slope now represents the elasticity of new capital with respect to investment. Because only a fraction $\Pi_i$ is 
 successful, the gap $e_i - m_i$ is akin to depreciation in transit, and the curved shape pictures the declining marginal 
 product of piling ever more entry resources into a sector where profitable ideas are increasingly scarce. In sum, the introduction of
 matching frictions also enriches the "firm-entry-as-investment" dynamics of the original BGM framework, creating a more elaborate
 process of capital creation where not all investment translates directly to  capital/firm formation.
-
-
-
-
- 
-
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1192,13 +1185,111 @@ process of capital creation where not all investment translates directly to  cap
 \section{Quantitative Implementation}
 \label{sec:quant}
 
+In this section I will focus on exploring the mechanism of shock propagation in the model by means of a quantitative exercise.
+I compute the impulse responses to a productivity shock analogous to the one found in BGM, and to the supply-of-ideas shock which is,
+as explored in section \ref{sec:model-mine}, based on the composition shock in the Sedláček-Sterk quantitative exercise. 
+The results coroborate the intuition presented in the previous sections, while adding novel insights about the model. In line with the 
+BGM approach, I present the impulse response functions (IRFs) only for the inelastic labor case, with the IRFs for the elastic labor
+being found in the appendix in section \ref{sec-app:full}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Calibration}
 \label{sec:quant-cal} 
 
+In my baseline calibration, I adopt parameters from both \textcite{bilbiie2012endogenous} and \textcite{sedlavcek2017growth}, and
+interpret periods as years. Therefore, I adapt quarterly parameters from BGM, such as the exogenous firm exit shock $\delta = 0.09631$, 
+to a yierly base. All calibration values and their targets can be found in Table \ref{tab:calib_params_rotated}.
 
+\begin{sidewaystable}[htbp]
+\centering
+\caption{Calibrated parameters}
+\label{tab:calib_params_rotated}
+\begin{tabular}{lll}
+\toprule
+Parameter & Value & Target \\
+\midrule
+\begin{tabular}[t]{@{}l@{}}$\beta$\\discount factor to match 4\% annual interest rate\end{tabular}
+  & 0.96
+  & \textcite{sedlavcek2017growth} \\
+
+\begin{tabular}[t]{@{}l@{}}$\delta$\\exogenous firm exit shock (yierly)\end{tabular}
+  & 0.09631
+  & \textcite{bilbiie2012endogenous} \\
+
+\begin{tabular}[t]{@{}l@{}}$\theta$\\C.E.S. within-sector parameter\end{tabular}
+  & 3.8
+  & \textcite{bilbiie2012endogenous} \\
+
+\begin{tabular}[t]{@{}l@{}}$\eta$\\C.E.S. across-sector parameter\end{tabular}
+  & 2
+  & \textcite{carvalho2021sectoral} \\
+
+\begin{tabular}[t]{@{}l@{}}$f_{E}$\\steady‐state entry cost\end{tabular}
+  & 1
+  & \textcite{bilbiie2012endogenous} \\
+
+\begin{tabular}[t]{@{}l@{}}$Z$\\initial productivity\end{tabular}
+  & 1
+  & \textcite{bilbiie2012endogenous} \\
+
+\begin{tabular}[t]{@{}l@{}}$\chi$\\disutility of labor\end{tabular}
+  & 0.924271
+  & \textcite{bilbiie2012endogenous} \\
+
+\begin{tabular}[t]{@{}l@{}}$\varphi$\\elasticity of labor supply\end{tabular}
+  & 4
+  & \textcite{bilbiie2012endogenous} \\
+
+\begin{tabular}[t]{@{}l@{}}$\phi$\\elasticity in the entry function\end{tabular}
+  & 0.3
+  & \textcite{sedlavcek2017growth} \\
+
+\begin{tabular}[t]{@{}l@{}}$\rho_X$\\Stock of Ideas shock persistence\end{tabular}
+  & 0.415
+  & \textcite{sedlavcek2017growth} \\
+
+\begin{tabular}[t]{@{}l@{}}$\sigma_X$\\Stock of Ideas shock standard deviation\end{tabular}
+  & 0.000009
+  & \textcite{sedlavcek2017growth} \\
+
+\begin{tabular}[t]{@{}l@{}}$\rho_Z$\\productivity shock persistence\end{tabular}
+  & 0.9
+  & \textcite{bilbiie2012endogenous} \\
+
+\begin{tabular}[t]{@{}l@{}}$\sigma_Z$\\productivity shock standard deviation\end{tabular}
+  & $0.00995$
+  & \textcite{bilbiie2012endogenous} \\
+
+\midrule
+\begin{tabular}[t]{@{}l@{}}$\alpha_i$\\returns to scale parameters for each of the 9 sectors\end{tabular}
+  & [0.890,\,0.932,\,0.946,\,0.956,\,0.963,\,0.968,\,0.972,\,0.976,\,0.988]
+  & average size in BDS  \\
+
+\begin{tabular}[t]{@{}l@{}}$\Pi_i = \bigl(\psi_i / e_i\bigr)^{1-\varphi}$\\probability of successful entry for each of the 9 sectors\end{tabular}
+  & [0.625,\,0.357,\,0.218,\,0.123,\,0.070,\,0.040,\,0.022,\,0.013,\,0.002]
+  & firm shares in BDS  \\
+\bottomrule
+\end{tabular}
+\end{sidewaystable}
+
+For the C.E.S. preferences, I use the value of $\theta = 3.8$ from \textcite{bernard2003plants} 
+adopted by BGM. I set $\beta = 0.96$ to match an annual real interest rate of 4\%. I set productivity $Z$ and 
+the fixed entry cost $f_E$ both to $1$. Finally, I consider $\varphi = 0$ for the inelastic labor case, 
+and $\varphi = 4$ for the elastic labor case, and I take $\chi = 0.924271$ from BGM directly for ease of comparison
+with their baseline results. For the across-sector C.E.S. parameter, I take the calibration value of $\eta = 2$ from
+\textcite{carvalho2021sectoral}, due to the similar sectoral structure found in their model.
+
+For the Sedláček-Sterk matching block, I set the elasticity in the entry function to $\phi = 0.3$ to match their 
+calibration. Following their approach with the BDS data, I set the total number of technology types equal to the
+number of size groups avaliable in the database, yielding $I = 9$ sectors/technology types. I also adopted their
+implied values for the returns-to-scale parameters and matching probabilities, which they back out directly from
+BDS data. 
+
+Finally, for the two shocks adopted here, I take the exact same persistance and standard deviations used in the 
+original BGM and Sedláček-Sterk exercises. The productivity shock has
+persistance $\rho_Z =0.9$ and standard deviation $\sigma_Z = 0.00995$, whereas the stock-of-ideas shock has 
+persistance $\rho_X = 0.415$ and variance $\sigma_X = 0.000009$. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Impulse responses}
@@ -1236,20 +1327,20 @@ process of capital creation where not all investment translates directly to  cap
 \section{Additional Figures}
 \label{sec-app:full}
 
+\pagebreak
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Computational Implementation}
 \label{sec-app:codes}
 
-
-
+\pagebreak
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Data for Model Calibration}
 \label{sec-app:data}
 
-
+\pagebreak
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Supplementary Results}
-\label{sec-app:figures}
+\label{sec-app:sup}
 
 This appendix contains supplementary figures and tables, placed here for the sake of brevity in the main text. It is ordered according to the corresponding sections in the text.
 
