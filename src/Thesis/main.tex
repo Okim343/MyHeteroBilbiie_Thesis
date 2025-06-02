@@ -38,6 +38,7 @@ urldate=long
 \usepackage{tikz}
 \usepackage{rotating}
 \usepackage{hyperref} % Load after everything else
+\usepackage{graphicx}
 \usepackage[symbols, nopostdot, automake, nonumberlist]{glossaries}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1070,16 +1071,120 @@ one-dimensional monotone function (when $w$ rises, labor demand $L(w)$ falls and
 hence $g(w)$ is strictly decreasing), a unique root exists, and a bisection algorithm converges fast. At convergence, the set
 \[
 \bigl\{\,w^*,L^*,r^*,\bigl\{
-        C_i^*,M_i^*,\rho_i^*,d_i^*,v_i^*,e_i^*, \psi_i^*\bigr\}^I_{(i=1,\dots,I)}\bigr\},
+        C_i^*,M_i^*,\rho_i^*,d_i^*,v_i^*,e_i^*, \psi_i^*,\Pi_i^*\bigr\}^I_{(i=1,\dots,I)}\bigr\},
 \]
-satisfies all equilibrium conditions listed on Table \ref{tb:eqconditions}, with all other variables being pinned from their definitions
-and from the numéraire being $P \equiv 1$.
+satisfies all equilibrium conditions listed on Table \ref{tb:eqconditions}, with all other variables being 
+pinned from their definitions and from the numéraire being $P \equiv 1$.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Properties of the Steady-State}
 \label{sec:solution-properties}
+
+In this section, I explore the resulting dynamics of the numeric steady-state solution achieved through the 
+algorithm in the previous section, with a special focus on the differences in behavior between different technology types.
+Figure \ref{fig:steady-output-log} shows three important dimensions for each sector, namely firm-level output, employment and the number 
+of varieties/firms in each sector, which is represented by the size of each circle both in the figure and the legend.
+Focusing first on the relationship between firm labor demand and output, the axes are logged to make the power law governing the relationship 
+clearer, especially how the returns-to-scale coefficient affects this relationship. That is, by taking logs of equation 
+\eqref{eq:labourClearing}, the relationship between labor and output at the firm level becomes
+\begin{equation}
+  \ln l_i = \frac{1}{\alpha_i}(\ln y_i - \ln Z), \label{eq:laboroutputlog}
+\end{equation}
+such that the slope in the figure is $1/\alpha_i$, capturing the effects of different returns-to-scale parameters on the labor requirement
+per unit of output. 
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{../images/steady_state/elastic_labor/steady_firm_dynamic_log.pdf}
+  \caption{Steady State relationship between firm-level output and employment (logged).}
+  \label{fig:steady-output-log}
+\end{figure}
+
+The different slopes are particularly clear when comparing the position of the circles in relation to the 45-degree dashed line. 
+Given the small differences in the $\alpha$ parameters gathered from BDS data, differences in slope are small ($1/\alpha_i$ ranges 
+only from 1.12 to 1.01), but not imperceptible. The higher $\alpha_i$, the closer the circle's centre is to the 45-degree line, since 
+for $\alpha_i = 1$ and no change in productivity $Z$, labor demand $l_i$ moves one-to-one with $y_i$ as evident by \eqref{eq:laboroutputlog}.
+
+Therefore, the further a sector's bubble is from the 45-degree line, the smaller their returns-to-scale are, and as a consequence, output
+rises noticeably less than employment, so the firm quickly runs into diminishing returns and stays small (low employment). On the other hand, 
+for high-scalability sectors, a one-percent increase in employment raises output by almost one percent. Because marginal product falls slowly,
+it takes longer for the firm to face diminishing returns to employment, and thus the firms' optimal size/employment is larger.
+
+A real-life analogy could be the difference between a multi-plant manufacturer (highly-scalable) and a specialized B2B producer 
+(medium-small scalability). For the multi-plant manufacturer, despite their large fixed cost base, their standardised processes, efficient IT 
+or big capital stock lets each extra worker generate almost proportional extra output. On the other hand, for a specialized B2B producer output
+is tied closely to a small specialized crew, and extra workers might not contribute with equal extra output due to coordination/training costs.
+
+An interesting case is sector 9, which significantly stands above the rest in both output and employment levels. This is due to its substantial
+returns-to-scale parameter, especially when compared to the preeciding sectors 8 and 7. The increase in $\alpha$ from sector 7 to 8 
+is merely $0.004$, whereas from sector 8 to 9 it is three times bigger at $0.012$. This significantly impact the size to which firms in 
+sector 9 can grow to when compared to other sectors, leading to bigger employment and output levels.
+
+Moving on to the number of firms/varieties $M_i$, it is important to notice that, in steady-state, the higher the returns-to-scale parameter
+in a sector, the smaller the matching probability $\Pi_i$ due to a limited stock of ideas and excessive competition. Therefore, one might find
+the high number of firms in sector 9, 8 or 7 contradictory, since entry is harder and firms are larger and thus the number of incumbents should
+be smaller. This would, however, be an incorrect interpretation, since $M_i$ should be interpreted as the number of product lines (or varieties) 
+rather than a stand-alone legal entitiy, as this is the interpretation favored in the basiline model without 
+sectoral heterogeneity in \textcite{bilbiie2012endogenous}. 
+
+In this reading, each incumbent variety corresponds to a point on the continuum $\omega$, and the results displayed in 
+Figure \ref{fig:steady-output-log} can be made sense of. Highly scalable firms end up having a bigger number of product lines due the
+easiness of scaling-up the business, whereas low-scalability industries cannot expand their varieties/product-lines so easily due 
+to scaling issues. Therefore, for high-$\alpha$ technologies, marginal labor requirements to generate output are low, so once a 
+core platform is in place (such as Amazon's fulfilment network or a cloud-software datacenter), adding another feature or product line costs
+only the fixed entry cost. By contrast, labor-intensive sectors such as restaurants, bespoke services and others, have lower returns-to-scale. Even with abundant ideas,
+they cannot scale far, so their steady-state variety counts remain small due to the small number of prospective entrants
+
+However, starting a successful product line in high-$\alpha$ business is inherently harder, due to the high competition in entry and the 
+limited stock of ideas. This is balanced out by the high expected profits, which translates into a high net present value of $v_i$,
+making the free-entry condition \eqref{eq:freeentry} accomodate a vast flow of attempts, which in equilibrium yields a large stock
+of active varieties $M_i$, which might be all owned by the same firm, but the model abstracts away from this perspective. However, the difficulty of
+entry starts to overpower the high scalability factor at some point. This is particularly true for sector 9, whose number of active varieties $M_9$ is actually slighly
+smaller than for sector 8, despite the significantly higher value of $\alpha_9$, due to the extremely low probability of successful entry in 
+steady-state $\Pi_9$ of around $0.2\%$.
+
+Another interesting aspect of the steady-state solution is the friction of entry, and the relationship between prospective 
+entrants and successful ones, which is capture in Figure \ref{fig:steady-entry-log}. The horizontal axis represents the steady-state number of prospective
+entrants in sector $i$, $e_i$, and the vertical axis the steady-state number of successful entrants in sector $i$, $m_i$. The $\alpha_i$
+parameter for each sector is indicated next to each circle, and the steady-state matching probability $\Pi_i$ for each sector is show 
+in the legend.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{../images/steady_state/elastic_labor/steady_entry_log.pdf}
+  \caption{Steady State relationship between prospective and successful entrants (logged).}
+  \label{fig:steady-entry-log}
+\end{figure}
+As before, the axes are logged to reveal the elasticity between variables.
+Therefore, taking logs turns the relationship into a line whose slope is elasticity $\epsilon_i = \frac{\Delta \ln m_i}{\Delta \ln e_i}$. 
+The figure puts the matching friction aspect of the model into the spotlight, showcasing the "decresing-returns-to-entry" 
+as one moves up the $\alpha_i$ values (moves down the matching probabilities $\Pi_i$). That is, on the double-log axes that 
+curvature shows that the elasticity between potential entrants $e_i$ and successful startups $m_i$ falls steadily as the entry pool 
+gets larger. In other words, each successive sector is fighting steeper diminishing returns-to-entry than the one to its left. 
+
+This concurs with the logic found in previous section, where high-$\alpha$ sectors are more attractive despite the lower probability
+of success and low-$\alpha$ sectors face little congestion due to their unatractiveness, despite the large stock of ideas.
+By sector 9, the sucess rate is so minimal that curve starts to invert on itself, such that, as explored before for 
+Figure \ref{fig:steady-output-log}, the low-matching-probability effect starts to dominate the high-net-present-value effect, beginning
+to showcase a "Laffer-like" (\cite{laffer1974balance}) relationship between $e_i$ and $m_i$.
+
+Interpreting the flow of prospective entrants $e_i$ as investment outlay, another insight about the model appears. Namely,
+that Figure \ref{fig:steady-entry-log} can be re-read almost one-for-one as a sector-specific capital-production function $m_i = F_i(e_i)$.
+Therefore, the slope now represents the elasticity of new capital with respect to investment. Because only a fraction $\Pi_i$ is 
+successful, the gap $e_i - m_i$ is akin to depreciation in transit, and the curved shape pictures the declining marginal 
+product of piling ever more entry resources into a sector where profitable ideas are increasingly scarce. In sum, the introduction of
+matching frictions also enriches the "firm-entry-as-investment" dynamics of the original BGM framework, creating a more elaborate
+process of capital creation where not all investment translates directly to  capital/firm formation.
+
+
+
+
+ 
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
