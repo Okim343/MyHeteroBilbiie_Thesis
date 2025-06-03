@@ -1258,7 +1258,7 @@ Parameter & Value & Target \\
   & \textcite{bilbiie2012endogenous} \\
 
 \begin{tabular}[t]{@{}l@{}}$\sigma_Z$\\productivity shock standard deviation\end{tabular}
-  & $0.00995$
+  & $\log (1.01)^2$
   & \textcite{bilbiie2012endogenous} \\
 
 \midrule
@@ -1288,14 +1288,122 @@ BDS data.
 
 Finally, for the two shocks adopted here, I take the exact same persistance and standard deviations used in the 
 original BGM and Sedláček-Sterk exercises. The productivity shock has
-persistance $\rho_Z =0.9$ and standard deviation $\sigma_Z = 0.00995$, whereas the stock-of-ideas shock has 
+persistance $\rho_Z =0.9$ and standard deviation $\sigma_Z = \log (1.01)^2$, whereas the stock-of-ideas shock has 
 persistance $\rho_X = 0.415$ and variance $\sigma_X = 0.000009$. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Impulse responses}
 \label{sec:quant-IRF}
 
+\medskip
+\medskip
+\noindent\textbf{Productivity Shock}
+\medskip
 
+In Figure \ref{fig:multiprod} and Figure \ref{fig:aggprod}, the responses for the inelastic labor case
+to a transitory one percent productivity shock is displayed for both sectoral variables in 
+\ref{fig:multiprod} and aggregate ones in \ref{fig:aggprod}. As described before, periods are interpreted as years,
+and the number of periods after the shock is on the horizontal axis. I start by analyzing the sectoral responses and
+then move on to the aggregate ones. 
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=1\textwidth]{../images/inelastic_labor/Zshocks/irf_epsZ_sectoral.pdf}
+  \caption{Responses to a transitory positive productivity shock for main sectoral variables.}
+  \label{fig:multiprod}
+\end{figure}
+
+In Figure \ref{fig:multiprod}, the response of sectoral flow variables such as $M_i$, $e_i$ and $L_i$ are kept in level
+deviation from steady-state, to make the absolute quantities more clear for sectoral comparison. On the other hand, all other
+variables are logged, such that the response represents percentage deviations from steady state, to characterize the heterogeneous
+responses of different sectors. The only exception is the IRF for the real/relative price $\rho_i$, which is 
+kept in levels to help clearly distinguish which sectors have higher and lower levels.
+
+Initially, it is clear that a temporary increase in TFP leads to a more attractive business enviornment, thus enticing
+entry in all sectors. In particular, sectors with higher $\alpha$ parameters face more entry because of higher MPLs,
+meaning that a raise in TFP yields higher returns. Due to the time-to-build lag, $M_i$ raises subsequently, but because
+of matching frictions, the sectoral differences are more balanced. Consequently, the relative price rises, in particular in
+sectors that face more successful entry, due to the love-for-variety expression \eqref{eq:lovevariety}. Finally, a spike in
+labor used in bulding new product lines can be seen, especially in high-$\alpha$ sectors since entry is higher demanding more
+hours.
+
+The most interesting dynamics, however, are the responses of the firm-level variables ($y_i,d_i,v_i,l_i$). In particular, the
+negative dip that profits, output and value suffer in high-$\alpha$ sectors. Initially, the temporary positive 
+increase in $Z$ leads to bigger future profits and therefore bigger net present value of entering accross all sectors, as can be
+clearly seen in Figure \ref{fig:multiprod}. Due to time-to-build lag, firms pay the entry cost today but only start producing
+next period. Once this new cohort starts producing, the over-entry that happened in particular in highly scalable sectors leads
+to competition glut (excessively high number of incubents $M_i$). 
+
+This has two effects on firm-level variables. The first is the
+increase in the relative price $\rho_i$, which leads to consumers substituting away from the sectors with the highest prices, decreasing
+sectoral demand $C_i$, especially at high-$\alpha$ sectors, which forces firm-level output $y_i$ downwards. The second is the dilution of
+firm-level output and profits due to the conditional symmetric equilibrium conditions, where more firms now share the same demand.
+The higher the increase in $M_i$, the higher the impact of this mechanism, leading to a bigger impact on high-$\alpha$ sectors, as visible
+in the figure. This dynamic is well-portraid in the firm-level labor demand $l_i$, which decreases substantially since firms now produce 
+less output.
+
+The effect of this over-entry and competition glut is what ultimately leads to the negative dip seen in some firm-level variables in
+Figure \ref{fig:multiprod}, in particular for sector 9, which, as explored before, represents a significant outlier in 
+and thus suffers from the competition glut the hardest. The recovery back to steady state happens as the exogenous firm exit shock
+thins out the bloated number of incumbents $M_i$. This in turn leads to fewer competition and lowers relative prices, bringing $y_i$ and $d_i$
+back and therefore also $v_i$. Low-$\alpha$ sectors never attract enough entrants to flip their incuments into the red, so they just glide
+back as Z dissipates.
+
+Finally, the response of $M_i$ is also worth some exploration. $M_i$ is the key endogenous state in the model and,
+much like in BGM, the sunk cost dynamic and time-to-build lag makes $M_i$ behave very much like capital in the 
+baseline RBC. Thus, $e_i$ represents consumer investment, and $v_i$ the key price for household financing, with $e_i$ intially overshooting
+because $v_t$ is expected to temporarily increase in the future, especially in high $\alpha$ sectors. This makes it profitable for households
+to invest today in order to reap the temporary benefits of the positive producitivity shock.
+
+Moving on to Figure \ref{fig:aggprod}, the aggregate responses to the productivity shock are now of interest. The response of labor used in
+firm production ($Le$) is in line with the dynamics explored before, fuelling the substantial entry of new incumbents into the many sectors.
+Labor used in production ($Lc$) then rises to match the production of these new firms after they are built, hence the lag. Real wage rises to
+match the increase in labor demand for both entry and production.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{../images/inelastic_labor/Zshocks/irf_epsZAgg.pdf}
+  \caption{Responses to a transitory positive productivity shock for main aggregate variables.}
+  \label{fig:aggprod}
+\end{figure}
+
+The most interesting effect, however, consists of the response of aggregate
+output $Y$. In the baseline BGM framework, output responds to the one-percent increase in $Z$ with a slighly bigger response of 
+around one to two percent. In Figure \ref{fig:aggprod}, however, the response far exceds the one of BGM, leading to an increase of
+around eleven percent. This happens through the love-for-variety effect found in BGM, which drives an increase
+in output due to the increase in the number of varieties, but also due to two novel channels. The first is the possibility of cross-sector
+C.E.S. substitution, where households redirect demand towards sectors whose relative prices fall the most. Because the elasticity parameter
+$\eta$ is bigger than one, the quantitiy response is elastic, such that the demand shift itself raises $Y$. This channel is sensitive to
+the calibration of $\eta$ and thus its effect should be taken with a grain of salt.
+
+The second novel channel constitutes the labor reallocation between sectors after a producitivity shock. Since the effect of an increase in
+TFP on the MPL depends directly on the returns-to-scale parameter $\alpha$, the shock induces 
+reallocation from low-$\alpha$ to high-$\alpha$ sectors. This in turn raises output, since labor is now used more efficiently accross 
+the economy both for entry and production. The two novel channels represent extensions to the intensive composition margin in the model, 
+going beyond the love-for-variety transmission mechanism found in BGM, which focuses on the extensive composition margin. Thus, the introduction
+of heterogenous firm sectors into the BGM framework not only enriches the pre-existing dynamics, but introduces new transmission mechanism
+that enrich the propagation and effect of productivity shocks in the model.
+
+As found in the original BGM quantitative exercise with producitivity shocks, the response in the elastic labor case is 
+qualitatively similar for almost all variables. The Figures \ref{fig:multiprod-elastic} and \ref{fig:aggprod-elastic} in the appendix present the IRFs for both
+sectoral and aggregate variables, respectively. All sectoral variables follow the exact same pattern as in the inelastic labor case, albeit 
+with stronger responses. That is because the household now has an additional margin of adjustment in face of shocks, thus enchancing the model's 
+propagation mechanism and amplifying the responses of most endogenous variables, since households adjust their hours worked. 
+
+As for the aggregate
+responses in Figure \ref{fig:aggprod-elastic}, all variables stay the same excluding labor that goes into production ($Lc$). For this variable, there
+is an initial decline to levels lower than steady state, followed by a recovery and a brief period of above steady-state levels of work hours. 
+The initial drop is not present in the inelastic labor case because now hours are free to adjust, so the income effect of the positive 
+productivity shock makes households enjoy more leisure now, leading to a fall in production labor even though the marginal product of 
+labour is higher. The subsequent rise comes from  the newly built product lines demanding labor to produce goods, as in the 
+inelastic labor scenario.
+
+
+
+\medskip
+\medskip
+\noindent\textbf{Stock-of-Ideas Shock}
+\medskip
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Concluding Remarks}
@@ -1326,6 +1434,20 @@ persistance $\rho_X = 0.415$ and variance $\sigma_X = 0.000009$.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Additional Figures}
 \label{sec-app:full}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=1\textwidth]{../images/elastic_labor/Zshocks/irf_epsZ_sectoral.pdf}
+  \caption{Responses to a transitory positive productivity shock for main sectoral variables (Elastic Labor).}
+  \label{fig:multiprod-elastic}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{../images/elastic_labor/Zshocks/irf_epsZAgg.pdf}
+  \caption{Responses to a transitory positive productivity shock for main aggregate variables (Elastic Labor).}
+  \label{fig:aggprod-elastic}
+\end{figure}
 
 \pagebreak
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
