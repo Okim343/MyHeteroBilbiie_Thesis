@@ -46,6 +46,7 @@ mkpath(outdir)
 
 ss_inL = steady_state(model; inelasticL=true)          # compute steady state for inelastic labor
 print_ss(ss_inL)                     # print steady state
+println("Steady state with inelastic labor: ", ss_inL)
 
 p = steady_state_scatter(ss_inL; size_scale=30, log_y=true, log_x=true) # relationship between y_i l_i and M_i logged
 

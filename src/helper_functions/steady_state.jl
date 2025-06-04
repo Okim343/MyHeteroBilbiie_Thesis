@@ -57,13 +57,13 @@ function steady_state(model::MyHeteroBilbiieModel; tol = 1e-15, inelasticL::Bool
     δdeath = model.δ                       # firm exit rate
     θ      = model.θ                       # within-sector CES
     η      = model.η                       # across-sector CES
-    α      = model.α                       # sector returns-to-scale
+    α      = model.α                       # sector returns-to-scale (vector of length I)
     fE     = model.fE                      # entry cost
-    Z̄      = 1.0                           # productivity norm
-    X      = 1.0                           # composition shock norm
+    Z̄      = 1.0                           # productivity norm (here normalized to 1)
+    X      = 1.0                           # composition shock norm (normalized to 1)
     χ      = model.χ                       # disutility of labor
     ϕ      = model.ϕ                       # matching elasticity
-    Π̄      = model.Π                       # success probabilities
+    Π̄      = model.Π                       # success probabilities (vector length I)
     φ      = model.φ                       # Frisch elasticity
 
     I      = length(α)
@@ -77,9 +77,17 @@ function steady_state(model::MyHeteroBilbiieModel; tol = 1e-15, inelasticL::Bool
 
     ## ─── Sector‐level block for a candidate wage w ───────────────
     function sector_block(w)
-        Mi = zeros(I);  Ci = similar(Mi);  ρi = similar(Mi)
-        di = similar(Mi); vi = similar(Mi); ei = similar(Mi); ψi = similar(Mi)
-        yi = similar(Mi); li = similar(Mi); mi = similar(Mi)
+        Mi   = zeros(I)
+        Ci   = similar(Mi)
+        ρi   = similar(Mi)
+        di   = similar(Mi)
+        vi   = similar(Mi)
+        ei   = similar(Mi)
+        ψi   = similar(Mi)
+        yi   = similar(Mi)
+        li   = similar(Mi)
+        # new: MCi stores marginal cost in each sector
+        MCi  = similar(Mi)
 
         for i in 1:I
             αi        = α[i]
@@ -89,18 +97,24 @@ function steady_state(model::MyHeteroBilbiieModel; tol = 1e-15, inelasticL::Bool
             Ci_over_Mi = const_part * w / p_success
             cost       = (w * fE) / (Z̄ * X)
 
-            # (E) pricing → Mᵢ
-            Ki        = μ * w/(Z̄ * αi) * (Ci_over_Mi/Z̄)^(1/αi - 1)
+            # We set y_i = Cᵢ/Mᵢ  (note: Z̄=1 here)
+            yi[i]     = Ci_over_Mi
+
+            # ── compute marginal cost MCᵢ = w/(αᵢ Z̄) * (yᵢ/Z̄)^(1/αᵢ - 1)
+            MCi[i] = w/(αi * Z̄) * (yi[i]/Z̄)^(1/αi - 1)
+
+            # (E) pricing → pᵢ = μ * MCᵢ  →  Mᵢ from CES‐demand condition
+            # (here Ki is the sector‐i price relative to normalization)
+            Ki        = μ * MCi[i]
             Mi[i]     = Ki^(θ - 1)
 
             # back out sectorals
             Ci[i]     = Ci_over_Mi * Mi[i]
-            yi[i]     = Ci_over_Mi
             li[i]     = (yi[i]/Z̄)^(1/αi)
-            di[i]     = (1 - 1/μ)*yi[i]
-            vi[i]     = di[i]/κ
-            mi[i]     = δdeath/(1 - δdeath)*Mi[i]
-            ei[i]     = mi[i]/(cost/vi[i])
+            di[i]     = (1 - 1/μ) * yi[i]
+            vi[i]     = di[i] / κ
+            mi_i      = δdeath / (1 - δdeath) * Mi[i]
+            ei[i]     = mi_i / (cost/vi[i])
             ρi[i]     = Mi[i]^(1/(θ - 1))
             ψi[i]     = ei[i] * (cost/vi[i])^(1/(1 - ϕ))
         end
@@ -116,7 +130,25 @@ function steady_state(model::MyHeteroBilbiieModel; tol = 1e-15, inelasticL::Bool
         L_i = Mi .* li .+ ei * fE / Z̄
         Y_i = w .* L_i .+ di .* Mi
 
-        return (; C, L, Le, Lc, Y, Mi, Ci, ρi, di, vi, ei, ψi, li, yi, L_i, Y_i)
+        return (
+            C     = C,
+            L     = L,
+            Le    = Le,
+            Lc    = Lc,
+            Y     = Y,
+            Mi    = Mi,
+            Ci    = Ci,
+            ρi    = ρi,
+            di    = di,
+            vi    = vi,
+            ei    = ei,
+            ψi    = ψi,
+            li    = li,
+            yi    = yi,
+            L_i   = L_i,
+            Y_i   = Y_i,
+            MCi   = MCi,   # return the marginal cost array
+        )
     end
 
     ## ─── Household intratemporal FOC residual ────────────────────
@@ -163,9 +195,11 @@ function steady_state(model::MyHeteroBilbiieModel; tol = 1e-15, inelasticL::Bool
         y_i    = blk.yi,
         L_i    = blk.L_i,
         Y_i    = blk.Y_i,
+        MC_i   = blk.MCi,    # vector of marginal costs in each sector
         s_lag_Z = 1.0,
     )
 end
+
 
 
 
@@ -175,7 +209,7 @@ end
 """
  Nicely print a steady‐state NamedTuple `ss` with:
    • scalars:  w, L, Le, Lc, Y, r, C, s_lag_Z
-   • 9‐element vectors: M_i, C_i, ρ_i, v_i, d_i, e_i, ψ_i, Π_i, α_i, l_i, y_i, L_i, Y_i
+   • sector‐level vectors (length 9): M_i, C_i, ρ_i, v_i, d_i, e_i, ψ_i, Π_i, α_i, l_i, y_i, L_i, Y_i, MC_i
 """
 function print_ss(ss)
     # 1) scalars
@@ -190,13 +224,19 @@ function print_ss(ss)
     # 2) sectoral vectors 
     vec_fields = (
       :M_i, :C_i, :ρ_i, :v_i, :d_i, :e_i, :ψ_i,
-      :Π_i, :α_i, :l_i, :y_i, :L_i, :Y_i
+      :Π_i, :α_i, :l_i, :y_i, :L_i, :Y_i,
+      :MC_i            # <-- newly added
     )
+
+    # Assume there are 9 sectors (length 9 for each vector)
     df = DataFrame(sector = 1:9)
+
     for fld in vec_fields
         @assert hasproperty(ss, fld) "ss has no field $fld"
         arr = getproperty(ss, fld)
         @assert length(arr) == 9 "field $fld must have length 9"
+
+        # Rename Greek letters to ascii‐friendly names:
         clean_name = replace(string(fld),
                              "ρ" => "rho",
                              "Π" => "Pi",
@@ -210,6 +250,7 @@ function print_ss(ss)
     println("─"^60)
     show(df, allrows=true, allcols=true)
 end
+
 
 
 
