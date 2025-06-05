@@ -226,7 +226,7 @@ description={Gross Domestic Product}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Formalities
-\title{Technology Choice and Firm Composition in an RBC Model with Endogenous Entry}
+\title{Technology Choice and Firm Heterogeneity in an RBC Model with Endogenous Entry}
 \author{}
 \date{}
 
@@ -1372,7 +1372,7 @@ output $Y$. In the baseline BGM framework, output responds to the one-percent in
 around one to two percent. In Figure \ref{fig:aggprod}, however, the response far exceds the one of BGM, leading to an increase of
 around eleven percent. This happens through the love-for-variety effect found in BGM, which drives an increase
 in output due to the increase in the number of varieties, but also due to two novel channels. The first is the possibility of cross-sector
-C.E.S. substitution, where households redirect demand towards sectors whose relative prices fall the most. Because the elasticity parameter
+C.E.S. substitution, where households redirect demand towards sectors whose relative rise the less. Because the elasticity parameter
 $\eta$ is bigger than one, the quantitiy response is elastic, such that the demand shift itself raises $Y$. This channel is sensitive to
 the calibration of $\eta$ and thus its effect should be taken with a grain of salt.
 
@@ -1404,6 +1404,80 @@ inelastic labor scenario.
 \medskip
 \noindent\textbf{Stock-of-Ideas Shock}
 \medskip
+
+In Figure \ref{fig:multistock} and Figure \ref{fig:aggstock}, the responses for the inelastic labor case
+to a transitory stock-of-ideas shock is displayed for both sectoral variables in 
+\ref{fig:multistock} and aggregate ones in \ref{fig:aggstock}. As described before, periods are interpreted as years,
+and the number of periods after the shock is on the horizontal axis. I start by analyzing the sectoral responses and
+then move on to the aggregate ones. The stock-of-ideas shock follows the same magnitude as the composition shock found in
+\textcite{sedlavcek2017growth}, that is, the shock is persistent ($\rho_X = 0.415$) but minuscule, with an annual
+innovation volatility of $\sigma_X = 0.000009$ (less than one hundredth of a percent). This explains the minimal responses of
+most endogenous variables, especially when compared to the responses to the productivity shock explored above.
+
+As briefly discussed before in section \ref{sec:model-mine}, I choose to modify the original composition shock to have it affect the
+stock of ideas of all sectors equally. That is because my goal is the study of aggregate RBC dynamics rather than cohort-by-year composition.
+This makes sure that the shock now has a larger macro impact, functioning as a facilitator of business activity across the board, from high- 
+to low-scalability types. Empirical analogues could be a patent-law change, the arrival of a new innovation, or a broad surge in entrepreneurial 
+funding. The bottom-line is that the shock now endogenously models an aggregate event that facilitates starting businesses through affecting
+the actual aggregate stock of ideas $\Psi$, preserving the microfoundations of the model. This differs from literature that models entry-rate
+shocks as exogenous "animal-spirits" phenomena (\cite{leduc2016uncertainty}), simply hardcoding a higher $e_i$.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=1\textwidth]{../images/inelastic_labor/Xshocks/irf_epsX_sectoral.pdf}
+  \caption{Responses to a transitory positive sotck-of-ideas shock for main sectoral variables.}
+  \label{fig:multistock}
+\end{figure}
+
+Despite the shock multiplying the stock of ideas for each sector equaly, entry still differs due to different returns-to-scale parameters
+and matching probabilities, as visible in Figure \ref{fig:multistock}. Prospective entry in all nine sectors jumps on impact due to a higher
+number of ideas being avalible, a dynamic similar to an increase in the number of lottery tickets for a given prize (successfule entry in
+this scenario). As before, sector nine sees the highest surge in entrants by far, given the attractiveness of its high-$\alpha$ technology.
+Due to time-to-build and sunk entry costs, the number of product lines $M_i$ in each sector adapts with a lag to the new entrants, behaving
+again as physical capital in the textbook RBC model. A stark increase in sectoral-level labor $L$ to build new firms is once again present,
+matching the spike in prospective entrants.
+
+Echooing the previous results for the productivity shocks, the firm-level variable dynamics are plagued by the same curse of over-entry
+and competition, but without the positive effect of a temporary rise in productivity to compensate. Therefore, due to the over-entry mechanism
+and the subsequent competition glut explored before, firm-level output ($y_i$), labor ($l_i$) and profits ($d_i$) all fall with a lag after the
+time-to-build lag. Evidently, high-$\alpha$ sectors suffer the biggest impact, with over-entry bitting their profits the hardest. Firm value,
+however, exhibits a different behavior to the three other varibles. It instantly falls when the shock happens, since investors take the future
+increase in competitors and thus lower profits into consideration. Interestingly, however, $v_i$ overshoots above steady-state levels for low-$\alpha$
+sectors only, since these sectors face lesser competition and therefore have the fastest profit recovery of all sectors. Ultimately, it is
+the combination of the intial expected profit impact of entry and the speed of the expected relief that dictates the firm valuation dynamics.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{../images/inelastic_labor/Xshocks/irf_epsX_Agg.pdf}
+  \caption{Responses to a transitory positive stock-of-ideas shock for main aggregate variables.}
+  \label{fig:aggstock}
+\end{figure}
+
+Moving on to aggregate variables in Figure \ref{fig:aggstock}, a similar dynamic as in Figure \ref{fig:aggprod} can be seen for both 
+production and entry labor. Labor used in entry ($Le$) spikes initially to support the new entrants, with the labor used in production ($Lc$)
+following suit to support production after the time-to-build lag. Output rises due to a sheer increase in the total number of producers, which,
+due to the love-for-variety effect, fosters higher demand. Some reallocation of demand across sectors also happens, since the shock also causes
+changes in the relative price $\rho_i$, but less than the response for the productivity shock. Finally, the real wage now rises with a lag since
+labor demand increases in production only after firms are built, and the stock-of-ideas shock does not directly influence MPL and thus the 
+real wage.
+
+Once more, the reponses for the elastic labor case can be found in Figures \ref{fig:multistock-elastic} and \ref{fig:aggstock-elastic} 
+in the appendix.
+For the aggregate responses, a similar dynamic to the one found in Figure \ref{fig:aggprod-elastic} is found again, with labor used in 
+production ($Lc$) facing the intial dip as before, due to households now adjusting their labor supply in response to the income effect 
+from higher labor demand in entry ($Le$).
+
+On the other hand, sectoral-level responses for firm-level variables present a new dynamic not seen in the inelastic case. Namely, the dip in the
+firm-level variables of employment ($l_i$), output ($y_i$), profits/dividends ($d_i$) and valuation ($v_i$) happens immediately after the shock,
+without lagging. This is also due to households now being able to adjust their total labor supply. Now, household can use fewer hours in production
+and more in entry since labor demand there is higher, as can be seen by the significantly higher levels of entry in Figure \ref{fig:multistock-elastic}
+when compared to the inelastic case. Naturally, this leads to lower output, profits, and overall firm value, in practice bringing the 
+over-entry/competition glut effect foward in time. The same effect is absent from the response in Figure \ref{fig:multiprod-elastic} simply because
+the productivity shock also raises the MPL in production, forcing households to keep hours there too. 
+
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Concluding Remarks}
@@ -1447,6 +1521,20 @@ inelastic labor scenario.
   \includegraphics[width=0.7\textwidth]{../images/elastic_labor/Zshocks/irf_epsZAgg.pdf}
   \caption{Responses to a transitory positive productivity shock for main aggregate variables (Elastic Labor).}
   \label{fig:aggprod-elastic}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=1\textwidth]{../images/elastic_labor/Xshocks/irf_epsX_sectoral.pdf}
+  \caption{Responses to a transitory positive stock-of-ideas shock for main sectoral variables (Elastic Labor).}
+  \label{fig:multistock-elastic}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{../images/elastic_labor/Xshocks/irf_epsX_Agg.pdf}
+  \caption{Responses to a transitory positive stock-of-ideas shock for main aggregate variables (Elastic Labor).}
+  \label{fig:aggstock-elastic}
 \end{figure}
 
 \pagebreak
