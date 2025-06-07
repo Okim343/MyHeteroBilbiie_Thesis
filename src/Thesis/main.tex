@@ -322,6 +322,77 @@ Hello this is abstract bro.
 \section{Introduction}
 \label{sec:introduction}
 
+The heterogeneity of producers, and not only their number, represents an important feature of any economy. Firms can diverge on many aspects,
+but a fundamental one is scalability. On one hand, more scalable firms tend to grow to larger sizes due to high returns to scale while less scalable firms tend
+to expand less. According to a technical report by the European Comission, high-growth enterprises are just 11\% of EU firms but created 53\% 
+of net jobs in 2015-16 (\cite{flachenecker2020highgrowth}).
+On the other hand, highly-scalable and lucrative business ideas tend to also invoke higher competition, leading to
+subtantial friction when establishing a firm for prospective entrepreneurs. \textcite{sedlavcek2017growth} use data from the 
+Business Dynamics Statistics (BDS) US-census to show that, depending on how scalable the business idea is, the probability of 
+starting a successful business can range from 0.2\% all the way to 62\%.
+
+Heterogenous scaling within firm cohorts also leads to heterogeneous responses to shocks, which can yield novel aggregate shock dynamics when compared
+with standard shock responses. Using census microdata, \textcite{smirnyagin2023returns} shows that the entry rate of high returns-to-scale firms falls 
+twice as much as for low returns-to-scale firms during recessions. \textcite{calligaris2023employment} demostrate that employment losses in 2020 from the COVID-19
+pandemic were significantly larger in low-telework sectors uncapable of quick scaling and adaptation.
+
+Hence, this thesis investigates how shock responses in a Real-Business-Cycle (RBC) model with endogenous entry are affected by the introduction of across-sector 
+differences in returns-to-scale parameters and entry matching frictions. In particular, How do sector-specific returns-to-scale and matching frictions at birth 
+alter the propagation of aggregate shocks, especially when compared to a baseline RBC framework? I also investigate the impact of a sudden increase in business 
+opportunities across the economy, and how firm-level and aggregate-level responses to this shock diverge.
+
+By doing so, I integrate the seminal RBC with endogenous entry framework found in \textcite{bilbiie2012endogenous} (henceforth BGM) with the technology-choice mechanism from
+\textcite{sedlavcek2017growth} in one DSGE environment with multiple production sectors\footnote{In my framework, each sector corresponds to one 
+returns-to-scale parameter, such that a symmetric within-sector equilibrium makes all firm that belong to the same sector share equal prices and profits}. 
+Additionally, a novel stock-of-ideas shock is introduced by modifying the composition shock found in the 
+Sedláček-Sterk framework, to capture the effect of a boom in business viability in an endogenous and micro-consistent way. This approach allows the study of
+firm entry and heterogeneity dynamics inside a pre-existing and well-studied RBC framework, delivering new insights for industrial policy backing 
+production activities in recession periods which takes scalling differences into consideration.
+
+For instance, I find that by introducing firm heterogeneity in returns-to-scale parameters, the impact of a productivity shock on aggregate output 
+subtantially increases when compared to the baseline RBC framework in BGM. This new magnitude comes from two new shock transmission channels: labor 
+reallocation intra-sector and demand reallocation across sectors; which are not captured by the standard representative firm baseline. Additionally,
+I find a negative firm-level impact across different technology types of positive producitivity and stock-of-ideas shocks, mainly caused by over-entry
+and a subsequent competition glut. This effect drives firm-level profits down despite sectoral aggregates going up from higher productivity and/or 
+a higher number of incumbents.
+
+An important point is that, as in the original BGM framework, each producer is equated to an individual product line, accounting for the fact that new varieties
+are also added by existing firms. With this in mind, analyzing steady state firm behaviour pins down interesting facts about the model's functioning. 
+The relationship between firm-level output and labor demand, for instance, is highly connected to the returns-to-scale parameter. The larger the 
+parameter, the longer a firm can expand before hitting dimishing returns, so highly-scalable sectors naturally hold more production lines. On the 
+competition front, any parameter change that depresses entry, enlarges the slice of the market served by each surviving producer. A congestion channel also
+exists, such that prospective incumbents face decreasing "returns-to-entry", where success odds tumble significantly going from low- to high-scalability sectors.
+Finally, in steady-state all entry happens solely to rebuild the stock of varieties. Therefore, entry and dividends work together much like depreciation and
+investment in a capital-based RBC model.
+
+
+Recent literature has been increasingly concerned with the impact of firm heterogeneity on the transmission and persistance of shocks. More foundational works 
+like BGM and \textcite{ghironi2007trade} have given substatial attention to endogeneizing entry dynamics, explaining the pro-cyclicality of net-entry in 
+business cycles.
+Another strand of work focuses on technological heterogeneity and cohort effects as potential explanations to the persistent effects of recessions on startup cohorts
+(See \textcite{sedlavcek2017growth,clementi2016entry}). Finally, more recent models base their dynamics solely on innovation/idea-driven mechanisms, exploring
+new transmission channels that arise from R\&D activity. This thesis bridges these strands by allowing firm technology choice to interact with variety creation
+in a standard RBC skeletion with endogenous entry.
+
+The insights presented here are of value to the design of policies such as startup subsidies, macro-prudential entry policy, industrial strategy, and others.
+For instance, facilitating conditions for early-stage entrepreneurs can have significant impacts in active firms, especially in highly attractive sectors which are
+hit the hardest by competition overflow. Policymakers must adjust their subsidies to make sure that the same few large firms that employ most of the economy does not
+suffer to hard of a blow from even a positive shock. Another important discussion comes from potential externalities in variety creation in the baseline BGM 
+model, where a new entrant raises welfare through additional varietires, but its private incentive equals the markup, not the social value of the variety 
+(See \cite{bilbiie2019monopoly}). In my framework, it could be the case that across-sector returns-to-scale dispersion could generate allocative inneficiency, 
+as is the case with markup dispersion (See \cite{baqaee2020productivity}), or amplify congestion 
+externality\footnote{ See \textcite{bilbiie2014optimal}, where the authors show that ramsey-optimal policy in the BGM framework departs from
+price stability precisely to offset the congestion/variety wedges, where more entrants raise marginal entry costs for all and lower existing profits, a 
+negative pecuniary externality absent from firms' decisions.} in highly scalable sectors. 
+
+The remainder of this thesis is organized as follows. Section \ref{sec:literature} begins with an in-depth review of two central frameworks 
+to this work: \textcite{bilbiie2012endogenous} and \textcite{sedlavcek2017growth}. This is followed by a brief overview of the broader literature 
+on firm heterogeneity and the transmission of shocks. Section \ref{sec:model} introduces the key elements of the BGM framework and the technology 
+choice and entry mechanism of Sedláček and Sterk, culminating in the full model that integrates both. Section \ref{sec:solution} outlines the 
+solution method, detailing the algorithm used to compute the model’s steady state and examining its steady-state properties, with a focus on firm 
+behavior. Section \ref{sec:quant} presents the model calibration and analyzes its dynamic responses to both a standard productivity shock and a 
+stock-of-ideas shock. Finally, Section \ref{sec:conclusion} concludes with the main findings.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -331,8 +402,8 @@ Hello this is abstract bro.
 
 
 
-I first start this review of the literature by addressing \textcite{bilbiie2012endogenous} (henceforth BGM), since it represents the core framework behind the model developed in this thesis. 
-BGM expand on a classic RBC model\footnote{See \textcite{campbell1994inspecting}} by introducing monopolistic competition and endogenous firm entry for both a C.E.S.preferences and a translog preferences framework. 
+I first start this review of the literature by addressing \textcite{bilbiie2012endogenous}, since it represents the core framework behind the model developed in this thesis. 
+BGM expand on a classic RBC model (See \cite{campbell1994inspecting}) by introducing monopolistic competition and endogenous firm entry for both a C.E.S.preferences and a translog preferences framework. 
 Firms incur a one-time sunk entry cost to enter and then start producing after one period with constant returns (time-to-build). 
 This one-time sunk entry cost is interpreted in the model as an "investment" paid in effective labor units to create a new firm/variety. Consequently, the economy has two sectors. 
 A production sector where incumbent firms produce output using labor and (as an additional exercise) physical capital, and an "entry" or variety-expanding sector, where labor can be used to create new firms/varieties. 
