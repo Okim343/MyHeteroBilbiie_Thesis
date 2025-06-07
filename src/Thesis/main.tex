@@ -376,8 +376,8 @@ in a standard RBC skeletion with endogenous entry.
 
 The insights presented here are of value to the design of policies such as startup subsidies, macro-prudential entry policy, industrial strategy, and others.
 For instance, facilitating conditions for early-stage entrepreneurs can have significant impacts in active firms, especially in highly attractive sectors which are
-hit the hardest by competition overflow. Policymakers must adjust their subsidies to make sure that the same few large firms that employ most of the economy does not
-suffer to hard of a blow from even a positive shock. Another important discussion comes from potential externalities in variety creation in the baseline BGM 
+hit the hardest by competition overflow. Policymakers must adjust their subsidies to make sure that the same few large firms that employ most of the economy do not
+suffer too hard of a blow from a positive shock that incentivizes entry. Another important discussion comes from potential externalities in variety creation in the baseline BGM 
 model, where a new entrant raises welfare through additional varietires, but its private incentive equals the markup, not the social value of the variety 
 (See \cite{bilbiie2019monopoly}). In my framework, it could be the case that across-sector returns-to-scale dispersion could generate allocative inneficiency, 
 as is the case with markup dispersion (See \cite{baqaee2020productivity}), or amplify congestion 
@@ -535,10 +535,11 @@ conditions improve, recessions will not only feature fewer entries, but also man
 
 Finally, there are welfare and policy implications to consider. In models like BGM, there is a variety externality issue, where individual firms do not internalize
 that their entry adds consumer surplus by increasing variety. This might lead to under-entry in equilibrium, suggesting a possible socially inefficient equilibrium 
-and arole for subsidies to startup formation. However, other potential distortions such as markups, fixed costs and financial frictioins might complicate the picture, 
-not making it certain that more entry entry is always welfare-adding. Recent research by \textcite{bilbiie2019monopoly} tackles this issue by deriving optimal monetary
+and a role for subsidies to startup formation. However, other potential distortions such as markups, fixed costs and financial frictioins might complicate the picture, 
+not making it certain that more entry is always welfare-adding. Recent research by \textcite{bilbiie2019monopoly} tackles this issue by deriving optimal monetary
 and fiscal policy in these settings, finding that the planner typically wants to encourage firm entry, especially during downturns, to offset the tendency of recessions
-to reduce variety and future supply.
+to reduce variety and future supply. \textcite{baqaee2020productivity} also discuss the possibility that frictions caused from
+markup dispersions or any friction to resource reallocation can potentially cause within-sector missallocations, creating an allocative-efficiency externality.
 
 The integration of firm heterogeneity and endogenous entry into macroeconomics has opened up many questions. The fundamental debate with which I occupy myself
 in this thesis is: How important is firm heterogeneity for macroeconomic fluctuations? Although \textcite{bilbiie2012endogenous} show that 
@@ -796,7 +797,8 @@ given by the following expression
 An important observation is that, as the demonstrated in BGM, there is no option value for waiting, since there remains no 
 idiosyncratic/firm-specific uncertainty and exit constitutes an exogenous process, meaning that uncertainty related to firm death is also aggregate. 
 Despite the introduction of matching frictions, every potential entrant faces the same matching probabilities $\Pi_{i,t}$ for each sector $i$ 
-determined by aggregate conditions that are not firm-dependent\footnote{See the Appendix for the expanded BGM proof for my framework.}.
+determined by aggregate conditions that are not firm-dependent\footnote{See Section \ref{sec-app:option} in the appendix for the expanded BGM 
+proof for my framework with matching frictions.}.
 
 \medskip
 \medskip
@@ -1067,7 +1069,7 @@ higher payoffs to keep financing new entry. Better matching in the form a higher
 consumption or lower labor effort, an effect that is masked in the non-static version \eqref{eq:aggaccount} because $e_{i,t}$ 
 simultaneously adjusts on the investment side.
 
-The steady state specification for all other variables in the system can be found in the appendix \textbf{WHERE???}. The blocks are,
+The blocks are,
 as discussed previously, divided into sectoral and aggregate. Due to concerns introduced by the heterogeneous sectoral blocks, no
 one-size-fits-all closed form steady state solution can be found, mainly due to the real wage. For that matter, I solve for the
 steady state values of all variables using an outer-inner loop dynamic explored in the following section \ref{sec:solution-num}.
@@ -1551,8 +1553,56 @@ the productivity shock also raises the MPL in production, forcing households to 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Concluding Remarks}
+\section{Conclusion}
 \label{sec:conclusion}
+
+In this thesis, I seek to understand how sectoral firm heterogeneity in returns to scale and entry frictions alter RBC shock propagation, and how
+entry dynamics affect sectors differently.
+To that intent, I embed the Sedláček-Sterk technology choice and matching into the Bilbiie-Ghironi-Melitz RBC with endogeneous entry framework, and explore
+responses to both a TFP and stock-of-ideas shock.
+Doing this amplifies the transmission of an aggregate positive TFP shock roughly five-fold and uncovers a competition-induced negative 
+impact on firm-level profits of an increase in entry, which greatly varies by sector. 
+
+The key findings can be separated into aggregate results, firm-level/sectoral results and mechanistic insights. As for the aggregate results,
+the main finding in new magnitude of the reponse of aggregate output to the temporary TFP shock. Output jumps up around 11\%  (1-2\% in BGM) due to 
+the love-for-variety effect from BGM, and two new channels: cross sector C.E.S. substitution and labor reallocation toward high-$\alpha$ sectors.
+The stock-of-ideas shock also drives a modest increase in GDP due to an increase in varieties, but real wages lag until firms start producing.
+
+Moving on to firm-level/sectoral results, the findings suggest that over-entry and competition glut push profits, output and employment per firm 
+temporarily below steady state after a positive TFP or stock-of-ideas shock, with the effect being the strongest in high-$\alpha$ sectors, due to higher
+expected profits. Sectoral heterogeneity also influences steady-state properties, where highly scalable sectors showcase higher labor demand and output 
+and overall number of varieties than their less scalable counterparts
+
+Finally, the findings echoo the original BGM interpretation that entry behaves like capital investment in a classic RBC, such that the total number of
+incumbents evolves with time-to-build and depreciation-like exit, strenghtening persistance. On top of that, however, the expanded model allows 
+different investment responses for different sectors, and adds a new potential source of investment loss through the matching frictions, 
+which further bolsters persistance in the model. Steady-state entry dynamics also show decreasing "returns-to-entry", where each successive sector is 
+fighting steeper diminishing chances of success than the previous one, raising losses at entry.
+
+Policy interventions should therefore be more granular in their incentives. For instance, Startup support that varies by scalability class helps avoid 
+the blanket-subsidy pitfall, where incentives can exacerbate the competition glut identified in highly scalable (high-$\alpha$) sectors. 
+Steering some of those incentives toward less-scalable industries would spread entrepreneurial effort more evenly, easing matching 
+frictions and the losses they create. Downturn subsidies should also factor in heterogeneous variety externalities and sectoral misallocation, 
+nudging entrants to internalise the consumer-surplus gains that new varieties generate based on their sector.
+
+Some potential caveats qualify the main conclusions, however. First, calibration relies heavily on BDS-implied data and the sectoral splits made by 
+\textcite{sedlavcek2017growth}, such that results could be sensitive to alternative splits or new data altogether. Second, constant-markups mute 
+potential endogenous markup/price dispersion channels that naturally play an important role in firm dynamics. Third, all firms, not matter their scalability,
+face the same uniform exogenous exit probability, biasiang competitive pressure and persistance. Fourth, the lack of capital shuts down capital-adjustment
+dynamics that usually amplify RBC persistance. Finally, ignoring household heterogeneity and portfolio risk may understate the distributional
+effects, particularly when entry reallocates labor across sectors.
+
+Therefore, there are many potential avenues for future research. The first and most obvious one would be experimenting with endogenous markups generated by
+translog preferences, and implementing capital into the model. Both expansions are done in BGM, where the authors find a significant
+impact of translog preferences through endogenous markups on shock transmission, and that the addition of capital improves RBC second-moments significantly.
+Another potential idea is exploring more in depth the welfare impacts of variety externalities in a sectoral firm heterogeneity setup. As discussed before, 
+this could yield interesting and novel policy insights not found in the baseline BGM framework. Additionally, comparing the framework with frameworks 
+that have different sources of heterogeneity, such as markups or productivity parameters, could also be fruitful. 
+
+Overall, recognizing firm differences in scalability and the resulting matching frictions enchances how 
+shock transmission is understood in RBC models and can guide smarter policy entry during downturns that respects
+the heterogeneous responses of firms. 
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1615,8 +1665,34 @@ the productivity shock also raises the MPL in production, forcing households to 
 
 \pagebreak
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Data for Model Calibration}
-\label{sec-app:data}
+\section{No Option Value for Waiting to Enter with Matching Frictions}
+\label{sec-app:option}
+
+The following proof is very similar to the one found in BGM, with the only major difference being the addition of $\Pi_{i,t}$,
+the mathing probability at time $t$ for sector $i$, and that firms are no characterized by both $i$ and $\omega$.
+Let the option value of waiting to enter for firm $\omega i$ be $W_{i,t}(\omega)\ge0$. In all periods $t$,
+\[
+W_{i,t}(\omega)
+=\max\!\Bigl[v_t(\omega)-\frac{w_t\,f_{E,t}}{\Pi_{i,t}Z_t},\;\beta\,W_{i,t+1}(\omega)\Bigr],
+\]
+where the first term is the payoff of undertaking the investment and the second term is the discounted payoff of waiting. 
+If firms are identical (there is no idiosyncratic uncertainty) and exit is exogenous (uncertainty related to firm death is also aggregate), this becomes:
+\[
+W_{i,t}
+=\max\!\Bigl[v_t-\frac{w_t\,f_{E,t}}{\Pi_{i,t}Z_t},\;\beta\,W_{i,t+1}\Bigr].
+\]
+Because of free entry, the first term is always zero, so the option value obeys:
+\[
+W_{i,t} = \beta\,W_{i,t+1}.
+\]
+This is a contraction mapping because of discounting, and by forward iteration, under the assumption
+\[
+\lim_{T\to\infty}\beta^T\,W_{i,t+T}=0
+\]
+(i.e., there is a zero value of waiting when reaching the terminal period), the only stable solution for the option value is
+\[
+W_{i,t} = 0.
+\]
 
 \pagebreak
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
