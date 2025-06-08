@@ -41,4 +41,5 @@ src/Thesis/*
 
 # Ignore the .vscode directory
 # This directory is often used for IDE-specific settings and should not be committed
+.vscode/.DS_Store
 .vscode/
