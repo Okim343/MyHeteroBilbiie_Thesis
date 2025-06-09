@@ -1,6 +1,6 @@
 # Master Thesis: Technology Choice and Firm Composition in an RBC Model with Endogenous Entry
 
-This repository accompanies my master thesis, titled *Technology Choice and Firm Composition in an RBC
+This repository accompanies my master thesis, titled *Technology Choice and Firm Heterogeneity in an RBC
 Model with Endogenous Entry* and supervised by Prof. Dr. Christian Bayer and Dr. Zheng Gong. This thesis was presented to the Department of Economics at the Rheinische Friedrich-Wilhelms-Universität Bonn in partial fulfillment of the requirements for the degree of Master of Science (M.Sc.) in Economics. In particular, you can find in this repository the thesis itself and the codes to generate the results as well as the figures found therein.
 
 ## Set-up
