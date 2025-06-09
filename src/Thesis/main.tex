@@ -343,7 +343,7 @@ The relationship between firm-level output and labor demand, for instance, is hi
 parameter, the longer a firm can expand before hitting diminishing returns, so highly scalable sectors naturally hold more production lines. On the 
 competition front, any parameter change that depresses entry enlarges the slice of the market served by each surviving producer. A congestion channel also
 exists, such that prospective incumbents face decreasing "returns-to-entry", where success odds tumble in a non-linear way going from low- to high-scalability sectors.
-Finally, in steady-state all entry happens solely to rebuild the stock of varieties. such that entry and dividends work together much like depreciation and
+Finally, in steady-state all entry happens solely to rebuild the stock of varieties, such that entry and dividends work together much like depreciation and
 investment in a capital-based RBC model.
 
 
@@ -1631,6 +1631,63 @@ the heterogeneous responses of firms.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Computational Implementation}
 \label{sec-app:codes}
+
+The computational appendix provides a guide to the code repository accompanying this thesis. All scripts and data files are available at the GitHub repository:
+\begin{center}
+  \url{https://github.com/Okim343/MyHeteroBilbiie_Thesis.git}
+\end{center}
+
+\subsection{Setup}
+
+The code is written in Julia (v1.9.4) and uses the \texttt{Dynare.jl} package for solving and simulating the 
+RBC model for both the inelastic and elastic labor specifications. To install the correct Julia version and dependencies:
+
+\begin{enumerate}
+  \item Install Julia 1.9.4 via \texttt{juliaup}.
+  \item Open a Julia REPL in the project root and run:
+    \begin{verbatim}
+    ] activate .
+    (MyHeteroBilbiie) pkg> instantiate
+    \end{verbatim}
+\end{enumerate}
+
+\subsection{Folder Structure}
+
+\begin{itemize}
+  \item \texttt{src/}:  
+    Contains the main Julia scripts that solve the model, compute impulse responses, and generate all figures.
+  \item \texttt{helper\_functions/}:  
+    Utility routines for computing steady states (\texttt{steady\_state.jl}), drawing figures (\texttt{steady\_state\_figures.jl}), and plotting IRFs (\texttt{plot\_irfs.jl}).
+  \item \texttt{DynareModFiles/}:  
+    Dynare model files (\texttt{calibration.mod}, \texttt{declarations.mod}, \texttt{model.mod}, etc.) for both elastic and inelastic labor specifications.
+  \item \texttt{Thesis/}:  
+    The \LaTeX{} source of the thesis, including the compiled PDF and bibliography.
+\end{itemize}
+
+\subsection{Scripts}
+
+To reproduce the results presented in the thesis, execute the following in order:
+
+\begin{description}
+  \item[\texttt{analyze\_steadystate.jl}]: 
+    Solves and visualizes the steady state of the heterogeneous‐firm RBC model under both elastic and inelastic labor. Prints steady‐state values for all key variables.
+  \item[\texttt{run\_model.jl}]: 
+    Loads the calibrated Dynare model with elastic labor, runs perfect‐foresight and stochastic simulations, computes impulse response functions for aggregate shocks, and exports all sectoral and aggregate IRF plots.
+  \item[\texttt{run\_model\_ineL.jl}]: 
+    Analogous to \texttt{run\_model.jl}, but for the inelastic labor specification.
+\end{description}
+
+\subsection{Reproducing Figures}
+
+After obtaining steady‐state values from \texttt{analyze\_steadystate.jl}, these must be copied into the Dynare mod files (\texttt{calibration.mod} and \texttt{calibration\_ineL.mod}) because \texttt{Dynare.jl} does not yet support dynamic parameter passing. Then:
+
+\begin{enumerate}
+  \item Run \texttt{run\_model.jl} to generate IRFs for the elastic labor case.
+  \item Run \texttt{run\_model\_ineL.jl} to generate IRFs for the inelastic labor case.
+  \item The resulting figures are saved under \texttt{Images/}, organized by specification 
+  (elastic/inelastic) and shock type (XShock, ZShock).
+\end{enumerate}
+
 
 \pagebreak
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
