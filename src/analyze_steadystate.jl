@@ -18,7 +18,7 @@ include(joinpath(SRC,"helper_functions","steady_state_figures.jl"))  # defines s
 
 model = MyHeteroBilbiieModel()    # pulls constants from params.jl
 
-# ────────────────────────────────────────────────────────────────────────
+# ──────────────────────────────────────────────────────────────────────── Elastic Labor model ─────────────────────────────────────────────────────────────
 
 outdir = joinpath(@__DIR__, "..", "src", "images", "steady_state", "elastic_labor")
 mkpath(outdir)
@@ -39,7 +39,7 @@ p = steady_state_entry(ss; log_y=true, log_x=true) # relationship between y_i l_
 savefig(p, joinpath(outdir,"steady_entry_log.pdf"))
 
 
-# ────────────────────────────────────────────────────────────────────────
+# ──────────────────────────────────────────────────────────────────────── Inelastic Labor model ─────────────────────────────────────────────────────────────
 
 outdir = joinpath(@__DIR__, "..", "src", "images", "steady_state", "inelastic_labor")
 mkpath(outdir)
@@ -59,3 +59,9 @@ savefig(p, joinpath(outdir,"steady_firm_dynamic.pdf"))
 p = steady_state_entry(ss_inL; log_y=true, log_x=true) # relationship between y_i l_i and M_i logged
 
 savefig(p, joinpath(outdir,"steady_entry_log.pdf"))
+
+# ──────────────────────────────────────────────────────────────────────── Business cycle model ─────────────────────────────────────────────────────────────
+
+ss_bcycle = steady_state(model)          # compute steady state for elastic labor (frisch elasticity = 2)
+print_ss(ss_bcycle)                                       # print steady state
+println("Steady state with inelastic labor: ", ss_bcycle)
