@@ -28,7 +28,7 @@ All relevant source code can be found inside `src/`, which itself contains four 
 
 - `run_model_ineL.jl` – Calls and runs the Dynare RBC model with inelastic labor, computes impulse response functions (IRFs) for aggregate shocks, and exports sectoral and aggregate plots.
 
-To replicate the results presented in the paper, one has to run `analyze_steadystate.jl` to get the steady-state values for the inelastic and elastic labor specifications, and copy paste them into the Dynare files directly, given how Dynare.jl currently does not integrate with Julia routines. Then, by running `run_model.jl` and `run_model_ineL.jl`, one can generate the IRFs seem in the paper for both the elastic and inelastic labor cases. These figures will be saved in a newly created local folder `Images/` which divides the images depending on the model specification (elastic or inelastic) and the shock (XShock or ZShock), and also includes the steady state visualizations.
+To replicate the results presented in the paper, one has to run `analyze_steadystate.jl` to get the steady-state values for the inelastic and elastic labor specifications, and copy and paste them into the Dynare files directly, given how Dynare.jl currently does not integrate with Julia routines. Then, by running `run_model.jl` and `run_model_ineL.jl`, one can generate the IRFs seem in the paper for both the elastic and inelastic labor cases. These figures will be saved in a newly created local folder `Images/` which divides the images depending on the model specification (elastic or inelastic) and the shock (XShock or ZShock), and also includes the steady state visualizations.
 
 To replicate the business cycle moments, one has to run the third and final steady state calculation in `analyze_steadystate.jl` to get the steady-state values, and then simply run the `main_bcycle.mod` directly
 using MATLAB terminal either in VSCode with the MATLAB extension, or directly on MATLAB. This should print all the necessary business cycle moments directly in the output, with the relative standard deviation
@@ -38,6 +38,6 @@ The three other subfolders are:
 
 - `helper_functions/`, which contains the helper functions used to calculate the steady_state values (`steady_state.jl`), plot the steady state figures (`steady_state_figures.jl`), and finally, plot the IRFS (`plot_irfs.jl`).
 
-- `DynareModFiles/`, which contains the Dynare mod files specifing the calibration parameters (`calibration.mod` and `calibration_ineL.mod`), declaring the variables (`declarations.mod`), setting up the relevant equations (`equations.mod` and `equations_ineL.mod`) and finally running the model itself (`model.mod` and `model_ineL.mod`).
+- `DynareModFiles/`, which contains the Dynare mod files specifying the calibration parameters (`calibration.mod` and `calibration_ineL.mod`), declaring the variables (`declarations.mod`), setting up the relevant equations (`equations.mod` and `equations_ineL.mod`) and finally running the model itself (`model.mod` and `model_ineL.mod`).
 
 - `Thesis/`, which contains the TeX code of the thesis, its `.bib` file and its PDF version.
