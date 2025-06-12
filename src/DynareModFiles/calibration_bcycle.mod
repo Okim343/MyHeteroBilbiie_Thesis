@@ -65,7 +65,7 @@ end;
   5) Declare shock variances
 */
 shocks;
-  var eps_Z = 0.00995;
-  var eps_X; stderr sqrt(sigma_X);
+  var eps_Z; stderr 0.0072;          % Bilbiie’s σ for business cycle moments
+  var eps_X; stderr 0;               % turn off extra shock
 end;
 

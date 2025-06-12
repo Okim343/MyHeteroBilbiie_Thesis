@@ -40,6 +40,8 @@ urldate=long
 \usepackage{hyperref} % Load after everything else
 \usepackage{graphicx}
 \usepackage[symbols, nopostdot, automake, nonumberlist]{glossaries}
+\usepackage{booktabs,subcaption}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -91,6 +93,11 @@ urldate=long
     \stepcounter{subsection}
     \subsection*{\Alph{section}.\arabic{subsection}\hspace{1em}{#1}}
 }
+
+\newcommand{\dat}{\textbf}      % Data column style
+\newcommand{\bil}{\relax}       % Bilbiie column (roman)
+\newcommand{\rbc}{\emph}        % RBC column style
+\newcommand{\mine}[1]{\underline{#1}}   % underline my model values
 
 
 \pagestyle{plain}
@@ -1726,6 +1733,76 @@ W_{i,t} = 0 \quad \forall i \in \{1,2,...,I\}.
 \label{sec-app:sup}
 
 This appendix contains supplementary figures and tables, placed here for the sake of brevity in the main text. It is ordered according to the corresponding sections in the text.
+
+\begin{table}[htbp]
+\centering
+\label{tab:moments}
+% -------- first row: σ  and  relative σ ------------------------------------
+\begin{subtable}[t]{.48\textwidth}
+  \centering
+  \caption*{(a) Volatility $\sigma_X$}
+  \begin{tabular}{lcccc}
+  \toprule
+   $X$ & \dat{Data} & Bilbiie & \rbc{RBC} & \mine{Mine}\\
+  \midrule
+   $Y_R$      & \dat{1.81} & 1.34 & \rbc{1.39} & \mine{0.99}\\
+   $C_R$      & \dat{1.35} & 0.65 & \rbc{0.61} & \mine{0.83}\\
+   $v_RN_E$   & \dat{5.30} & 5.23 & \rbc{4.09} & \mine{1.57}\\
+   $L$        & \dat{1.79} & 0.63 & \rbc{0.67} & \mine{0.25}\\
+  \bottomrule
+  \end{tabular}
+\end{subtable}
+\hfill
+\begin{subtable}[t]{.48\textwidth}
+  \centering
+  \caption*{(b) Relative volatility $\sigma_X/\sigma_{Y_R}$}
+  \begin{tabular}{lcccc}
+  \toprule
+   $X$ & \dat{Data} & Bilbiie & \rbc{RBC} & \mine{Mine}\\
+  \midrule
+   $Y_R$      & \dat{1.00} & 1.00 & \rbc{1.00} & \mine{1.00}\\
+   $C_R$      & \dat{0.74} & 0.48 & \rbc{0.44} & \mine{0.84}\\
+   $v_RN_E$   & \dat{2.93} & 3.90 & \rbc{2.95} & \mine{1.59}\\
+   $L$        & \dat{0.99} & 0.47 & \rbc{0.48} & \mine{0.25}\\
+  \bottomrule
+  \end{tabular}
+\end{subtable}
+
+\vspace{0.8em}   % space between the two rows of panels
+
+% -------- second row: persistence  and  correlations -----------------------
+\begin{subtable}[t]{.48\textwidth}
+  \centering
+  \caption*{(c) Persistence $E[X_t X_{t-1}]$}
+  \begin{tabular}{lcccc}
+  \toprule
+   $X$ & \dat{Data} & Bilbiie & \rbc{RBC} & \mine{Mine}\\
+  \midrule
+   $Y_R$      & \dat{0.84} & 0.70 & \rbc{0.72} & \mine{0.73}\\
+   $C_R$      & \dat{0.80} & 0.75 & \rbc{0.79} & \mine{0.74}\\
+   $v_RN_E$   & \dat{0.87} & 0.69 & \rbc{0.71} & \mine{0.71}\\
+   $L$        & \dat{0.88} & 0.69 & \rbc{0.71} & \mine{0.74}\\
+  \bottomrule
+  \end{tabular}
+\end{subtable}
+\hfill
+\begin{subtable}[t]{.48\textwidth}
+  \centering
+  \caption*{(d) Contemporaneous corr.\ with $Y_R$}
+  \begin{tabular}{lcccc}
+  \toprule
+   $X$ & \dat{Data} & Bilbiie & \rbc{RBC} & \mine{Mine}\\
+  \midrule
+   $Y_R$      & \dat{1.00} & 1.00 & \rbc{1.00} & \mine{1.00}\\
+   $C_R$      & \dat{0.88} & 0.97 & \rbc{0.94} & \mine{0.99}\\
+   $v_RN_E$   & \dat{0.80} & 0.99 & \rbc{0.99} & \mine{0.97}\\
+   $L$        & \dat{0.88} & 0.98 & \rbc{0.97} & \mine{0.99}\\
+  \bottomrule
+  \end{tabular}
+\end{subtable}
+\caption{Second-moment statistics: \dat{Data}, Bilbiie et al.\ (2012), 
+\rbc{Baseline RBC}, and \mine{My Model}}
+\end{table}
 
 
 

@@ -192,7 +192,7 @@ check;
 // model_info ;
 // model_diagnostics;
 
-
-stoch_simul(order=1, irf=75, noprint) ;
+// 10 000 quarters → virtually no small-sample noise
+stoch_simul(order=1, periods = 10000, drop = 500, hp_filter = 1600, nograph, nodisplay) logYr logCr logIr logL;
 
 
