@@ -30,6 +30,10 @@ All relevant source code can be found inside `src/`, which itself contains four 
 
 To replicate the results presented in the paper, one has to run `analyze_steadystate.jl` to get the steady-state values for the inelastic and elastic labor specifications, and copy paste them into the Dynare files directly, given how Dynare.jl currently does not integrate with Julia routines. Then, by running `run_model.jl` and `run_model_ineL.jl`, one can generate the IRFs seem in the paper for both the elastic and inelastic labor cases. These figures will be saved in a newly created local folder `Images/` which divides the images depending on the model specification (elastic or inelastic) and the shock (XShock or ZShock), and also includes the steady state visualizations.
 
+To replicate the business cycle moments, one has to run the third and final steady state calculation in `analyze_steadystate.jl` to get the steady-state values, and then simply run the `main_bcycle.mod` directly
+using MATLAB terminal either in VSCode with the MATLAB extension, or directly on MATLAB. This should print all the necessary business cycle moments directly in the output, with the relative standard deviation
+w.r.t output $Y_R$ being retrieved by dividing the standard deviations of the other variables by the standard deviation of real output.
+
 The three other subfolders are:
 
 - `helper_functions/`, which contains the helper functions used to calculate the steady_state values (`steady_state.jl`), plot the steady state figures (`steady_state_figures.jl`), and finally, plot the IRFS (`plot_irfs.jl`).

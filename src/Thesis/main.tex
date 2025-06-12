@@ -1677,7 +1677,8 @@ To reproduce the results presented in the thesis, execute the following in order
 
 \begin{description}
   \item[\texttt{analyze\_steadystate.jl}]: 
-    Solves and visualizes the steady state of the heterogeneous‐firm RBC model under both elastic and inelastic labor. Prints steady‐state values for all key variables.
+    Solves and visualizes the steady state of the heterogeneous‐firm RBC model under both elastic 
+    (for $\varphi = 4$ and $\varphi = 2$ for the business cycle moments calculations) and inelastic labor. Prints steady‐state values for all key variables.
   \item[\texttt{run\_model.jl}]: 
     Loads the calibrated Dynare model with elastic labor, runs perfect‐foresight and stochastic simulations, computes impulse response functions for aggregate shocks, and exports all sectoral and aggregate IRF plots.
   \item[\texttt{run\_model\_ineL.jl}]: 
@@ -1693,6 +1694,13 @@ After obtaining steady‐state values from \texttt{analyze\_steadystate.jl}, the
   \item Run \texttt{run\_model\_ineL.jl} to generate IRFs for the inelastic labor case.
   \item The resulting figures are saved under \texttt{Images/}, organized by specification 
   (elastic/inelastic) and shock type (XShock, ZShock).
+  \item To get the Business Cycle Moments, one has to run \texttt{model\_bcycle.mod} directly on a MATLAB terminal
+  using the MATLAB VSCode extension (or MATLAB itself) by typing:
+    \begin{verbatim}
+    >> dynare main_bcycle
+    \end{verbatim}
+  \item This will automatically report all the coefficients of interest, with the relative standard deviation being retrieved
+  by dividing the reported standard deviations by the standard deviation of Output $Y_R$.
 \end{enumerate}
 
 
