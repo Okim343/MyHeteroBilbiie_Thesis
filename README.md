@@ -5,9 +5,9 @@ Model with Endogenous Entry* and supervised by Prof. Dr. Christian Bayer and Dr.
 
 ## Set-up
 
-This thesis uses Dynare.jl, a julia package implementing the most common dynare commands into the Julia language. I use Julia version 1.94 for best compatibility with Dynare.jl, given that the package is still under development. Therefore, I recommend installing Julia 1.9.4 using the `juliaup` version manager.
+This thesis uses Dynare.jl, a Julia package implementing the most common Dynare commands into the Julia language. I use Julia version 1.94 for best compatibility with Dynare.jl, given that the package is still under development. Therefore, I recommend installing Julia 1.9.4 using the `juliaup` version manager.
 
-Once the correct version is installed, you need to activate the project and install all the dependencies (You can find out which version you are using by calling `versioninfo()` in the Julia REPL). To do that,  set this folder as your working directory `cd`. Then, start your Julia REPL and type `]` so that you can call:
+Once the correct version is installed, you need to activate the project and install all the dependencies (You can find out which version you are using by calling `versioninfo()` in the Julia REPL). To do that, set this folder as your working directory `cd`. Then, start your Julia REPL and type `]` so that you can call:
 
 ```console
 (v1.9.4) pkg> activate .
@@ -38,6 +38,6 @@ The three other subfolders are:
 
 - `helper_functions/`, which contains the helper functions used to calculate the steady_state values (`steady_state.jl`), plot the steady state figures (`steady_state_figures.jl`), and finally, plot the IRFS (`plot_irfs.jl`).
 
-- `DynareModFiles/`, which contains the Dynare mod files specifying the calibration parameters (`calibration.mod` and `calibration_ineL.mod`), declaring the variables (`declarations.mod`), setting up the relevant equations (`equations.mod` and `equations_ineL.mod`) and finally running the model itself (`model.mod` and `model_ineL.mod`).
+- `DynareModFiles/`, which contains the Dynare mod files specifying the calibration parameters (`calibration.mod`, `calibration_ineL.mod` and `calibration_bcycle.mod`), declaring the variables (`declarations.mod` and `declarations_bcycle.mode`), setting up the relevant equations (`equations.mod`, `equations_ineL.mod`, `equations_bcycle.mod`) and finally running the model itself (`model.mod`, `model_ineL.mod` and `model_bcycle.mod`).
 
 - `Thesis/`, which contains the TeX code of the thesis, its `.bib` file and its PDF version.
