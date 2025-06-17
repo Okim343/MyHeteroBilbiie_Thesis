@@ -344,6 +344,13 @@ I find a negative firm-level impact across different technology types of positiv
 and a subsequent competition glut. This effect drives firm-level profits down despite sectoral aggregates going up from higher productivity and/or 
 a higher number of incumbents.
 
+Consistent with these mechanisms, the business cycle second moments (See Table \ref{tab:moments}) show that the expanded model still reproduces very 
+persistent output and hours series and brings the volatility of consumption much closer to the data than both BGM 
+and the canonical RBC benchmark found in \textcite{king1999resuscitating}. However, the volatility of both investment and labor becomes
+too smooth when compared to the other benchmarks explored, mainly because entry matching and frictions cap their reaction. On top of that, the 
+model still faces the classic challenges found in other RBC models, where the main variables move too perfectly with output and lack enough
+endogenous persistence.
+
 An important point is that, as in the original BGM framework, each producer is equated to an individual product line, accounting for the fact that new varieties
 are also added by existing firms. With this in mind, analyzing steady-state firm behavior pins down interesting facts about the model's functioning. 
 The relationship between firm-level output and labor demand, for instance, is highly connected to the returns-to-scale parameter. The larger the 
@@ -378,8 +385,9 @@ to this work: \textcite{bilbiie2012endogenous} and \textcite{sedlavcek2017growth
 on firm heterogeneity and the transmission of shocks. Section \ref{sec:model} introduces the key elements of the BGM framework and the technology 
 choice and entry mechanism of Sedláček and Sterk, culminating in the full model that integrates both. Section \ref{sec:solution} outlines the 
 solution method, detailing the algorithm used to compute the model’s steady state and examining its steady-state properties, with a focus on firm 
-behavior. Section \ref{sec:quant} presents the model calibration and analyzes its impulse responses to both a standard productivity shock and a 
-stock-of-ideas shock. Finally, Section \ref{sec:conclusion} concludes with the main findings.
+behavior. Section \ref{sec:quant} presents the model calibration, analyzes its impulse responses to both a standard productivity shock and a 
+stock-of-ideas shock, and explores the business cycle second moments implied by the model. Finally, Section \ref{sec:conclusion} 
+concludes with the main findings.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1239,7 +1247,10 @@ I compute the impulse responses to a productivity shock analogous to the one fou
 as explored in section \ref{sec:model-mine}, based on the composition shock in the Sedláček-Sterk quantitative exercise. 
 The results corroborate the intuition presented in the previous sections while adding novel insights about the model. In line with the 
 BGM approach, I present the impulse response functions (IRFs) only for the inelastic labor case, with the IRFs for the elastic labor
-being found in the appendix in section \ref{sec-app:full}.
+being found in the appendix in section \ref{sec-app:full}. Finally, in Section \ref{sec:quant-BCmon} I report and explore the 
+Business Cycle second moments of my model
+in comparison to the BGM framework, and the real Business Cycle data and standard RBC model results found in 
+\textcite{king1999resuscitating}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1527,6 +1538,128 @@ over-entry/competition glut effect forward in time. The same effect is absent fr
 the productivity shock also raises the MPL in production, forcing households to keep their hours used in producing goods. 
 
 
+\subsection{Business Cycle Second Moments}
+\label{sec:quant-BCmon}
+
+To further explore the new heterogeneous sector framework presented here, I compute and report the implied second
+moments of the artificial economy for some key macroeconomic variables and compare these to real data and those produced
+both by the baseline BGM framework and by the benchmark RBC model from \textcite{king1999resuscitating}. As in BGM,
+I focus on random shocks to productivity $Z_t$ as the source of business cycle fluctuations. I adopt the same
+productivity process as in \textcite{king1999resuscitating} and BGM, which has persistence $.979$ and standard deviation
+of innovation $.0072$.
+
+Following BGM, I now change $\varphi = 2$ to match the benchmark calibration in both their model and
+the RBC baseline. In Table \ref{tab:moments}, the first column (bold) in each subtable represents the empirical
+moment implied by the U.S. data as reported by \textcite{king1999resuscitating}, the second column (normal) 
+represents the moments implied by the BGM model, the third column (italics) displays the moments
+generated by King and Rebelo’s baseline RBC model, finally, the fourth column (underlined) presents the moments
+generated by my model. Analogous to BGM, I compute model-implied second moments for HP-filtered 
+variables for consistency, and I measure investment in my model 
+as the real value of household investment in new prospective entrants $v_R \mathcal{E}$. To get empirically relevant
+variables ($Y_R$, $C_R$, and $v_R$), I make use of the sectoral relative price $\rho_i$ to deflate the corresponding sectoral variables,
+and then merely aggregate them as $Y_R = \sum_{i=1}^I(Y_i/\rho_i)$, $C_R\;=\; 
+\left[ \sum_{i=1}^I \left( C_{i}/\rho_i \right)^{\frac{\eta-1}{\eta}} \right]^{\frac{\eta}{\eta-1}},$ 
+and $v_R\mathcal{E}=\sum_{i=1}^I\frac{v_{i}}{\rho_i}e_{i}$. 
+
+\begin{table}[H]
+\centering
+% -------- first row: σ  and  relative σ ------------------------------------
+\begin{subtable}[t]{.48\textwidth}
+  \centering
+  \caption*{(a) Volatility $\sigma_X$}
+  \begin{tabular}{lcccc}
+  \toprule
+   $X$ & \dat{Data} & BGM & \rbc{RBC} & \mine{Mine}\\
+  \midrule
+   $Y_R$      & \dat{1.81} & 1.34 & \rbc{1.39} & \mine{0.99}\\
+   $C_R$      & \dat{1.35} & 0.65 & \rbc{0.61} & \mine{0.83}\\
+   $v_R\mathcal{E}$   & \dat{5.30} & 5.23 & \rbc{4.09} & \mine{1.57}\\
+   $L$        & \dat{1.79} & 0.63 & \rbc{0.67} & \mine{0.25}\\
+  \bottomrule
+  \end{tabular}
+\end{subtable}
+\hfill
+\begin{subtable}[t]{.48\textwidth}
+  \centering
+  \caption*{(b) Relative volatility $\sigma_X/\sigma_{Y_R}$}
+  \begin{tabular}{lcccc}
+  \toprule
+   $X$ & \dat{Data} & BGM & \rbc{RBC} & \mine{Mine}\\
+  \midrule
+   $Y_R$      & \dat{1.00} & 1.00 & \rbc{1.00} & \mine{1.00}\\
+   $C_R$      & \dat{0.74} & 0.48 & \rbc{0.44} & \mine{0.84}\\
+   $v_R\mathcal{E}$   & \dat{2.93} & 3.90 & \rbc{2.95} & \mine{1.59}\\
+   $L$        & \dat{0.99} & 0.47 & \rbc{0.48} & \mine{0.25}\\
+  \bottomrule
+  \end{tabular}
+\end{subtable}
+
+\vspace{0.8em}   % space between the two rows of panels
+
+% -------- second row: persistence  and  correlations -----------------------
+\begin{subtable}[t]{.48\textwidth}
+  \centering
+  \caption*{(c) Persistence $E[X_t X_{t-1}]$}
+  \begin{tabular}{lcccc}
+  \toprule
+   $X$ & \dat{Data} & BGM & \rbc{RBC} & \mine{Mine}\\
+  \midrule
+   $Y_R$      & \dat{0.84} & 0.70 & \rbc{0.72} & \mine{0.73}\\
+   $C_R$      & \dat{0.80} & 0.75 & \rbc{0.79} & \mine{0.74}\\
+   $v_R\mathcal{E}$   & \dat{0.87} & 0.69 & \rbc{0.71} & \mine{0.71}\\
+   $L$        & \dat{0.88} & 0.69 & \rbc{0.71} & \mine{0.74}\\
+  \bottomrule
+  \end{tabular}
+\end{subtable}
+\hfill
+\begin{subtable}[t]{.48\textwidth}
+  \centering
+  \caption*{(d) Contemporaneous corr.\ with $Y_R$}
+  \begin{tabular}{lcccc}
+  \toprule
+   $X$ & \dat{Data} & BGM & \rbc{RBC} & \mine{Mine}\\
+  \midrule
+   $Y_R$      & \dat{1.00} & 1.00 & \rbc{1.00} & \mine{1.00}\\
+   $C_R$      & \dat{0.88} & 0.97 & \rbc{0.94} & \mine{0.99}\\
+   $v_R\mathcal{E}$   & \dat{0.80} & 0.99 & \rbc{0.99} & \mine{0.97}\\
+   $L$        & \dat{0.88} & 0.98 & \rbc{0.97} & \mine{0.99}\\
+  \bottomrule
+  \end{tabular}
+\end{subtable}
+\caption{Second-moment statistics from \dat{Data}, Bilbiie et al.\ (2012), 
+\rbc{Baseline RBC}, and \mine{My Model}}
+\label{tab:moments}
+\end{table}
+
+Volatility-wise in Panel a), the model underperforms when compared to the alternatives, being distant from both the
+benchmark RBC and BGM specifications and the real data, especially regarding investment and hours. This could potentially
+be explained by how the cross-sectoral averaging of variables dampens total variance since the shocks are aggregate and hit
+all sectors equally. Another potential source of dampening, especially for investment, is the low calibration value
+for the matching elasticity parameter $\phi$. A low $\phi$ caps the elasticity of entry to profits, such that entry
+reacts less, investment becomes far smoother than in the BGM baseline, and so does labor used in producing new firms. 
+
+This dynamic of overly smooth investment and hours is also present in the relative volatilities in Panel b), where the value 
+for investment is half of the value in all other specification, and the same is valid for labor. The relative volatility of
+consumption, however, displays a value closer to the data than the overly smooth BGM and RBC frameworks. A potential cause could 
+stem from consumers now facing sector-relative prices $\rho_i$, so more inter-sectoral substitution takes place, making the 
+response of consumption stronger to variations in output.
+
+Moving on to the persistence in Panel c), the values are at least as good as the ones from the other two models 
+when compared to the data, with the persistence of labor, output, and investment being closer to 
+empirical observations than the ones presented by BGM. The addition of matching frictions on top of the 
+time-to-build lag keeps entry reacting slowly, improving upon the already existing internal propagation mechanism 
+that resembles physical capital accumulation in the benchmark RBC.
+
+Finally, in Panel d) the high correlations found in BGM are preserved in my model, despite the addition of sectoral heterogeneity.
+Consumption moves too perfectly with output, however, which could be corrected by the introduction of preference shocks or sticky
+prices. Investment displays slightly lower procyclicality when compared to BGM or the RBC benchmark, but is still far off the $0.8$ 
+empirical baseline. 
+
+Despite overly smooth entry due to calibration hindering volatilities, the model captures persistence and 
+correlations relatively well when compared to the other three baselines presented and displays adequate volatility of consumption
+with regard to output. Nonetheless, the model still faces the same well-known challenges as the standard RBC model: 
+insufficient endogenous persistence and all variables are too procyclical in  comparison to the data.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusion}
@@ -1543,6 +1676,9 @@ The key findings can be separated into aggregate results, firm-level/sectoral re
 the main finding is the new magnitude of the response of aggregate output to the temporary TFP shock. Output jumps up around 11\%  (1-2\% in BGM) due to 
 the love-for-variety effect from BGM, and two new channels: cross-sector C.E.S. substitution and labor reallocation toward high-$\alpha$ sectors.
 The stock-of-ideas shock also drives a modest increase in GDP due to an increase in varieties, but real wages lag until firms start producing.
+Turning to business-cycle moments, the heterogeneous-sector specification reproduces persistence and co-movements found in BGM and brings the 
+consumption-to-output volatility ratio closer to the data, but it severely understates the absolute and relative volatility of investment and hours, potentially
+due to overly-smooth entry from low matching elasticity $\phi$ and cross-sector averaging.
 
 Moving on to firm-level/sectoral results, the findings suggest that over-entry and competition glut push profits, output, and employment per firm 
 temporarily below steady state after a positive TFP or stock-of-ideas shock, with the effect being the strongest in high-$\alpha$ sectors, due to higher
@@ -1700,7 +1836,7 @@ After obtaining steady‐state values from \texttt{analyze\_steadystate.jl}, the
     >> dynare main_bcycle
     \end{verbatim}
   \item This will automatically report all the coefficients of interest, with the relative standard deviation being retrieved
-  by dividing the reported standard deviations by the standard deviation of Output $Y_R$.
+  by dividing the reported standard deviations by the standard deviation of real output $Y_R$.
 \end{enumerate}
 
 
@@ -1713,26 +1849,26 @@ The following proof is very similar to the one found in BGM, with the only major
 the mathing probability at time $t$ for sector $i$, and that firms are now characterized by both $i$ and $\omega$.
 Let the option value of waiting to enter for firm $\omega i$ be $W_{i,t}(\omega)\ge0$. In all periods $t$,
 \[
-W_{i,t}(\omega)
-=\max\!\Bigl[v_t(\omega)-\frac{w_t\,f_{E,t}}{\Pi_{i,t}Z_t},\;\beta\,W_{i,t+1}(\omega)\Bigr],
+\mathcal{W}_{i,t}(\omega)
+=\max\!\Bigl[v_t(\omega)-\frac{w_t\,f_{E,t}}{\Pi_{i,t}Z_t},\;\beta\,\mathcal{W}_{i,t+1}(\omega)\Bigr],
 \]
 where the first term is the payoff of undertaking the investment and the second term is the discounted payoff of waiting. 
 If firms are identical (there is no idiosyncratic uncertainty) and exit is exogenous (uncertainty related to firm death is also aggregate), this becomes:
 \[
-W_{i,t}
-=\max\!\Bigl[v_t-\frac{w_t\,f_{E,t}}{\Pi_{i,t}Z_t},\;\beta\,W_{i,t+1}\Bigr].
+\mathcal{W}_{i,t}
+=\max\!\Bigl[v_t-\frac{w_t\,f_{E,t}}{\Pi_{i,t}Z_t},\;\beta\,\mathcal{W}_{i,t+1}\Bigr].
 \]
 Because of free entry, the first term is always zero, so the option value obeys:
 \[
-W_{i,t} = \beta\,W_{i,t+1}.
+\mathcal{W}_{i,t} = \beta\,\mathcal{W}_{i,t+1}.
 \]
 This is a contraction mapping because of discounting, and by forward iteration, under the assumption
 \[
-\lim_{T\to\infty}\beta^T\,W_{i,t+T}=0
+\lim_{T\to\infty}\beta^T\,\mathcal{W}_{i,t+T}=0
 \]
 (i.e., there is a zero value of waiting when reaching the terminal period), the only stable solution for the option value is
 \[
-W_{i,t} = 0 \quad \forall i \in \{1,2,...,I\}.
+\mathcal{W}_{i,t} = 0 \quad \forall i \in \{1,2,...,I\}.
 \]
 
 \pagebreak
@@ -1741,77 +1877,6 @@ W_{i,t} = 0 \quad \forall i \in \{1,2,...,I\}.
 \label{sec-app:sup}
 
 This appendix contains supplementary figures and tables, placed here for the sake of brevity in the main text. It is ordered according to the corresponding sections in the text.
-
-\begin{table}[htbp]
-\centering
-\label{tab:moments}
-% -------- first row: σ  and  relative σ ------------------------------------
-\begin{subtable}[t]{.48\textwidth}
-  \centering
-  \caption*{(a) Volatility $\sigma_X$}
-  \begin{tabular}{lcccc}
-  \toprule
-   $X$ & \dat{Data} & Bilbiie & \rbc{RBC} & \mine{Mine}\\
-  \midrule
-   $Y_R$      & \dat{1.81} & 1.34 & \rbc{1.39} & \mine{0.99}\\
-   $C_R$      & \dat{1.35} & 0.65 & \rbc{0.61} & \mine{0.83}\\
-   $v_R\mathcal{E}$   & \dat{5.30} & 5.23 & \rbc{4.09} & \mine{1.57}\\
-   $L$        & \dat{1.79} & 0.63 & \rbc{0.67} & \mine{0.25}\\
-  \bottomrule
-  \end{tabular}
-\end{subtable}
-\hfill
-\begin{subtable}[t]{.48\textwidth}
-  \centering
-  \caption*{(b) Relative volatility $\sigma_X/\sigma_{Y_R}$}
-  \begin{tabular}{lcccc}
-  \toprule
-   $X$ & \dat{Data} & Bilbiie & \rbc{RBC} & \mine{Mine}\\
-  \midrule
-   $Y_R$      & \dat{1.00} & 1.00 & \rbc{1.00} & \mine{1.00}\\
-   $C_R$      & \dat{0.74} & 0.48 & \rbc{0.44} & \mine{0.84}\\
-   $v_R\mathcal{E}$   & \dat{2.93} & 3.90 & \rbc{2.95} & \mine{1.59}\\
-   $L$        & \dat{0.99} & 0.47 & \rbc{0.48} & \mine{0.25}\\
-  \bottomrule
-  \end{tabular}
-\end{subtable}
-
-\vspace{0.8em}   % space between the two rows of panels
-
-% -------- second row: persistence  and  correlations -----------------------
-\begin{subtable}[t]{.48\textwidth}
-  \centering
-  \caption*{(c) Persistence $E[X_t X_{t-1}]$}
-  \begin{tabular}{lcccc}
-  \toprule
-   $X$ & \dat{Data} & Bilbiie & \rbc{RBC} & \mine{Mine}\\
-  \midrule
-   $Y_R$      & \dat{0.84} & 0.70 & \rbc{0.72} & \mine{0.73}\\
-   $C_R$      & \dat{0.80} & 0.75 & \rbc{0.79} & \mine{0.74}\\
-   $v_R\mathcal{E}$   & \dat{0.87} & 0.69 & \rbc{0.71} & \mine{0.71}\\
-   $L$        & \dat{0.88} & 0.69 & \rbc{0.71} & \mine{0.74}\\
-  \bottomrule
-  \end{tabular}
-\end{subtable}
-\hfill
-\begin{subtable}[t]{.48\textwidth}
-  \centering
-  \caption*{(d) Contemporaneous corr.\ with $Y_R$}
-  \begin{tabular}{lcccc}
-  \toprule
-   $X$ & \dat{Data} & Bilbiie & \rbc{RBC} & \mine{Mine}\\
-  \midrule
-   $Y_R$      & \dat{1.00} & 1.00 & \rbc{1.00} & \mine{1.00}\\
-   $C_R$      & \dat{0.88} & 0.97 & \rbc{0.94} & \mine{0.99}\\
-   $v_R\mathcal{E}$   & \dat{0.80} & 0.99 & \rbc{0.99} & \mine{0.97}\\
-   $L$        & \dat{0.88} & 0.98 & \rbc{0.97} & \mine{0.99}\\
-  \bottomrule
-  \end{tabular}
-\end{subtable}
-\caption{Second-moment statistics: \dat{Data}, Bilbiie et al.\ (2012), 
-\rbc{Baseline RBC}, and \mine{My Model}}
-\end{table}
-
 
 
 \newpage
