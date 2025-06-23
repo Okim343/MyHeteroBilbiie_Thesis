@@ -71,10 +71,10 @@ urldate=long
 
 \geometry{ % Adjust paper geometry
  a4paper,
- right=25mm,
+ right=20mm,
  bottom=20mm,
- left=25mm,
- top=25mm}
+ left=30mm,
+ top=20mm}
 \urlstyle{same} % Make URL font the same with the rest of the document
 \onehalfspacing % Adjust spacing
 %\setstretch{1.75}
@@ -401,14 +401,14 @@ concludes with the main findings.
 I first start this review of the literature by addressing \textcite{bilbiie2012endogenous}, since it represents the core framework behind the model developed in this thesis. 
 BGM expand on the classic RBC model found in \textcite{campbell1994inspecting} by introducing monopolistic competition and endogenous firm entry for both a C.E.S. and a translog preferences framework. 
 Firms incur a one-time sunk entry cost to enter and then start producing after one period with constant returns (time-to-build). 
-This one-time sunk entry cost is interpreted in the model as an "investment" paid in effective labor units to create a new firm/variety. Consequently, the economy has two sectors. 
-A production sector where incumbent firms produce output using labor and (as an additional exercise) physical capital, and an "entry" or variety-expanding sector, where labor can be used to create new firms/varieties. 
+This one-time sunk entry cost is interpreted in the model as an ``investment'' paid in effective labor units to create a new firm/variety. Consequently, the economy has two sectors. 
+A production sector where incumbent firms produce output using labor and (as an additional exercise) physical capital, and an ``entry'' or variety-expanding sector, where labor can be used to create new firms/varieties. 
 
 An important aspect of the BGM framework is that each variety is interpreted as a new product line, instead of a new firm in itself. 
 Therefore, whenever any reference to the number of varieties is made, it does not necessarily translate to the actual number of firms in the economy. 
 The stock of varieties is a state variable that evolves with entry and exit, although in the baseline, the main driver of change is entry 
-since exit happens through a fixed probability "death shock" that affects all firms equally. Because of the sunk costs, entry is forward-looking,
-that is, prospective entrants base their entry decisions on the expected present value of profits, which in this framework represents the "stock-market price" of a new firm. 
+since exit happens through a fixed probability ``death shock'' that affects all firms equally. Because of the sunk costs, entry is forward-looking,
+that is, prospective entrants base their entry decisions on the expected present value of profits, which in this framework represents the ``stock-market price'' of a new firm. 
 
 Aggregate conditions drive entry in the BGM model. In an economic expansion, higher demand and profits raise the value of starting a firm, which naturally induces more entry. 
 However, due to the entry cost and, in particular, the time-to-build aspect, new firms enter sluggishly. This slow adjustment in the number of producers creates a novel 
@@ -440,8 +440,8 @@ number but also exhibited weaker growth potential, which in turn creates a long-
 attribute this to selection effects (which types of businesses choose to enter in booms versus in recessions) and heterogeneous growth profiles across startups.
 
 To explain these facts, Sedláček and Sterk develop a DSGE firm dynamics model with heterogeneous startups and entry uncertainty. Firm heterogeneity in the model arises
-from differences in each startup's growth potential, modeled via the demand side. That is, new firms can choose to produce either in a low-scalability/"niche" 
-environment or in a high-scalability/"mass market" environment, which is captured by the heterogeneous returns-to-scale parameters found in each environment. 
+from differences in each startup's growth potential, modeled via the demand side. That is, new firms can choose to produce either in a low-scalability/``niche'' 
+environment or in a high-scalability/``mass-market'' environment, which is captured by the heterogeneous returns-to-scale parameters found in each environment. 
 This choice at birth essentially represents a type-draw, and it determines the firm's growth trajectory. After birth, firms can choose to expand their customer 
 base over time by spending on marketing, subject to diminishing returns. Crucially, highly scalable startups have the incentive to invest aggressively in demand
 expansion, since there are larger returns-to-scale to begin with, whereas niche firms cannot profitably scale up as much. 
@@ -515,7 +515,7 @@ The authors find that the persistent productivity slowdown after the recession c
 and investment from the crisis led firms to cut R\&D and delay the adoption of new technologies, causing TFP growth to falter.
 
 On a similar note, other researchers have introduced idea production and knowledge spillovers into DSGE models. For instance,
-some DSGE models feature an "innovation sector" producing new blueprints or product lines, similar to \textcite{bilbiie2012endogenous},
+some DSGE models feature an ``innovation sector'' producing new blueprints or product lines, similar to \textcite{bilbiie2012endogenous},
 but incumbent firms now decide whether to adopt new technologies, effectively separating variety creation from firm dynamics.
 \textcite{kung2015innovation} tie stock market valuations to R\&D-driven growth in a production economy, producing Schumpeterian dynamics: 
 positive innovation shocks can cause bursts of creative destruction that temporarily depress output but raise growth later. That happens 
@@ -527,7 +527,7 @@ as the economy's idea pipeline dries up and fewer high-growth firms enter.
 The frictions involved in creating new firms also play a fundamental role in dictating firm composition in an economy. There are many plausible 
 sources of frictions worth considering. For instance, in the Sedláček-Sterk framework, a matching function dictates if entrants will find a matching
 business idea, capturing how easily a would-be founder finds a business partner, investor, or idea. \textcite{vardishvili2023entry} on the other hand,
-study entrepreneurs' option to delay entry, causing a "wait-and-see" friction. The author argues that if entrepreneurs can pause plans until aggregate
+study entrepreneurs' option to delay entry, causing a ``wait-and-see'' friction. The author argues that if entrepreneurs can pause plans until aggregate
 conditions improve, recessions will not only feature fewer entries but also many delayed projects, leading to a surge of entries at the subsequent recovery.
 
 Finally, there are welfare and policy implications to consider. In models like BGM, there is a variety externality issue, where individual firms do not internalize
@@ -554,9 +554,9 @@ how this heterogeneity in turn affects aggregate outcomes through rich firm dyna
 \section{Model}
 \label{sec:model}
 
-In this section, I briefly lay out the firm side in the baseline BGM model with no capital and C.E.S. preferences in section \ref{sec:model-bilbiie}, explain the Sedláček–Sterk
-heterogeneity and matching friction mechanisms in section \ref{sec:model-sedlacek}, and finally, fully characterize the main model and the departures made
-from the standard BGM framework in section \ref{sec:model-mine}. 
+In this section, I briefly lay out the firm side in the baseline BGM model with no capital and C.E.S. preferences in Section \ref{sec:model-bilbiie}, explain the Sedláček–Sterk
+heterogeneity and matching friction mechanisms in Section \ref{sec:model-sedlacek}, and finally, fully characterize the main model and the departures made
+from the standard BGM framework in Section \ref{sec:model-mine}. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -565,7 +565,7 @@ from the standard BGM framework in section \ref{sec:model-mine}.
 
 In the original BGM framework, the key elements of the firm side are fully characterized by the production/labor decision 
 and an entry decision pinned down by a free entry condition in equilibrium. I do not fully explore the consumer side of the framework yet for the sake of brevity, since it is analogous to the consumer side in the main model which will be 
-explained in detail later. As described before in section \ref{sec:literature}, each firm (or production line) produces a unique variety $\omega$ using labor as their single 
+explained in detail later. As described before in Section \ref{sec:literature}, each firm (or production line) produces a unique variety $\omega$ using labor as their single 
 production factor, with the production function 
 \[
     y_t(\omega) = Z_t \cdot l_t(\omega),
@@ -650,7 +650,7 @@ The interaction between these two mechanisms creates rich firm dynamics. Because
 larger $V_{i,0,t}$, condition (FE) forces their $P_{i,t}$ to fall—i.e.\ they face tougher matching—so shocks that 
 shift the opportunity mix $\psi_{i,t}$ endogenously tilt the composition of entrants toward or away from high-growth firms. 
 This joint mechanism of technology heterogeneity and matching frictions drives the persistent 
-cohort‐quality effects documented before in section \ref{sec:literature}. 
+cohort‐quality effects documented before in Section \ref{sec:literature}. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -667,7 +667,7 @@ the unique product variety $\omega$ that it produces. I refer to firm $\omega$ t
 I use $\Omega_i$ to denote the set that contains the indices of firms that belong to sector $i$, so that $\bigcup_{i=1}^{I} \Omega_i = \Omega$. 
 Its measure, here denoted $M_{i}$, gives the size of the sector in terms of firms (or production lines). I adopt the same interpretation as in BGM 
 of understanding each firm/variety as a production line rather than a separate entity, which also matches well with the scalability logic introduced
-by a sectoral diversity in returns-to-scale parameters, as will be explored later in section \ref{sec:solution}.
+by a sectoral diversity in returns-to-scale parameters, as will be explored later in Section \ref{sec:solution}.
 
 \medskip
 \medskip
@@ -714,7 +714,7 @@ $y_{i,t}(\omega) = Z_t \cdot l_{i,t}(\omega)^{\alpha_i}$. Similar to the Sedlá�
 that determines their returns-to-scale parameter $\alpha_i$ and thus directly influences their marginal product of labor.
 
 Before entry, the firm pays $f_{E,t}$ effective labor units, equal to $\frac{w_tf_{E,t}}{Z_t}$ units of the consumption good. 
-Firms that enter the economy produce every period until they get hit with a "death shock" (probability $\delta \in (0,1)$ in every period). 
+Firms that enter the economy produce every period until they get hit with a ``death shock'' (probability $\delta \in (0,1)$ in every period). 
 Entrants at time t can only start producing at time t+1, such that they incur a one-period time-to-build lag. 
 To produce a certain output level $y$, firms minimize their labor cost in a static minimization problem
 \[
@@ -745,7 +745,7 @@ sector $i$ are identical and given by
 \begin{equation}
   d_{i,t} = \Bigl(1-\tfrac1\mu\Bigr)\frac{C_{i,t}}{M_{i,t}}, \label{eq:profit}
 \end{equation}
-where $y_{i,t} = \frac{C_{i,t}}{M_{i,t}}$ since all firms are symmetrical and supply equal amounts of demand in their sector, analogous to firm-level
+where $y_{i,t} = \frac{C_{i,t}}{M_{i,t}}$, since all firms are symmetrical and supply equal amounts of demand in their sector. This is analogous to firm-level
 output in the BGM framework but adapted for the sectoral framework.
 
 \medskip
@@ -755,7 +755,7 @@ output in the BGM framework but adapted for the sectoral framework.
 
 The matching friction mechanism found in \textcite{sedlavcek2017growth} is adapted to the RBC framework presented here, such that firms face matching 
 frictions in entering a sector and not all potential entrants are successful. In every time period $t$ and sector $i$, $\exists M_{i,t}$ mass of 
-producing product lines and unbounded mass of prospective entrants. The entrants are forward-looking and correctly anticipate their future 
+producing product lines and an unbounded mass of prospective entrants $e_{i,t}$. The entrants are forward-looking and correctly anticipate their future 
 profits $d_{i,s}$ in every period $s\ge t+1$ as well as $\delta$. Prospective entrants choose a technology type $i$ and the corresponding sector.
 Let technology types reflect returns-to-scale in increasing order such that $i = 1$ is the lowest and $i = I$ is the highest. 
 Let $e_{i,t}$ denote the measure of entrants choosing $i$ at time $t$. Not every attempt to enter is successful. The Cobb-Douglas  matching function 
@@ -794,7 +794,7 @@ given by the following expression
 An important observation is that, as demonstrated in BGM, there is no option value for waiting, since there remains no 
 idiosyncratic/firm-specific uncertainty and exit constitutes an exogenous process, meaning that uncertainty related to firm death is also aggregate. 
 Despite the introduction of matching frictions, every potential entrant faces the same matching probabilities $\Pi_{i,t}$ for each sector $i$ 
-determined by aggregate conditions that are not firm-dependent\footnote{See Section \ref{sec-app:option} in the appendix for the expanded BGM 
+determined by aggregate conditions that are not firm-dependent\footnote{See Section \ref{sec-app:option} in the Appendix for the expanded BGM 
 proof for my framework with matching frictions.}.
 
 \medskip
@@ -840,8 +840,8 @@ $\mu(M_{i,t}) = \mu = \frac{\theta}{\theta - 1},
 \noindent\textbf{Household Problem}
 \medskip
 
-As stated before in section \ref{sec:model-bilbiie}, the household problem here is analogous to the one found in BGM, since the consumers are
-effectively "blind" to the sectoral diversity and consume a final aggregate basket of goods $C_t$. The only significant difference is regarding
+As stated before in Section \ref{sec:model-bilbiie}, the household problem here is analogous to the one found in BGM, since the consumers are
+effectively ``blind'' to the sectoral diversity and consume a final aggregate basket of goods $C_t$. The only significant difference is regarding
 the heterogeneity of the firms whose shares the household buys, but consumers only observe the aggregate quantities. Therefore, I define the aggregate
 firm-level profit and value as 
 $$
@@ -938,10 +938,10 @@ Therefore, equilibrium can be characterized as follows: Given exogenous processe
 and a top-level price numéraire $P_t \equiv 1$ as a nominal anchor, I summarize equilibrium as a sequence 
 \[
 \bigl\{\,w_t^*,L_t^*,r_{t}^*,\bigl\{
-        M_{i,t}^*,C_{i,t}^*,\rho_{i,t}^*,d_{i,t}^*,v_{i,t}^*,e_{i,t}^*,\psi_{i,t}^*,\Pi_{i,t}^*\bigr\}^I_{(i=1,\dots,I)}\bigr\}.
+        M_{i,t}^*,C_{i,t}^*,\rho_{i,t}^*,d_{i,t}^*,v_{i,t}^*,e_{i,t}^*,\psi_{i,t}^*,\Pi_{i,t}^*\bigr\}^I_{(i=1,\dots,I)}\bigr\},
 \]
 of 3 + 8$I$ endogenous variables, with 3 variables being predetermined at time $t$ ($M_{i,t}$, $r_t$ and $\psi_{i,t}$), 
-satisfying the simplified system of equilibrium conditions in Table \ref{tb:eqconditions} out of all the relevant equations explored in section \ref{sec:model-mine}
+satisfying the simplified system of equilibrium conditions in Table \ref{tb:eqconditions} out of all the relevant equations explored in Section \ref{sec:model-mine}
 
 \begin{table}[H]
 \centering
@@ -970,8 +970,8 @@ satisfying the simplified system of equilibrium conditions in Table \ref{tb:eqco
 \end{table}
 
 The household Euler equation for shares is left out of the list of equilibrium conditions as in BGM because it represents the same relationship 
-as the firm valuation equation but at an "average" aggregate level. Since I am interested in the sectoral profit and firm value dynamics, I do not include it 
-in the equilibrium conditions. Finally, when building the "$3 + 8I$" system, I keep only three unknowns per sector for the 
+as the firm valuation equation but at an ``average'' aggregate level. Since I am interested in the sectoral profit and firm value dynamics, I do not include it 
+in the equilibrium conditions. Finally, when building the ``$3 + 8I$'' system, I keep only three unknowns per sector for the 
 matching-entry block, $ e_{i,t},  \psi_{i,t}$ and $\Pi_{i,t}$. The auxiliary object \( m_{i,t} \) is left out of the list, 
 precisely because it is mechanically pinned down once \( (M_{i,t}, e_{i,t}, \psi_{i,t},\Pi_{i,t}) \) are known.
 
@@ -989,14 +989,14 @@ precisely because it is mechanically pinned down once \( (M_{i,t}, e_{i,t}, \psi
 \label{sec:solution-steadystate}
 
 To derive the steady-state expressions for all variables, I divide the solution into $I$ sectoral blocks and one aggregate block, to stay consistent
-with the formulation of equilibrium in section \ref{sec:model-mine}. I normalize aggregate productivity $Z = 1$ and set the stock of ideas shock
+with the formulation of equilibrium in Section \ref{sec:model-mine}. I normalize aggregate productivity $Z = 1$ and set the stock of ideas shock
 $X = 1$ in steady state, but I keep the variables in the expressions for tractability. Every variable is constant over time and thus time subscripts
-are dropped. Otherwise, the notation matches the main model description in section \ref{sec:model-mine}.
+are dropped. Otherwise, the notation matches the main model description in Section \ref{sec:model-mine}.
 
 From the intertemporal Euler equation for bonds, the steady-state interest rate is already pinned down by $1+r = \beta^{-1}$. I follow 
 BGM and \textcite{campbell1994inspecting} and make use of $1+r = \beta^{-1}$ to treat $r$ as a parameter in the solution. The firm valuation
 equation \eqref{eq:value} together with the definition $\kappa=\frac{r+\delta}{1-\delta}$ yields $v_i = d_i/\kappa$, which captures a premium for
-the expected firm destruction, since a higher $\delta$ brings down the price of the investment "good" (\textit{ceteris paribus}). Combining 
+the expected firm destruction, since a higher $\delta$ brings down the price of the investment good (\textit{ceteris paribus}). Combining 
 this expression with the free-entry condition \eqref{eq:freeentry} and substituting in the definition of profits \eqref{eq:profit}, I arrive at  
 \begin{equation}
   \frac{C_i}{M_i}=\frac{\kappa\,w f_E}{Z\Pi_i(1-1/\mu)}, \label{eq:CoverM}
@@ -1043,7 +1043,7 @@ all in steady state, the identity now becomes:
 C + \frac{w f_E}{Z}\frac{\delta}{1-\delta}\sum_iM_{i}= w.L + \frac{w f_E}{Z}\kappa \sum_i\frac{M_i}{\Pi_i}. \label{aggsteadystate} 
 \end{equation}
 The same general idea of matching expenditure (consumption plus investment) with income (labor income plus dividends)
-in a two "macro-sector" economy remains. However, investment and dividends can be broken down into further detail. 
+in a two ``macro-sector'' economy remains. However, investment and dividends can be broken down into further detail. 
 
 Investment, on the one hand, now captures the replacement principle seen in the classic RBC model 
 of \textcite{campbell1994inspecting} more clearly, where investment is made at steady state as pure maintenance to keep the variety/firm stock from shrinking. Therefore,
@@ -1056,8 +1056,8 @@ simultaneously adjusts on the investment side.
 The blocks are,
 as discussed previously, divided into sectoral and aggregate. Due to concerns introduced by the heterogeneous sectoral blocks, no
 one-size-fits-all closed-form steady-state solution can be found, mainly due to the real wage. For that matter, I solve for the
-steady-state values of all variables using an outer-inner loop dynamic explored in the following section \ref{sec:solution-num}.
-Subsequently, I explore these results in section \ref{sec:solution-properties}, with a particular focus on firm dynamics and the
+steady-state values of all variables using an outer-inner loop dynamic explored in the following Section \ref{sec:solution-num}.
+Subsequently, I explore these results in Section \ref{sec:solution-properties}, with a particular focus on firm dynamics and the
 composition of the firm sector.
 
 
@@ -1081,11 +1081,11 @@ g\bigl(w^{(0)}\bigr) \;=\; \chi\,L(w^{(0)})^{1/\varphi} \;-\; \frac{w^{(0)}}{C\b
 The routine then updates the wage guess until \(g(w)=0\), at which point, the last sectoral solutions constitute 
 the general equilibrium steady-state values for the sectoral variables, which are then aggregated to compute total quantities.
 The exogenous inputs used to pin down the steady-state quantities are summarized in Table \ref{tb:exoinputs}. They are broken
-down based on the block of the model where they have a direct impact. As mentioned in section \ref{sec:model-sedlacek}, 
+down based on the block of the model where they have a direct impact. As mentioned in Section \ref{sec:model-sedlacek}, 
 there is no empirical counterpart to the stock of ideas variable $\psi_i$, only to the matching probability $\Pi_i$.
 Therefore, as in \textcite{sedlavcek2017growth}, I take backed-out steady-state values for $\Pi_i$ from BDS firm data 
 in the steady-state calculations performed here. The exact calibration used in steady-state calculations and the 
-quantitative exercise is discussed in depth in section \ref{sec:quant-cal}.
+quantitative exercise is discussed in depth in Section \ref{sec:quant-cal}.
 
 \begin{table}[H]
 \centering
@@ -1143,6 +1143,11 @@ pinned from their definitions and the numéraire being $P \equiv 1$.
 
 In this section, I explore the resulting dynamics of the numeric steady-state solution achieved through the 
 algorithm in the previous section, with a special focus on the differences in behavior between different technology types.
+Calibration parameters, and in particular sectoral returns-to-scale parameters and matching probabilities,
+can be found in Table \ref{tab:calib_params_rotated} in the Appendix, and will be discussed in further detail in 
+Section \ref{sec:quant-cal}. Overall, I explore a total of $I = 9$ sectors that come directly from the BDS data 
+categorization done by \textcite{sedlavcek2017growth}.
+
 Figure \ref{fig:steady-output-log} shows three important dimensions for each sector, namely firm-level output, firm-level 
 employment, and the number 
 of varieties/firms in each sector, which is represented by the size of each circle both in the figure and the legend.
@@ -1158,7 +1163,7 @@ per unit of output.
 \begin{figure}[H]
   \centering
   \includegraphics[width=1\textwidth]{../images/steady_state/elastic_labor/steady_firm_dynamic_log.pdf}
-  \caption{Steady State relationship between firm-level output and employment (logged).}
+  \caption{Steady-state relationship between firm-level output and employment (logged).}
   \label{fig:steady-output-log}
 \end{figure}
 
@@ -1218,12 +1223,12 @@ in the legend.
 \begin{figure}[H]
   \centering
   \includegraphics[width=1\textwidth]{../images/steady_state/elastic_labor/steady_entry_log.pdf}
-  \caption{Steady State relationship between prospective and successful entrants (logged).}
+  \caption{Steady-state relationship between prospective and successful entrants (logged).}
   \label{fig:steady-entry-log}
 \end{figure}
 As before, the axes are logged to reveal the elasticity between variables.
 Therefore, taking logs turns the relationship into a line whose slope is elasticity $\epsilon_i = \frac{\Delta \ln m_i}{\Delta \ln e_i}$. 
-The figure puts the matching friction aspect of the model into the spotlight, showcasing the "decresing-returns-to-entry" 
+The figure puts the matching friction aspect of the model into the spotlight, showcasing the ``decresing-returns-to-entry''
 as one moves up the $\alpha_i$ values (moves down the matching probabilities $\Pi_i$). That is, on the double-log axes the 
 curvature shows that the elasticity between potential entrants $e_i$ and successful startups $m_i$ falls steadily as the entry pool 
 gets larger. In other words, each successive sector is fighting steeper diminishing returns-to-entry than the one to its left. 
@@ -1232,14 +1237,14 @@ This concurs with the logic found in the previous section, where high-$\alpha$ s
 of success and low-$\alpha$ sectors face little congestion due to their unattractiveness, despite the large stock of ideas.
 By sector 9, the success rate is so minimal that the curve starts to invert on itself, such that, as explored before for 
 Figure \ref{fig:steady-output-log}, the low-matching-probability effect starts to dominate the high-net-present-value effect, beginning
-to showcase a "Laffer-like" (\cite{laffer1974balance}) relationship between $e_i$ and $m_i$.
+to showcase a ``Laffer-like'' (\cite{laffer1974balance}) relationship between $e_i$ and $m_i$.
 
 Interpreting the flow of prospective entrants $e_i$ as investment outlay, another insight about Figure \ref{fig:steady-entry-log} appears.
 Namely, that it can be re-read almost one-for-one as a sector-specific capital-production function $m_i = F_i(e_i)$.
 Therefore, the slope now represents the elasticity of new capital concerning investment. Because only a fraction $\Pi_i$ is 
 successful, the gap $e_i - m_i$ is akin to depreciation in transit, and the curved shape pictures the declining marginal 
 product of piling ever more entry resources into a sector where profitable ideas are increasingly scarce. In sum, the introduction of
-matching frictions also enriches the "firm-entry-as-investment" dynamics of the original BGM framework, creating a more elaborate
+matching frictions also enriches the ``firm-entry-as-investment'' dynamics of the original BGM framework, creating a more elaborate
 process of capital creation where not all investment translates directly to  capital/firm formation.
 
 
@@ -1251,12 +1256,12 @@ process of capital creation where not all investment translates directly to  cap
 
 In this section, I will focus on exploring the mechanisms of shock propagation in the model using a quantitative exercise.
 I compute the impulse responses to a productivity shock analogous to the one found in BGM, and to the supply-of-ideas shock which is,
-as explored in section \ref{sec:model-mine}, based on the composition shock in the Sedláček-Sterk quantitative exercise. 
+as explored in Section \ref{sec:model-mine}, based on the composition shock in the Sedláček-Sterk quantitative exercise. 
 The results corroborate the intuition presented in the previous sections while adding novel insights about the model. In line with the 
 BGM approach, I present the impulse response functions (IRFs) only for the inelastic labor case, with the IRFs for the elastic labor
-being found in the appendix in section \ref{sec-app:full}. Finally, in Section \ref{sec:quant-BCmon} I report and explore the 
+being found in the Appendix in Section \ref{sec-app:full}. Finally, in Section \ref{sec:quant-BCmon} I report and explore the 
 Business Cycle second moments of my model
-in comparison to the BGM framework, and the real Business Cycle data and standard RBC model results found in 
+in comparison to the BGM framework, and the real Business Cycle data and standard RBC model results both found in 
 \textcite{king1999resuscitating}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1266,79 +1271,7 @@ in comparison to the BGM framework, and the real Business Cycle data and standar
 
 In my baseline calibration, I adopt parameters from both \textcite{bilbiie2012endogenous} and \textcite{sedlavcek2017growth} and
 interpret periods as years. Therefore, I adapt quarterly parameters from BGM, such as the exogenous firm exit shock $\delta = 0.09631$, 
-to a yearly basis. All calibration values and their targets can be found in Table \ref{tab:calib_params_rotated}.
-
-\begin{sidewaystable}[htbp]
-\centering
-\caption{Calibrated parameters}
-\label{tab:calib_params_rotated}
-\begin{tabular}{lll}
-\toprule
-Parameter & Value & Target \\
-\midrule
-\begin{tabular}[t]{@{}l@{}}$\beta$\\discount factor to match the 4\% annual interest rate\end{tabular}
-  & 0.96
-  & \textcite{sedlavcek2017growth} \\
-
-\begin{tabular}[t]{@{}l@{}}$\delta$\\exogenous firm exit shock (yearly)\end{tabular}
-  & 0.09631
-  & \textcite{bilbiie2012endogenous} \\
-
-\begin{tabular}[t]{@{}l@{}}$\theta$\\C.E.S. within-sector parameter\end{tabular}
-  & 3.8
-  & \textcite{bilbiie2012endogenous} \\
-
-\begin{tabular}[t]{@{}l@{}}$\eta$\\C.E.S. across-sector parameter\end{tabular}
-  & 2
-  & \textcite{carvalho2021sectoral} \\
-
-\begin{tabular}[t]{@{}l@{}}$f_{E}$\\steady‐state entry cost\end{tabular}
-  & 1
-  & \textcite{bilbiie2012endogenous} \\
-
-\begin{tabular}[t]{@{}l@{}}$Z$\\initial productivity\end{tabular}
-  & 1
-  & \textcite{bilbiie2012endogenous} \\
-
-\begin{tabular}[t]{@{}l@{}}$\chi$\\disutility of labor\end{tabular}
-  & 0.924271
-  & \textcite{bilbiie2012endogenous} \\
-
-\begin{tabular}[t]{@{}l@{}}$\varphi$\\elasticity of labor supply\end{tabular}
-  & 4
-  & \textcite{bilbiie2012endogenous} \\
-
-\begin{tabular}[t]{@{}l@{}}$\phi$\\elasticity in the entry function\end{tabular}
-  & 0.3
-  & \textcite{sedlavcek2017growth} \\
-
-\begin{tabular}[t]{@{}l@{}}$\rho_X$\\Stock of Ideas shock persistence\end{tabular}
-  & 0.415
-  & \textcite{sedlavcek2017growth} \\
-
-\begin{tabular}[t]{@{}l@{}}$\sigma_X$\\Stock of Ideas shock standard deviation\end{tabular}
-  & 0.000009
-  & \textcite{sedlavcek2017growth} \\
-
-\begin{tabular}[t]{@{}l@{}}$\rho_Z$\\productivity shock persistence\end{tabular}
-  & 0.9
-  & \textcite{bilbiie2012endogenous} \\
-
-\begin{tabular}[t]{@{}l@{}}$\sigma_Z$\\productivity shock standard deviation\end{tabular}
-  & $\log (1.01)^2$
-  & \textcite{bilbiie2012endogenous} \\
-
-\midrule
-\begin{tabular}[t]{@{}l@{}}$\alpha_i$\\returns to scale parameters for each of the 9 sectors\end{tabular}
-  & [0.890,\,0.932,\,0.946,\,0.956,\,0.963,\,0.968,\,0.972,\,0.976,\,0.988]
-  & average size in BDS  \\
-
-\begin{tabular}[t]{@{}l@{}}$\Pi_i = \bigl(\psi_i / e_i\bigr)^{1-\varphi}$\\probability of successful entry for each of the 9 sectors\end{tabular}
-  & [0.625,\,0.357,\,0.218,\,0.123,\,0.070,\,0.040,\,0.022,\,0.013,\,0.002]
-  & firm shares in BDS  \\
-\bottomrule
-\end{tabular}
-\end{sidewaystable}
+to a yearly basis. All calibration values and their targets can be found in Table \ref{tab:calib_params_rotated} in the Appendix.
 
 For the C.E.S. preferences, I use the value of $\theta = 3.8$ from \textcite{bernard2003plants} 
 adopted by BGM. I set $\beta = 0.96$ to match an annual real interest rate of 4\%. I set productivity $Z$ and 
@@ -1421,7 +1354,7 @@ back as Z dissipates.
 Finally, the response of $M_i$ is also worth some exploration. $M_i$ is the key endogenous state in the model and,
 much like in BGM, the sunk cost dynamic and time-to-build lag makes $M_i$ behave very much like capital in the 
 baseline RBC. Thus, $e_i$ represents consumer investment, and $v_i$ is the key price for household financing, with $e_i$ initially overshooting
-because $v_t$ is expected to temporarily increase in the future, especially in high $\alpha$ sectors. This makes it profitable for households
+because $v_i$ is expected to temporarily increase in the future, especially in high $\alpha$ sectors. This makes it profitable for households
 to invest today to reap the temporary benefits of the positive productivity shock.
 
 Moving on to Figure \ref{fig:aggprod}, the aggregate responses to the productivity shock are now of interest. The response of labor used in
@@ -1431,30 +1364,31 @@ match the increase in labor demand for both entry and production.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.7\textwidth]{../images/inelastic_labor/Zshocks/irf_epsZAgg.pdf}
+  \includegraphics[width=0.8\textwidth]{../images/inelastic_labor/Zshocks/irf_epsZAgg.pdf}
   \caption{Responses to a transitory positive productivity shock for main aggregate variables.}
   \label{fig:aggprod}
 \end{figure}
 
 The most interesting effect, however, consists of the response of aggregate
-output $Y$. In the baseline BGM framework, output responds to the one-percent increase in $Z$ with a slightly bigger response of 
+output $Y$. In the baseline BGM framework, output reacts to the one-percent increase in $Z$ with a response of 
 around one to two percent. In Figure \ref{fig:aggprod}, however, the response far exceeds the one of BGM, leading to an increase of
 around eleven percent. This happens through the love-for-variety effect found in BGM, which drives an increase
 in output due to the increase in the number of varieties, but also due to two novel channels. The first is the possibility of cross-sector
-C.E.S. substitution, where households redirect demand towards sectors whose relative price rise the less. Because the elasticity parameter
+C.E.S. substitution, where households redirect demand towards sectors whose relative price rise the less\footnote{See \textcite{gouel2023love}, 
+where the same dynamic in a multi-sector C.E.S. framework is found.}. Because the elasticity parameter
 $\eta$ is bigger than one, the quantity response is elastic, such that the demand shift itself raises $Y$. This channel is sensitive to
 the calibration of $\eta$ and thus its effect should be taken with a grain of salt.
 
 The second novel channel constitutes the labor reallocation between sectors after a productivity shock. Since the effect of an increase in
 TFP on the MPL depends directly on the returns-to-scale parameter $\alpha$, the shock induces 
 reallocation from low-$\alpha$ to high-$\alpha$ sectors. This, in turn, raises output, since labor is now used more efficiently across 
-the economy both for entry and production. The two novel channels represent extensions to the intensive composition margin in the model, 
+the economy for production. The two novel channels represent extensions to the intensive composition margin in the model, 
 going beyond the love-for-variety transmission mechanism found in BGM. Thus, the introduction
 of heterogenous firm sectors into the BGM framework not only enriches the pre-existing dynamics but introduces new transmission mechanisms
 that enrich the propagation and effect of productivity shocks in the model.
 
 As found in the original BGM quantitative exercise with productivity shocks, the response in the elastic labor case is 
-qualitatively similar for almost all variables. Figures \ref{fig:multiprod-elastic} and \ref{fig:aggprod-elastic} in the appendix present the IRFs for both
+qualitatively similar for almost all variables. Figures \ref{fig:multiprod-elastic} and \ref{fig:aggprod-elastic} in the Appendix present the IRFs for both
 sectoral and aggregate variables, respectively. All sectoral variables follow the exact same pattern as in the inelastic labor case, albeit 
 with stronger responses. That is because the household now has an additional margin of adjustment in the face of shocks, thus enhancing the model's 
 propagation mechanism and amplifying the responses of most endogenous variables, since households adjust their hours worked. 
@@ -1483,13 +1417,13 @@ then move on to the aggregate ones. The stock-of-ideas shock follows the same ma
 innovation volatility of $\sigma_X = 0.000009$ (less than one-hundredth of a percent). This explains the minimal responses of
 most endogenous variables, especially when compared to the responses to the productivity shock explored above.
 
-As briefly discussed before in section \ref{sec:model-mine}, I choose to modify the original composition shock to have it affect the
+As briefly discussed before in Section \ref{sec:model-mine}, I choose to modify the original composition shock to have it affect the
 stock of ideas of all sectors equally. That is because my goal is the study of aggregate RBC dynamics rather than cohort-by-year composition.
 This makes sure that the shock now has a larger macro impact, functioning as a facilitator of business activity across the board, from high- 
 to low-scalability types. Empirical analogues could be a patent-law change, the arrival of an innovation, or a broad surge in entrepreneurial 
 funding. The bottom line is that the shock now endogenously models an aggregate event that facilitates starting businesses by affecting
 the actual aggregate stock of ideas $\Psi$, preserving the microfoundations of the model. This differs from the literature that models entry-rate
-shocks as exogenous "animal-spirits" phenomena (see e.g. \cite{leduc2016uncertainty}), simply hardcoding a higher $e_i$.
+shocks as exogenous ``animal-spirits'' phenomena (see e.g. \cite{leduc2016uncertainty}), simply hardcoding a higher $e_i$.
 
 \begin{figure}[H]
   \centering
@@ -1517,7 +1451,7 @@ the combination of the initial expected profit impact of entry and the speed of 
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.7\textwidth]{../images/inelastic_labor/Xshocks/irf_epsX_Agg.pdf}
+  \includegraphics[width=0.8\textwidth]{../images/inelastic_labor/Xshocks/irf_epsX_Agg.pdf}
   \caption{Responses to a transitory positive stock-of-ideas shock for main aggregate variables.}
   \label{fig:aggstock}
 \end{figure}
@@ -1528,10 +1462,10 @@ following suit to support production after the time-to-build lag. Output rises d
 due to the love-for-variety effect, fosters higher demand. Some reallocation of demand across sectors also happens, since the shock also causes
 changes in the relative price $\rho_i$, but less than the response for the productivity shock. Finally, the real wage now rises with a lag since
 labor demand increases in production only after firms are built, and the stock-of-ideas shock does not directly influence MPL on inpact and thus the 
-real wagedoes not immediately rise as with the TFP shock.
+real wage does not immediately rise as with the TFP shock.
 
 Once more, the responses for the elastic labor case can be found in Figures \ref{fig:multistock-elastic} and \ref{fig:aggstock-elastic} 
-in the appendix.
+in the Appendix.
 For the aggregate responses, a similar dynamic to the one found in Figure \ref{fig:aggprod-elastic} can be seen, with labor used in 
 production ($Lc$) facing the initial dip as before, due to households now adjusting their labor supply in response to the income effect 
 from higher labor demand in entry ($Le$).
@@ -1555,7 +1489,7 @@ I focus on random shocks to productivity $Z_t$ as the source of business cycle f
 productivity process as in \textcite{king1999resuscitating} and BGM, which has persistence $.979$ and standard deviation
 of innovation $.0072$.
 
-Following BGM, I now change $\varphi = 2$ to match the benchmark calibration in both their model and
+Following BGM, I now change $\varphi = 2$ to match the benchmark calibration in
 the RBC baseline. In Table \ref{tab:moments}, the first column (bold) in each subtable represents the empirical
 moment implied by the U.S. data as reported by \textcite{king1999resuscitating}, the second column (normal) 
 represents the moments implied by the BGM model, the third column (italics) displays the moments
@@ -1641,14 +1575,14 @@ and $v_R\mathcal{E}=\sum_{i=1}^I\frac{v_{i}}{\rho_i}e_{i}$.
 Volatility-wise in Panel a), the model underperforms when compared to the alternatives, being distant from both the
 benchmark RBC and BGM specifications and the real data, especially regarding investment and hours. This could potentially
 be explained by how the cross-sectoral averaging of variables dampens total variance since the shocks are aggregate and hit
-all sectors equally. Another potential source of dampening, especially for investment, is the low calibration value
+all sectors equally. Another potential source of dampening, especially for investment and labor, is the low calibration value
 for the matching elasticity parameter $\phi$. A low $\phi$ caps the elasticity of entry to profits, such that entry
 reacts less, investment becomes far smoother than in the BGM baseline, and so does labor used in producing new firms. 
 
 This dynamic of overly smooth investment and hours is also present in the relative volatilities in Panel b), where the value 
 for investment is half of the value in all other specification, and the same is valid for labor. The relative volatility of
 consumption, however, displays a value closer to the data than the overly smooth BGM and RBC frameworks. A potential cause could 
-stem from consumers now facing sector-relative prices $\rho_i$, so more inter-sectoral substitution takes place, making the 
+stem from consumers now facing sector-relative prices $\rho_i$, so inter-sectoral substitution takes place, making the 
 response of consumption stronger to variations in output.
 
 Moving on to the persistence in Panel c), the values are at least as good as the ones from the other two models 
@@ -1662,7 +1596,7 @@ Consumption moves too perfectly with output, however, which could be corrected b
 prices (see e.g. \cite{smets2007shocks}). Investment displays slightly lower procyclicality when compared to BGM or the RBC benchmark, but is still far off the $0.8$ 
 empirical baseline. 
 
-Despite overly smooth entry due to calibration hindering volatilities, the model captures persistence and 
+Despite overly-smooth entry, mainly due to calibration, hindering volatilities, the model captures persistence and 
 correlations relatively well when compared to the other three baselines presented and displays adequate volatility of consumption
 with regard to output. Nonetheless, the model still faces the same well-known challenges as the standard RBC model: 
 insufficient endogenous persistence and all variables are too procyclical in  comparison to the data.
@@ -1718,9 +1652,9 @@ Another potential idea is exploring more in depth the welfare impacts of variety
 this could yield interesting and novel policy insights not found in the baseline BGM framework. Additionally, comparing the framework with frameworks 
 that have different sources of heterogeneity, such as markups or productivity parameters, could also be fruitful. 
 
-Overall, recognizing firm differences in scalability and the resulting matching frictions enhances how 
-shock transmission is understood in RBC models and can guide smarter policy entry during downturns that respects
-the heterogeneous responses of firms. 
+%Overall, recognizing firm differences in scalability and the resulting matching frictions enhances how 
+%shock transmission is understood in RBC models and can guide smarter policy entry during downturns that respects
+%the heterogeneous responses of firms. 
 
 
 
@@ -1748,6 +1682,78 @@ the heterogeneous responses of firms.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Additional Figures}
 \label{sec-app:full}
+
+\begin{sidewaystable}[htbp]
+\centering
+\caption{Calibrated parameters}
+\label{tab:calib_params_rotated}
+\begin{tabular}{lll}
+\toprule
+Parameter & Value & Target \\
+\midrule
+\begin{tabular}[t]{@{}l@{}}$\beta$\\discount factor to match the 4\% annual interest rate\end{tabular}
+  & 0.96
+  & \textcite{sedlavcek2017growth} \\
+
+\begin{tabular}[t]{@{}l@{}}$\delta$\\exogenous firm exit shock (yearly)\end{tabular}
+  & 0.09631
+  & \textcite{bilbiie2012endogenous} \\
+
+\begin{tabular}[t]{@{}l@{}}$\theta$\\C.E.S. within-sector parameter\end{tabular}
+  & 3.8
+  & \textcite{bilbiie2012endogenous} \\
+
+\begin{tabular}[t]{@{}l@{}}$\eta$\\C.E.S. across-sector parameter\end{tabular}
+  & 2
+  & \textcite{carvalho2021sectoral} \\
+
+\begin{tabular}[t]{@{}l@{}}$f_{E}$\\steady‐state entry cost\end{tabular}
+  & 1
+  & \textcite{bilbiie2012endogenous} \\
+
+\begin{tabular}[t]{@{}l@{}}$Z$\\initial productivity\end{tabular}
+  & 1
+  & \textcite{bilbiie2012endogenous} \\
+
+\begin{tabular}[t]{@{}l@{}}$\chi$\\disutility of labor\end{tabular}
+  & 0.924271
+  & \textcite{bilbiie2012endogenous} \\
+
+\begin{tabular}[t]{@{}l@{}}$\varphi$\\elasticity of labor supply\end{tabular}
+  & 4
+  & \textcite{bilbiie2012endogenous} \\
+
+\begin{tabular}[t]{@{}l@{}}$\phi$\\elasticity in the entry function\end{tabular}
+  & 0.3
+  & \textcite{sedlavcek2017growth} \\
+
+\begin{tabular}[t]{@{}l@{}}$\rho_X$\\Stock of Ideas shock persistence\end{tabular}
+  & 0.415
+  & \textcite{sedlavcek2017growth} \\
+
+\begin{tabular}[t]{@{}l@{}}$\sigma_X$\\Stock of Ideas shock standard deviation\end{tabular}
+  & 0.000009
+  & \textcite{sedlavcek2017growth} \\
+
+\begin{tabular}[t]{@{}l@{}}$\rho_Z$\\productivity shock persistence\end{tabular}
+  & 0.9
+  & \textcite{bilbiie2012endogenous} \\
+
+\begin{tabular}[t]{@{}l@{}}$\sigma_Z$\\productivity shock standard deviation\end{tabular}
+  & $\log (1.01)^2$
+  & \textcite{bilbiie2012endogenous} \\
+
+\midrule
+\begin{tabular}[t]{@{}l@{}}$\alpha_i$\\returns to scale parameters for each of the 9 sectors\end{tabular}
+  & [0.890,\,0.932,\,0.946,\,0.956,\,0.963,\,0.968,\,0.972,\,0.976,\,0.988]
+  & average size in BDS  \\
+
+\begin{tabular}[t]{@{}l@{}}$\Pi_i = \bigl(\psi_i / e_i\bigr)^{1-\varphi}$\\probability of successful entry for each of the 9 sectors\end{tabular}
+  & [0.625,\,0.357,\,0.218,\,0.123,\,0.070,\,0.040,\,0.022,\,0.013,\,0.002]
+  & firm shares in BDS  \\
+\bottomrule
+\end{tabular}
+\end{sidewaystable}
 
 \begin{figure}[H]
   \centering
@@ -1782,7 +1788,7 @@ the heterogeneous responses of firms.
 \section{Computational Implementation}
 \label{sec-app:codes}
 
-The computational appendix provides a guide to the code repository accompanying this thesis. All scripts and data files are available at the GitHub repository:
+The computational Appendix provides a guide to the code repository accompanying this thesis. All scripts and data files are available at the GitHub repository:
 \begin{center}
   \url{https://github.com/Okim343/MyHeteroBilbiie_Thesis.git}
 \end{center}
@@ -1823,7 +1829,7 @@ To reproduce the results presented in the thesis, execute the following in order
     Solves and visualizes the steady state of the heterogeneous‐firm RBC model under both elastic 
     (for $\varphi = 4$ and $\varphi = 2$ for the business cycle moments calculations) and inelastic labor. Prints steady‐state values for all key variables.
   \item[\texttt{run\_model.jl}]: 
-    Loads the calibrated Dynare model with elastic labor, runs perfect‐foresight and stochastic simulations, computes impulse response functions for aggregate shocks, and exports all sectoral and aggregate IRF plots.
+    Loads the calibrated Dynare model with elastic labor, runs stochastic simulations, computes impulse response functions for aggregate shocks, and exports all sectoral and aggregate IRF plots.
   \item[\texttt{run\_model\_ineL.jl}]: 
     Analogous to \texttt{run\_model.jl}, but for the inelastic labor specification.
 \end{description}
@@ -1857,17 +1863,17 @@ the mathing probability at time $t$ for sector $i$, and that firms are now chara
 Let the option value of waiting to enter for firm $\omega i$ be $W_{i,t}(\omega)\ge0$. In all periods $t$,
 \[
 \mathcal{W}_{i,t}(\omega)
-=\max\!\Bigl[v_t(\omega)-\frac{w_t\,f_{E,t}}{\Pi_{i,t}Z_t},\;\beta\,\mathcal{W}_{i,t+1}(\omega)\Bigr],
+=\max\!\Bigl[v_{i,t}(\omega)-\frac{w_t\,f_{E,t}}{\Pi_{i,t}Z_t},\;\beta\,\mathcal{W}_{i,t+1}(\omega)\Bigr],
 \]
 where the first term is the payoff of undertaking the investment and the second term is the discounted payoff of waiting. 
 If firms are identical (there is no idiosyncratic uncertainty) and exit is exogenous (uncertainty related to firm death is also aggregate), this becomes:
 \[
 \mathcal{W}_{i,t}
-=\max\!\Bigl[v_t-\frac{w_t\,f_{E,t}}{\Pi_{i,t}Z_t},\;\beta\,\mathcal{W}_{i,t+1}\Bigr].
+=\max\!\Bigl[v_{i,t}-\frac{w_t\,f_{E,t}}{\Pi_{i,t}Z_t},\;\beta\,\mathcal{W}_{i,t+1}\Bigr].
 \]
 Because of free entry, the first term is always zero, so the option value obeys:
 \[
-\mathcal{W}_{i,t} = \beta\,\mathcal{W}_{i,t+1}.
+\mathcal{W}_{i,t} = \beta\,\mathcal{W}_{i,t+1} \quad \forall i \in \{1,2,...,I\}.
 \]
 This is a contraction mapping because of discounting, and by forward iteration, under the assumption
 \[
@@ -1879,14 +1885,7 @@ This is a contraction mapping because of discounting, and by forward iteration, 
 \]
 
 \pagebreak
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Supplementary Results}
-\label{sec-app:sup}
 
-This appendix contains supplementary figures and tables, placed here for the sake of brevity in the main text. It is ordered according to the corresponding sections in the text.
-
-
-\newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{appendices}
