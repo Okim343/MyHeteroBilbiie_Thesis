@@ -17,7 +17,7 @@ phi       = 0.3;         % elasticity in the entry function
 BigPsi    = 0.090;       % measure of business opportunities
 varphi    = 2;           % elasticity of substitution in the labor aggregator
 C_ss      = 0.11738613032104049;           % consumption steady state value
-r         = 0.04166666666666674; %interest rate equal to beta^(-1)-1
+r         = 0.04166666666666674;           % interest rate equal to beta^(-1)-1
 
 /*
   2) Sectoral tech & success probabilities
@@ -42,10 +42,10 @@ psi_bar8 = 2.730215755419061e-5;
 psi_bar9 = 1.2110527779411359e-5;
 
 /*
-  3) Shock processes 0.0072^2
+  3) Shock processes 
 */
 rho_Z   = 0.979;               % AR(1) for productivity
-sigma_Z = 0.0072;            % variance of eps_Z
+sigma_Z = 0.0072;              % variance of eps_Z
 
 rho_X   = 0.415;               % AR(1) for composition shocks
 sigma_X = 0.000009;            % variance of composition shocks

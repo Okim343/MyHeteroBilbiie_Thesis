@@ -161,7 +161,7 @@ end;
 
 
 
-stoch_simul (order=2,irf=25) n ne  ;
+stoch_simul (order=1,irf=25) n ne  ;
 
 
 model_info ;

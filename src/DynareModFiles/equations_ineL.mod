@@ -2,8 +2,6 @@
 //  equations.mod
 //------------------------------------------------
 
-//e@{i}   - psi_bar@{i}*((w(-1)*fE)/(Z(-1)*X(-1)*v@{i}(-1)))^(1/(phi - 1))          = 0;
-
 // ─── 1.  Sectoral FOCs (6 per sector since Pi_bar is a parameter and m_i is a definition) ───────────────────
 @#for i in 1:I
     rho@{i} - M@{i}^(1/(theta-1))                                                     = 0;
@@ -53,7 +51,7 @@ Y = w*L
 ;
 
 // ─── 5.  Shock processes in logs ───────────────────────
-ln(Z) - rho_Z*ln(Z(-1)) - eps_Z = 0; // productivity shock
+ln(Z) - rho_Z*ln(Z(-1)) - eps_Z = 0;  // productivity shock
 ln(X) - rho_X*ln(X(-1))- eps_X = 0;   // composition shock
 
 
