@@ -1,7 +1,6 @@
 using Plots, LaTeXStrings
 pgfplotsx()
 
-
 """
 2D bubble‐scatter of steady‐state firm properties with dynamic axes,  
 45° reference line, and α‐annotations.

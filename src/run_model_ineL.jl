@@ -17,9 +17,8 @@ ctx = @dynare "src/DynareModFiles/main_ineL.mod" "stoponerror";
 # Plotting IRFs for the aggregate shocks
 # ──────────────────────────────────────────────────────────
 
-mr  = ctx.results.model_results[1]         # the first (and maybe only) run
+mr  = ctx.results.model_results[1]         
 shocks = mr.irfs                           # this is a ::Dict{Symbol, AxisArrayTable}
-#println("shocks : ", shocks)  # print the keys of the shocks
 
 # ─────────────────────Aggreagate productivity shock Z─────────────────────────────────────
 
@@ -56,12 +55,6 @@ savefig(p, joinpath(outdirZ,"irf_epsZ_Li_stacked.pdf"))  # paper-ready PDF
 p = plot_irfs_stacked(mr, :eps_Z, [:logY1, :logY2, :logY3, :logY4, :logY5, :logY6, :logY7, :logY8, :logY9]; horizon=75, ncols=3)
 savefig(p, joinpath(outdirZ,"irf_epsZ_logOutput_stacked.pdf"))  # paper-ready PDF
 
-#= p = plot_irfs_stacked(mr, :eps_Z, [:MC1, :MC2, :MC3, :MC4, :MC5, :MC6, :MC7, :MC8, :MC9]; horizon=75, ncols=3)
-savefig(p, joinpath(outdirZ,"irf_epsZ_MCi_stacked.pdf"))  # paper-ready PDF
-
-p = plot_irfs_stacked(mr, :eps_Z, [:logMC1, :logMC2, :logMC3, :logMC4, :logMC5, :logMC6, :logMC7, :logMC8, :logMC9]; horizon=75, ncols=3)
-savefig(p, joinpath(outdirZ,"irf_epsZ_logMCi_stacked.pdf"))  # paper-ready PDF =#
-
 # ─────────────────────Aggreagate investment shock X─────────────────────────────────────<
 
 outdirX = joinpath(@__DIR__, "..", "src", "images", "inelastic_labor", "Xshocks")
@@ -96,9 +89,3 @@ savefig(p, joinpath(outdirX,"irf_epsX_Li_stacked.pdf"))  # paper-ready PDF
 
 p = plot_irfs_stacked(mr, :eps_X, [:logY1, :logY2, :logY3, :logY4, :logY5, :logY6, :logY7, :logY8, :logY9]; horizon=75, ncols=3)
 savefig(p, joinpath(outdirX,"irf_epsX_logOutput_stacked.pdf"))  # paper-ready PDF
-
-#= p = plot_irfs_stacked(mr, :eps_X, [:MC1, :MC2, :MC3, :MC4, :MC5, :MC6, :MC7, :MC8, :MC9]; horizon=75, ncols=3)
-savefig(p, joinpath(outdirX,"irf_epsX_MCi_stacked.pdf"))  # paper-ready PDF
-
-p = plot_irfs_stacked(mr, :eps_X, [:logMC1, :logMC2, :logMC3, :logMC4, :logMC5, :logMC6, :logMC7, :logMC8, :logMC9]; horizon=75, ncols=3)
-savefig(p, joinpath(outdirX,"irf_epsX_logMCi_stacked.pdf"))  # paper-ready PDF =#

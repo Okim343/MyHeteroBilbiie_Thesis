@@ -13,14 +13,12 @@ include(joinpath(SRC,"helper_functions","plot_irfs.jl"))  # defines plot_irfs(..
 
 ctx = @dynare "src/DynareModFiles/main.mod" "stoponerror";
 
-
 # ──────────────────────────────────────────────────────────
 # Plotting IRFs for the aggregate shocks
 # ──────────────────────────────────────────────────────────
 
-mr  = ctx.results.model_results[1]         # the first (and maybe only) run
+mr  = ctx.results.model_results[1]         
 shocks = mr.irfs                           # this is a ::Dict{Symbol, AxisArrayTable}
-#println("shocks : ", shocks)  # print the keys of the shocks
 
 # ─────────────────────Aggreagate productivity shock Z─────────────────────────────────────
 
