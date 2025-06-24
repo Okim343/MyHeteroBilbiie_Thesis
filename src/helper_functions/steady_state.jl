@@ -1,10 +1,9 @@
 ##############################################################################
 #  src/helper_functions/steady_state.jl – analytical steady-state solver     #
-#  for the heterogeneous Bilbiie-Sedlacek model (3 + 7 I)                    #
+#  for the heterogeneous Bilbiie-Sedlacek model (3 + 8I)                    #
 ##############################################################################
 
 using LinearAlgebra, Statistics, DataFrames
-
 
 # ──────────────────────────────────────────────────────────
 # Generic root-finder (Brent / bisection mix)
@@ -45,7 +44,7 @@ Compute the steady state of the full heterogeneous model.
 
 The returned **named tuple** contains the aggregates  
 `(w, L, Le, Lc, Y, r, C)` plus the per-sector vectors  
-`(M_i, C_i, ρ_i, v_i, d_i, e_i, ψ_i, Π_i, α_i, l_i, y_i, L_i, Y_i)`.
+`(M_i, C_i, ρ_i, v_i, d_i, e_i, ψ_i, Π_i, α_i, l_i, y_i, L_i, Y_i, MC_i)`.
 
 If `inelasticL=true`, the labor FOC uses χ = w/C (φ→0 limit).  
 Otherwise it uses χ·L^(1/φ) = w/C.
@@ -86,7 +85,7 @@ function steady_state(model::MyHeteroBilbiieModel; tol = 1e-15, inelasticL::Bool
         ψi   = similar(Mi)
         yi   = similar(Mi)
         li   = similar(Mi)
-        # new: MCi stores marginal cost in each sector
+        # MCi stores marginal cost in each sector
         MCi  = similar(Mi)
 
         for i in 1:I
@@ -100,7 +99,7 @@ function steady_state(model::MyHeteroBilbiieModel; tol = 1e-15, inelasticL::Bool
             # We set y_i = Cᵢ/Mᵢ  (note: Z̄=1 here)
             yi[i]     = Ci_over_Mi
 
-            # ── compute marginal cost MCᵢ = w/(αᵢ Z̄) * (yᵢ/Z̄)^(1/αᵢ - 1)
+            # compute marginal cost MCᵢ = w/(αᵢ Z̄) * (yᵢ/Z̄)^(1/αᵢ - 1)
             MCi[i] = w/(αi * Z̄) * (yi[i]/Z̄)^(1/αi - 1)
 
             # (E) pricing → pᵢ = μ * MCᵢ  →  Mᵢ from CES‐demand condition
@@ -147,7 +146,7 @@ function steady_state(model::MyHeteroBilbiieModel; tol = 1e-15, inelasticL::Bool
             yi    = yi,
             L_i   = L_i,
             Y_i   = Y_i,
-            MCi   = MCi,   # return the marginal cost array
+            MCi   = MCi,   
         )
     end
 
@@ -195,7 +194,7 @@ function steady_state(model::MyHeteroBilbiieModel; tol = 1e-15, inelasticL::Bool
         y_i    = blk.yi,
         L_i    = blk.L_i,
         Y_i    = blk.Y_i,
-        MC_i   = blk.MCi,    # vector of marginal costs in each sector
+        MC_i   = blk.MCi,    
         s_lag_Z = 1.0,
     )
 end

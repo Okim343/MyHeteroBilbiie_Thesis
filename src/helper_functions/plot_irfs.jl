@@ -4,7 +4,7 @@
 ##############################################################################
 
 using Plots, LaTeXStrings
-pgfplotsx()
+pgfplotsx() #generates latex like figures, but takes longer to render. Comment out for faster rendering.
 
 """
 Plot impulse response functions (IRFs) from a Dynare `ModelResults` object.
@@ -20,7 +20,7 @@ Plot impulse response functions (IRFs) from a Dynare `ModelResults` object.
 - `lw::Float64=1.5`: line width for each IRF.
 
 # Returns
-- A `Plots.Plot` object with LaTeX‐ready titles and no extra empty panels.
+- A `Plots.Plot` object with LaTeX‐ready titles.
 """
 function plot_irfs(
     mr::ModelResults,
@@ -47,7 +47,7 @@ function plot_irfs(
       legend    = false,
       linewidth = lw,
       size      = (400*ncols, 300*nrows),
-      grid      = false,    # turn off all grids
+      grid      = false,    
       color     = :firebrick      # default series color
     )
 
@@ -71,8 +71,8 @@ function plot_irfs(
           ylabel  = "",
           xlim    = (first(times), last(times)),
           ylim    = (ymin, ymax),
-          grid    = false,   # ensure no grid on this subplot
-          color   = :red     # force red line
+          grid    = false,   
+          color   = :red     
         )
     end
 
@@ -80,7 +80,7 @@ function plot_irfs(
     for j in (nvars+1):npanels
         plot!(
           p[j],
-          [],                          # empty series
+          [],                          
           framestyle = :none,
           xticks     = false,
           yticks     = false,

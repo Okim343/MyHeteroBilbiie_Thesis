@@ -1,5 +1,5 @@
 using Plots, LaTeXStrings
-pgfplotsx()
+pgfplotsx() #generates latex like figures, but takes longer to render. Comment out for faster rendering.
 
 """
 2D bubble‐scatter of steady‐state firm properties with dynamic axes,  
@@ -190,7 +190,7 @@ function steady_state_entry(ss;
         markerstrokewidth = 0.5,
         markerstrokecolor = :black,
         alpha             = alpha,
-        color             = palette[i],    # fixed sector color
+        color             = palette[i],   
         label             = "sector $i (Πᵢ=$(round(Πₖ[i], digits=3)))",
       )
 
@@ -200,8 +200,8 @@ function steady_state_entry(ss;
         xdata[i], ydata[i],
         text(
           "αᵢ=$(round(αₖ[i], digits=3))",
-          :right,  # push it just to the right of the point
-          8        # font size
+          :right,  
+          8        
         )
       )
     end
