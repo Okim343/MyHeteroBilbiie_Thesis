@@ -3,7 +3,7 @@ pgfplotsx() #generates latex like figures, but takes longer to render. Comment o
 
 """
 2D bubble‐scatter of steady‐state firm properties with dynamic axes,  
-45° reference line, and α‐annotations.
+and α‐annotations.
 
 # Arguments
 - `ss`: a NamedTuple or struct with fields
