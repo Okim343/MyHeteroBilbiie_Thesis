@@ -245,12 +245,12 @@ heterogeneity in returns-to-scale technology and entry-matching frictions. In pa
 alter the propagation of aggregate shocks, especially when compared to a baseline RBC framework? I also investigate the impact of an exogenous 
 surge in business opportunities across the economy, and how firm-level and aggregate-level responses to this shock diverge.
 
-To address these questions, I integrate the seminal RBC with the endogenous entry framework found in \textcite{bilbiie2012endogenous} (henceforth BGM) 
+To address these questions, I integrate the seminal RBC model with the endogenous entry framework found in \textcite{bilbiie2012endogenous} (henceforth BGM) 
 with the technology-choice mechanism from \textcite{sedlavcek2017growth} in a single DSGE environment featuring multiple production sectors\footnote{In my framework, 
 each sector corresponds to one 
 returns-to-scale parameter, such that a symmetric within-sector equilibrium makes all firms that belong to the same sector share equal prices and profits.}. 
 Additionally, a novel stock-of-ideas shock is introduced by modifying the composition shock found in the 
-Sedláček-Sterk framework, to capture booms in business viability in a micro-consistent manner. This approach allows the study of
+Sedláček-Sterk framework to capture booms in business viability in a micro-consistent manner. This approach allows the study of
 firm entry and heterogeneity dynamics inside a pre-existing and well-studied RBC framework and yields new insights for industrial 
 policy that recognizes scaling differences across sectors.
 
@@ -273,7 +273,7 @@ The relationship between firm-level output and labor demand, for instance, is hi
 parameter, the longer a firm can expand before encountering diminishing returns, so highly scalable sectors naturally host more product lines. On the 
 competition front, any parameter change that depresses entry enlarges the slice of the market served by each surviving producer. A congestion channel also
 exists, such that prospective incumbents face decreasing ``returns-to-entry'', where success odds tumble in a non-linear way going from low- to high-scalability sectors.
-Finally, in steady-state all entry happens solely to rebuild the stock of varieties, such that entry and dividends work together much like depreciation and
+Finally, in the steady state all entry happens solely to rebuild the stock of varieties, such that entry and dividends work together much like depreciation and
 investment in a capital-based RBC model.
 
 
@@ -325,7 +325,7 @@ which increases competition and drives markups countercyclically lower. This mec
 rise in booms, amplifying output fluctuations. Their findings underscore an important propagation channel 
 that is similarly found in the model presented in this thesis.
 
-However, \textcite{bilbiie2012endogenous} probably represent the most influential foundational work in this vein of literature, 
+However, \textcite{bilbiie2012endogenous} probably represents the most influential foundational work in this vein of literature, 
 also starting a line of work that modifies their model to study optimal monetary policy with endogenous firm entry, weighing the benefits 
 of variety creation against costs like entry investment and potentially inefficient boom-burst cycles of firm creation (see e.g. \cite{bilbiie2014optimal, lewis2012firm}).
 Another influential line of work has opted for idiosyncratic firm productivity shocks alongside entry as their driver of firm heterogeneity within a DSGE structure. 
@@ -447,7 +447,7 @@ of varieties
     C_t = \left[\int_{\omega \in \Omega_t} c_t(\omega)^{\frac{\theta-1}{\theta}}\,d\omega\right]^{\frac{\theta}{\theta-1}},
 \]
 
-which implies a consumption-based price index and constant markups for the firm. Solving the firm's pricing problem, I arrive at the equilibrium real pricing
+which implies a consumption-based price index and constant markups for the firm. Solving the firm's pricing problem, they arrive at the equilibrium real pricing
 condition of
 
  \[
@@ -515,7 +515,7 @@ heterogeneity in startup quality is macro-relevant through theory and empirical 
 I abstract away from almost all other relevant model aspects presented by \textcite{sedlavcek2017growth} 
 in this section to focus on two key mechanisms: the technology/returns-to-scale choice and the entry-stage 
 matching friction. Before entry, each prospective entrepreneur/startup chooses a technology type $i\in\{1,\dots,I\}$,
-which pins down the constant-returns-to-scale parameter $\alpha_i\in(0,1)$. Once active, an incumbent of age $a$ 
+which pins down the constant returns-to-scale parameter $\alpha_i\in(0,1)$. Once active, an incumbent of age $a$ 
 produces according to 
 \[
 y_{i,a,t}=A_t\,n_{i,a,t}^{\alpha_i},
@@ -588,7 +588,7 @@ of labor supply to wages and the intertemporal elasticity of substitution in lab
 income and substitution effects of real wage variation on effort cancel out in steady state, as argued in BGM.
 
 At time t, the household consumes the basket of goods $C_t$, defined over a continuum of goods $\Omega$. At any time, only $\Omega_t \in \Omega$ 
-is available. Given sector $i$, the continuum of goods stemming from that sector is $\Omega_{i}$, and the basket of goods is $C_{i,t}$. 
+is available. Given sector $i$, the continuum of goods stemming from that sector is $\Omega_{i,t}$, and the basket of goods is $C_{i,t}$. 
 Let $p_{i,t}(\omega)$ denote the nominal price 
 of a good $\omega \in \Omega_{i,t}$. Additionally, demand for an individual variety, $c_{i,t}(\omega)$, is obtained as 
 $c_{i,t}(\omega) \, d\omega = C_{i,t} \, \partial P_{i,t} / \partial p_{i,t}(\omega)$.
@@ -819,7 +819,7 @@ process, especially for highly scalable sectors that have lower probabilities of
 \noindent\textbf{G. Characterizing Equilibrium}
 \medskip
 
-Given predetermined variables $M_{i,t}$, $\psi_{i,t}$, $r_t$ and exogenous shocks $(Z_{t},X_{t}, f_{E,t})$\footnote{Note: I treat 
+Given predetermined variables $M_{i,t}$, $\psi_{i,t}$, $r_t$ and exogenous shocks $(Z_{t},X_{t})$\footnote{Note: I treat 
 $f_{E,t}$ as a parameter during quantitative exercises.}, the intra-period sequence in the model goes as follows: i) Given their preferences, households
 choose $\{C_t,L_t,B_{t+1},x_{t+1}\}$; ii) Incumbent firms hire labor, set prices, produce and pay dividends in all sectors;
 iii) Potential entrants pay the sunk entry cost $f_{E,t}w_t/Z_t$.  Matching occurs with probability $\Pi_{i,t}$ and 
@@ -836,11 +836,11 @@ Furthermore, nominal variables like $P_{i,t}$ and $p_{i,t}$ are not solved for, 
 \eqref{eq:pricing} and \eqref{eq:lovevariety} solve for the real/relative sectoral price $\rho_{i,t}$.
 
 
-Therefore, equilibrium can be characterized as follows: Given exogenous processes $(Z_t,X_t,f_{E,t})$, initial masses $\{M_{i,0}\}$, 
+Therefore, equilibrium can be characterized as follows: Given exogenous processes $(Z_t,X_t)$, initial masses $\{M_{i,0}\}^I_{i=1,\dots,I}$, 
 and a top-level price numéraire $P_t \equiv 1$ as a nominal anchor, I summarize equilibrium as a sequence 
 \[
 \bigl\{\,w_t^*,L_t^*,r_{t}^*,\bigl\{
-        M_{i,t}^*,C_{i,t}^*,\rho_{i,t}^*,d_{i,t}^*,v_{i,t}^*,e_{i,t}^*,\psi_{i,t}^*,\Pi_{i,t}^*\bigr\}^I_{(i=1,\dots,I)}\bigr\},
+        M_{i,t}^*,C_{i,t}^*,\rho_{i,t}^*,d_{i,t}^*,v_{i,t}^*,e_{i,t}^*,\psi_{i,t}^*,\Pi_{i,t}^*\bigr\}^I_{i=1,\dots,I}\bigr\},
 \]
 of 3 + 8$I$ endogenous variables, with 3 variables being predetermined at time $t$ ($M_{i,t}$, $r_t$ and $\psi_{i,t}$). This satisfies
 the simplified system of equilibrium conditions in Table \ref{tb:eqconditions} out of all the relevant 
@@ -861,7 +861,7 @@ equations explored in Section \ref{sec:model-mine}.
 6 & Stock of ideas in sector $i$ & \(  \psi_{i,t}=X_t^{\frac{1}{1-\phi}}\bar{\psi}_i  \quad \text{ from \eqref{eq:psilaw}} \) & \( I \) \\
 7 & Matching definition & \( e_{i,t} = \psi_{i,t}\bigl(\Pi_{i,t}\bigr)^{\frac{1}{\phi-1}} \quad \text{from \eqref{eq:probability}} \) & \( I \) \\
 8 & Number of firms in sector $i$ & \( M_{i,t+1} = (1-\delta)\bigl(M_{i,t}+e_{i,t}\Pi_{i,t}\bigr) \quad \text{from \eqref{eq:entrants}} \) & \( I \) \\
-9 & Intra-temporal labor FOC & \( \chi L_t^{1/\phi} = \frac{w_t}{C_t} \quad \text{from \eqref{eq:intratemp}} \) & \( 1 \) \\
+9 & Intra-temporal labor FOC & \( \chi L_t^{1/\varphi} = \frac{w_t}{C_t} \quad \text{from \eqref{eq:intratemp}} \) & \( 1 \) \\
 10 & Inter-temporal Euler (bonds) & \(1 = \beta(1+r_{t+1})E_t\Bigl[\tfrac{C_t}{C_{t+1}}\Bigr] \quad \text{from \eqref{eq:eulerbonds}} \) & \( 1 \) \\
 11 & Aggregate Labor Identity & \( L_t=\sum_i(M_{i,t}\ell_{i,t}+e_{i,t} f_{E,t}/Z_t) \ \  \ \text{from \eqref{eq:AgglaborClearing}}\) & \( 1 \) \\
 \midrule
@@ -916,8 +916,8 @@ means that active incumbents in sector $i$ have fewer competing firms with whom 
 firm size despite the negative impact of an increase in wages. 
 
 The contrasting behavior of potential entrants and active incumbents comes from the fact that, after the forward-looking choice of entry, 
-successful entrants only perform the myopic-static choice of optimal labor demand every period, and do not take into consideration their probability
-of exit in doing so. Additionally, the negative impact of a wage surge on the labor decision is counterbalanced by the 
+successful entrants only perform the myopic-static choice of optimal labor demand every period, and do not take into consideration their exogenous 
+probability of exit in doing so. Additionally, the negative impact of a wage surge on the labor decision is counterbalanced by the 
 positive impact of a decrease in incumbents due to rising entry costs on within-sector competition, hence the positive impact of wage on firm-level output 
 and employment.
 
@@ -961,8 +961,8 @@ The blocks are,
 as discussed previously, divided into sectoral and aggregate. Due to concerns introduced by the heterogeneous sectoral blocks, no
 one-size-fits-all closed-form steady-state solution can be found, mainly due to the real wage. For that matter, I solve for the
 steady-state values of all variables using an outer-inner loop dynamic explored in the following Section \ref{sec:solution-num}.
-Subsequently, I explore these results in Section \ref{sec:solution-properties}, with a particular focus on firm dynamics and the
-composition of the firm sector.
+Subsequently, I explore these results in Section \ref{sec:solution-properties}, with a particular focus on the
+composition of the firm sector and entry dynamics.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1126,13 +1126,13 @@ sectoral heterogeneity.
 
 In this reading, each incumbent variety corresponds to a point on the continuum $\omega$, and the results displayed in 
 Figure \ref{fig:steady-output-log} can be made sense of. Highly scalable firms end up having a bigger number of product lines due to the
-easiness of scaling up the business, whereas low-scalability industries cannot expand their varieties/product-lines so easily due 
+easiness of scaling up the business, whereas low-scalability industries cannot expand their varieties/product lines so easily due 
 to scaling issues. Therefore, for high-$\alpha$ technologies, marginal labor requirements to generate output are low, so once a 
 core platform is in place (such as Amazon's fulfillment network or a cloud software data center), adding another feature or product line costs
 only the fixed entry cost\footnote{See \textcite{destefano2023cloud} for empirical evidence of this dynamic using data from cloud 
 service firms in the UK.}.
- By contrast, labor-intensive sectors such as restaurants, bespoke services, and others, have lower returns to scale. Even with abundant ideas,
-they cannot scale far, so their steady-state variety counts remain small due to the small number of prospective entrants.
+By contrast, labor-intensive sectors such as restaurants, bespoke services, and others, have lower returns to scale. Even with abundant ideas,
+they cannot scale far, so their steady-state variety counts remain small due to the small number of prospective new product lines.
 
 However, starting a successful product line in a high-$\alpha$ business is inherently harder, due to the high competition in entry and the 
 limited stock of ideas. This is balanced out by the high expected profits that translate into a high net present value of $v_i$,
@@ -1158,9 +1158,9 @@ in the legend.
 As before, the axes are logged to reveal the elasticity between variables.
 Therefore, taking logs turns the relationship into a line whose slope is elasticity $\epsilon_i = \frac{\Delta \ln m_i}{\Delta \ln e_i}$. 
 The figure puts the matching friction aspect of the model into the spotlight, showcasing the ``decresing-returns-to-entry''
-as one moves up the $\alpha_i$ values (which consequentlymoves down the matching probabilities $\Pi_i$). That is, on the double-log axes the 
+as one moves up the $\alpha_i$ values (which consequently moves down the matching probabilities $\Pi_i$). That is, on the double-log axes the 
 curvature shows that the elasticity between potential entrants $e_i$ and successful startups $m_i$ falls steadily as the entry pool 
-gets larger. In other words, each successive sector is fighting steeper diminishing returns-to-entry than the one to its left. 
+gets larger. In other words, each successive sector is fighting increasingly smaller returns-to-entry than the one to its left. 
 
 This concurs with the findings discussed in the previous section, where high-$\alpha$ sectors are more attractive despite the lower probability
 of success and low-$\alpha$ sectors face little congestion due to their unattractiveness, despite the large stock of ideas.
@@ -1169,7 +1169,7 @@ Figure \ref{fig:steady-output-log}, the low-matching-probability effect starts t
 to showcase a ``Laffer-like'' (\cite{laffer1974balance}) relationship between $e_i$ and $m_i$.
 
 When interpreting the flow of prospective entrants $e_i$ as investment outlay, another insight about Figure \ref{fig:steady-entry-log} appears.
-Namely, that it can be re-read almost one-for-one as a sector-specific capital-production function $m_i = F_i(e_i)$.
+Namely, that it can be re-read almost one-for-one as a capital-production function $m_i = F(e_i)$.
 Therefore, the slope now represents the elasticity of new capital concerning investment. Because only a fraction $\Pi_i$ is 
 successful, the gap $e_i - m_i$ is akin to depreciation in transit, and the curved shape pictures the declining marginal 
 product of piling ever more entry resources into a sector where profitable ideas are increasingly scarce. In sum, the introduction of
@@ -1189,7 +1189,7 @@ as explored in Section \ref{sec:model-mine}, based on the composition shock in t
 The results corroborate the intuition presented in the previous sections while adding novel insights about the model. In line with the 
 BGM approach, I present the impulse response functions (IRFs) only for the inelastic labor case, with the IRFs for the elastic labor
 found in Section \ref{sec-app:full} of the Appendix. Finally, in Section \ref{sec:quant-BCmon} I report and explore the 
-Business Cycle second moments of my model
+business cycle second moments of my model
 in comparison to the BGM framework, and the real Business Cycle data and standard RBC model results both found in 
 \textcite{king1999resuscitating}.
 
@@ -1212,54 +1212,54 @@ then move on to the aggregate ones.
   \label{fig:multiprod}
 \end{figure}
 
-In Figure \ref{fig:multiprod}, the response of sectoral flow variables such as $M_i$, $e_i$, and $L_i$ are kept in level
+In Figure \ref{fig:multiprod}, the response of sectoral flow variables such as $M_{i,t}$, $e_{i,t}$, and $L_{i,t}$ are kept in level
 deviation from steady-state, to make the absolute quantities more clear for sectoral comparison. The variables are not normalized, however,
 so absolute values should not be interpreted literally. On the other hand, all other
 variables are logged, such that the response represents percentage deviations from steady state, to characterize the heterogeneous
-responses of different sectors. The only exception is the IRF for the real/relative price $\rho_i$, which is 
+responses of different sectors. The only exception is the IRF for the real/relative price $\rho_{i,t}$, which is 
 kept in levels to help clearly distinguish which sectors have higher and lower levels.
 
 Initially, a temporary increase in TFP leads to a more attractive business environment, thus enticing
 entry in all sectors. In particular, sectors with higher $\alpha$ parameters face more entry because of higher MPLs,
-meaning that a rise in TFP yields higher returns. Due to the time-to-build lag, $M_i$ rises subsequently, but because
+meaning that a rise in TFP yields higher returns. Due to the time-to-build lag, $M_{i,t}$ rises subsequently, but because
 of the matching frictions, the sectoral differences are more balanced. Consequently, the relative price rises, in particular in
 sectors that face more successful entry, due to the love-for-variety expression \eqref{eq:lovevariety}. Finally, a spike in
 labor used in building new product lines can be seen, especially in high-$\alpha$ sectors since prospective entry is higher, demanding more
 hours.
 
-The most interesting dynamics, however, are the responses of the firm-level variables ($y_i,d_i,v_i,l_i$). In particular, the
+The most interesting dynamics, however, are the responses of the firm-level variables ($y_{i,t},d_{i,t},v_{i,t},l_{i,t}$). In particular, the
 negative dip that profits, output, and value suffer in high-$\alpha$ sectors. Initially, the temporary positive 
 increase in $Z$ leads to bigger future profits and therefore bigger net present value of entering across all sectors\footnote{The productivity shock affects
 all sectors with the same initial magnitude, and therefore, the deviation from steady state is the same across sector for firm-level variables.}, as can be
 seen in Figure \ref{fig:multiprod}. Due to time-to-build lag, firms pay the entry cost today but only start producing
 next period. Once this new cohort starts producing, the over-entry that happened, in particular in highly scalable sectors, leads
-to a competition glut (excessively high number of incumbents $M_i$). 
+to a competition glut (excessively high number of incumbents $M_{i,t}$). 
 
 This has two effects on firm-level variables. The first is the
-increase in the relative price $\rho_i$, which leads to consumers substituting away from the sectors with the highest prices, decreasing
-sectoral demand $C_i$, which forces firm-level output $y_i$ downwards. The second is the dilution of
+increase in the relative price $\rho_{i,t}$, which leads to consumers substituting away from the sectors with the highest prices, decreasing
+sectoral demand $C_{i,t}$, which forces firm-level output $y_{i,t}$ downwards. The second is the dilution of
 firm-level output and profits due to the conditional symmetric equilibrium conditions, where more firms now share the same demand.
-The higher the increase in $M_i$, the higher the impact of this mechanism, leading to a bigger impact on high-$\alpha$ sectors, as visible
-in the figure. This dynamic is well-portrayed in the firm-level labor demand $l_i$, which decreases substantially since firms now produce 
+The higher the increase in $M_{i,t}$, the higher the impact of this mechanism, leading to a bigger impact on high-$\alpha$ sectors, as visible
+in the figure. This dynamic is well-portrayed in the firm-level labor demand $l_{i,t}$, which decreases substantially since firms now produce 
 less output.
 
 The impact of the competition glut alongside the increase in relative prices is what ultimately leads to the negative dip seen in some firm-level variables in
 Figure \ref{fig:multiprod}, in particular for sector 9, which, as explored before, represents a significant outlier 
 and thus suffers from the competition glut the hardest. The recovery back to steady state happens as the exogenous firm exit shock
-thins out the bloated number of incumbents $M_i$. This, in turn, leads to less competition and lowers relative prices, bringing $y_i$ and $d_i$
-back and therefore also $v_i$. Low-$\alpha$ sectors never attract enough entrants to flip their incumbents into the red, so they just glide
+thins out the bloated number of incumbents $M_{i,t}$. This, in turn, leads to less competition and lowers relative prices, bringing $y_{i,t}$ and $d_{i,t}$
+back and therefore also $v_{i,t}$. Low-$\alpha$ sectors never attract enough entrants to flip their incumbents into the red, so they just glide
 back as Z dissipates.
 
-Finally, the response of $M_i$ is also worth some exploration. $M_i$ is the key endogenous state in the model and,
-much like in BGM, the sunk cost dynamic and time-to-build lag makes $M_i$ behave very much like capital in the 
-baseline RBC. Thus, $e_i$ represents consumer investment, and $v_i$ is the key price for household financing, with $e_i$ initially overshooting
-because $v_i$ is expected to temporarily increase in the future, especially in high $\alpha$ sectors. This makes it profitable for households
+Finally, the response of $M_{i,t}$ is also worth some exploration. $M_{i,t}$ is the key endogenous state in the model and,
+much like in BGM, the sunk cost dynamic and time-to-build lag makes $M_{i,t}$ behave very much like capital in the 
+baseline RBC. Thus, $e_{i,t}$ represents consumer investment, and $v_{i,t}$ is the key price for household financing, with $e_{i,t}$ initially overshooting
+because $v_{i,t}$ is expected to temporarily increase in the future, especially in high $\alpha$ sectors. This makes it profitable for households
 to invest today to reap the temporary benefits of the positive productivity shock.
 
 Moving on to Figure \ref{fig:aggprod}, the aggregate responses to the productivity shock are now of interest. The response of labor used in
-firm production ($Le$) is in line with the dynamics explored before, fuelling the substantial entry of new incumbents into the many sectors.
-Labor used in production ($Lc$) then rises to match the production of these new firms after they are built, hence the lag. Real wage rises to
-match the increase in labor demand for both entry and production.
+firm production ($Le_t$) is in line with the dynamics explored before, fuelling the substantial entry of new incumbents into the many sectors.
+Labor used in production ($Lc_t$) then rises to match the production of these new firms after they are built, hence the lag. Real wage rises to
+match the new productivity level through the increase in labor demand for both entry and production.
 
 \begin{figure}[H]
   \centering
@@ -1269,13 +1269,13 @@ match the increase in labor demand for both entry and production.
 \end{figure}
 
 The most interesting effect, however, consists of the response of aggregate
-output $Y$. In the baseline BGM framework, output reacts to the one-percent increase in $Z$ with a response of 
+output $Y_t$. In the baseline BGM framework, output reacts to the one-percent increase in $Z$ with a response of 
 around one to two percent. In Figure \ref{fig:aggprod}, however, the response far exceeds the one of BGM, leading to an increase of
-around eleven percent. This happens through the love-for-variety effect found in BGM, which drives an increase
-in output due to the increase in the number of varieties, but also due to two novel channels. The first is the possibility of cross-sector
+around eleven percent. This happens through the love-for-variety effect found in BGM -- which drives an increase
+in output due to the increase in the number of varieties -- but also due to two novel channels. The first is the possibility of cross-sector
 C.E.S. substitution, where households redirect demand towards sectors whose relative price rise the least\footnote{See \textcite{gouel2023love}, 
 where the same dynamic in a multi-sector C.E.S. framework is found.}. Because the elasticity parameter
-$\eta$ is bigger than one, the quantity response is elastic, such that the demand shift itself raises $Y$. This channel is sensitive to
+$\eta$ is bigger than one, the quantity response is elastic, such that the demand shift itself raises $Y_t$. This channel is sensitive to
 the calibration of $\eta$ and thus its effect should be taken with a grain of salt.
 
 The second novel channel constitutes the labor reallocation between sectors after a productivity shock. Since the effect of an increase in
@@ -1293,7 +1293,7 @@ with stronger responses. That is because the household now has an additional mar
 propagation mechanism and amplifying the responses of most endogenous variables, since households adjust their hours worked. 
 
 As for the aggregate
-responses in Figure \ref{fig:aggprod-elastic}, all variables stay the same excluding labor that goes into production ($Lc$). For this variable, there
+responses in Figure \ref{fig:aggprod-elastic}, all variables stay the same excluding labor that goes into production ($Lc_t$). For this variable, there
 is an initial decline to levels lower than steady state, followed by a recovery and a brief period of above steady-state levels of work hours. 
 The initial drop is not present in the inelastic labor case because now hours are free to adjust, so the income effect of the positive 
 productivity shock makes households enjoy more leisure now, leading to a fall in production labor even though the marginal product of 
@@ -1317,7 +1317,7 @@ This makes sure that the shock now has a larger macro impact, functioning as a f
 to low-scalability types. Empirical analogues could be a patent-law change, the arrival of an innovation, or a broad surge in entrepreneurial 
 funding. The bottom line is that the shock now endogenously models an aggregate event that facilitates starting businesses by affecting
 the actual aggregate stock of ideas $\Psi$, preserving the microfoundations of the model. This differs from the literature that models entry-rate
-shocks as exogenous ``animal-spirits'' phenomena (see e.g. \cite{leduc2016uncertainty}), simply hardcoding a higher $e_i$.
+shocks as exogenous ``animal-spirits'' phenomena (see e.g. \cite{leduc2016uncertainty}), simply hardcoding a higher $e_{i,t}$.
 
 \begin{figure}[H]
   \centering
@@ -1330,16 +1330,16 @@ Despite the shock multiplying the stock of ideas for each sector equally, entry 
 and matching probabilities, as visible in Figure \ref{fig:multistock}. Prospective entry in all nine sectors jumps on impact due to a higher
 number of ideas being available, a dynamic similar to an increase in the number of lottery tickets for a given prize (successful entry in
 this scenario). As before, sector nine sees the highest surge in entrants by far, given the attractiveness of its high-$\alpha$ technology.
-Due to time-to-build and sunk entry costs, the number of product lines $M_i$ in each sector adapts with a lag to the new entrants, behaving
+Due to time-to-build and sunk entry costs, the number of product lines $M_{i,t}$ in each sector adapts with a lag to the new entrants, behaving
 again as physical capital in the textbook RBC model. A stark increase in sectoral-level labor $L$ to build new firms is once again present,
 matching the spike in prospective entrants.
 
 Echoing the previous results for the productivity shocks, the firm-level variable dynamics are plagued by the same curse of over-entry
 and competition, but without the positive effect of a temporary rise in productivity to compensate. Therefore, due to the over-entry mechanism
-and the subsequent competition glut explored before, firm-level output ($y_i$), labor ($l_i$), and profits ($d_i$) all fall with a lag after the
+and the subsequent competition glut explored before, firm-level output ($y_{i,t}$), labor ($l_{i,t}$), and profits ($d_{i,t}$) all fall with a lag after the
 time-to-build lag. Evidently, high-$\alpha$ sectors suffer the biggest impact, with over-entry biting their profits the hardest. Firm value,
 however, exhibits a different behavior from the three other variables. It instantly falls when the shock happens, since investors take the future
-increase in competitors and thus lower profits into consideration. Interestingly, however, $v_i$ overshoots above steady-state levels for low-$\alpha$
+increase in competitors and thus lower profits into consideration. Interestingly, however, $v_{i,t}$ overshoots above steady-state levels for low-$\alpha$
 sectors only, since these sectors face less future competition and therefore have the fastest profit recovery of all sectors. Ultimately, it is
 the combination of the initial expected profit impact of entry and the speed of the expected relief that dictates the firm valuation dynamics.
 
@@ -1351,21 +1351,21 @@ the combination of the initial expected profit impact of entry and the speed of 
 \end{figure}
 
 Moving on to aggregate variables in Figure \ref{fig:aggstock}, a similar dynamic as in Figure \ref{fig:aggprod} can be seen for both 
-production and entry labor. Labor used in entry ($Le$) spikes initially to support the new entrants, with the labor used in production ($Lc$)
+production and entry labor. Labor used in entry ($Le_t$) spikes initially to support the new entrants, with the labor used in production ($Lc_t$)
 following suit to support production after the time-to-build lag. Output rises due to a sheer increase in the total number of producers, which,
 due to the love-for-variety effect, fosters higher demand. Some reallocation of demand across sectors also happens, since the shock also causes
-changes in the relative price $\rho_i$, but less than the response to the productivity shock. Finally, the real wage now rises with a lag since
+changes in the relative price $\rho_{i,t}$, but less than the response to the productivity shock. Finally, the real wage now rises with a lag since
 labor demand increases in production only after firms are built, and the stock-of-ideas shock does not directly influence MPL on impact and thus the 
 real wage does not immediately rise as with the TFP shock.
 
 Once more, the responses for the elastic labor case can be found in Figures \ref{fig:multistock-elastic} and \ref{fig:aggstock-elastic} 
 in the Appendix.
 For the aggregate responses, a similar dynamic to the one found in Figure \ref{fig:aggprod-elastic} can be seen, with labor used in 
-production ($Lc$) facing the initial dip as before, due to households now adjusting their labor supply in response to the income effect 
-from higher labor demand in entry ($Le$).
+production ($Lc_t$) facing the initial dip as before, due to households now adjusting their labor supply in response to the income effect 
+from higher labor demand in entry ($Le_t$).
 
 On the other hand, sectoral-level responses for firm-level variables present a new dynamic not seen in the inelastic case. Namely, the dip in the
-firm-level variables of employment ($l_i$), output ($y_i$), profits/dividends ($d_i$), and valuation ($v_i$) happens immediately after the shock,
+firm-level variables of employment ($l_{i,t}$), output ($y_{i,t}$), profits/dividends ($d_{i,t}$), and valuation ($v_{i,t}$) happens immediately after the shock,
 without lagging. This is also due to households now being able to adjust their total labor supply. Now, households can use fewer hours in production
 and more in entry since labor demand there is higher, as can be seen by the significantly higher levels of entry in Figure \ref{fig:multistock-elastic}
 when compared to the inelastic case. Naturally, this leads to lower output, profits, and overall firm value, in practice bringing the 
@@ -1481,7 +1481,7 @@ response of consumption to variations in output stronger.
 
 Moving on to the persistence in Panel c), the values are at least as good as the ones from the other two models 
 when compared to the data. The persistence of labor, output, and investment are closer to 
-empirical observations than the ones presented by BGM. The addition of matching frictions on top of the 
+empirical observations than the ones presented by BGM, albeit by a small margin. The addition of matching frictions on top of the 
 time-to-build lag keeps entry reacting slowly, improving upon the already existing internal propagation mechanism 
 that resembles physical capital accumulation in the benchmark RBC.
 
@@ -1511,7 +1511,7 @@ The key findings can be separated into aggregate results, firm-level/sectoral re
 the main finding is the new magnitude of the response of aggregate output to the temporary TFP shock. Output increases around 11\%  (1-2\% in BGM) due to 
 the love-for-variety effect from BGM, and due to two new channels: cross-sector C.E.S. substitution and labor reallocation toward high-$\alpha$ sectors.
 The stock-of-ideas shock also drives a modest increase in GDP due to an increase in varieties, but real wages lag until firms start producing.
-Turning to business-cycle moments, the heterogeneous-sector specification reproduces persistence and co-movements found in BGM and brings the 
+Turning to business cycle moments, the heterogeneous-sector specification reproduces persistence and co-movements found in BGM and brings the 
 consumption-to-output volatility ratio closer to the data, but it severely understates the absolute and relative volatility of investment and hours, potentially
 due to overly-smooth entry from low matching elasticity $\phi$ and cross-sector averaging.
 
@@ -1542,11 +1542,11 @@ effects, particularly when entry reallocates labor across sectors.
 Therefore, there are many potential avenues for future research. The first and most obvious one would be experimenting with endogenous markups generated by
 translog preferences, and implementing capital into the model. Both expansions are done in BGM, where the authors find a significant
 impact of translog preferences through endogenous markups on shock transmission, and that the addition of capital improves RBC second-moments significantly.
-Another potential idea is exploring more in-depth the welfare impacts of variety externalities in a sectoral firm heterogeneity setup. As discussed before, 
+Another potential idea is exploring more in-depth the welfare impacts of variety and entry externalities in a sectoral firm heterogeneity setup. As discussed before, 
 this could yield interesting and novel policy insights not found in the baseline BGM framework. Additionally, comparing the framework with frameworks 
 that have different sources of heterogeneity, such as markups or productivity parameters, could also be fruitful. 
 
-Overall, recognizing firm differences in scalability and matching frictions enhances how 
+Overall, recognizing firm heterogeneity in scalability and matching frictions enhances how 
 shock transmission is understood in RBC models and can guide smarter policy during downturns that respect
 the heterogeneous responses of firms. 
 
@@ -1621,11 +1621,11 @@ Parameter & Value & Target \\
   & 0.3
   & \textcite{sedlavcek2017growth} \\
 
-\begin{tabular}[t]{@{}l@{}}$\rho_X$\\Stock of Ideas shock persistence\end{tabular}
+\begin{tabular}[t]{@{}l@{}}$\rho_X$\\stock of Ideas shock persistence\end{tabular}
   & 0.415
   & \textcite{sedlavcek2017growth} \\
 
-\begin{tabular}[t]{@{}l@{}}$\sigma_X$\\Stock of Ideas shock standard deviation\end{tabular}
+\begin{tabular}[t]{@{}l@{}}$\sigma_X$\\stock of Ideas shock standard deviation\end{tabular}
   & 0.000009
   & \textcite{sedlavcek2017growth} \\
 
@@ -1731,7 +1731,8 @@ To reproduce the results presented in the thesis, execute the following in order
 \subsection{Reproducing Figures}
 
 After obtaining steady‐state values from \texttt{analyze\_steadystate.jl}, 
-these must be copied into the Dynare mod files (\texttt{calibration.mod} and \texttt{calibration\_ineL.mod}) 
+these must be copied into the Dynare mod files (\texttt{main.mod}, \texttt{main\_ineL.mod}, 
+\texttt{main\_bcycle.mod}, \texttt{calibration.mod}, \texttt{calibration\_ineL.mod}, and \texttt{calibration\_bcycle.mod}) 
 because \texttt{Dynare.jl} does not yet support dynamic parameter passing. Then:
 
 \begin{enumerate}
