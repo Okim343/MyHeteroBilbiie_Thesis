@@ -58,6 +58,7 @@ handling_figs.ipynb
 # -------------------------------------------------------------------
 src/Thesis/*
 !src/Thesis/main.tex
+!src/Thesis/main.pdf
 !src/Thesis/master_thesis.bib
 
 # -------------------------------------------------------------------
