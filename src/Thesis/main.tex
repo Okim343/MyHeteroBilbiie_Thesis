@@ -236,7 +236,7 @@ Yet, the profit opportunities that make scalable ideas attractive also intensify
 prospective entrepreneurs. Using U.S. Business Dynamics Statistics for 1979–2013, \textcite{sedlavcek2017growth} show that the probability of launching a successful 
 business ranges from 0.2 \% to 62 \%, depending on the scalability of the underlying idea.
 
-Heterogenous scaling within startup cohorts also produces heterogeneous responses to macroeconomic shocks, giving rise to aggregate dynamics 
+Heterogeneous scaling within startup cohorts also produces heterogeneous responses to macroeconomic shocks, giving rise to aggregate dynamics 
 that standard models miss. Using census microdata, \textcite{smirnyagin2023returns} shows that the entry rate of high returns-to-scale firms falls 
 twice as much as for low returns-to-scale firms during recessions. \textcite{calligaris2023employment} find that employment losses in 2020 were 
 significantly larger in low-telework sectors that could not scale rapidly in response to pandemic disruptions.
@@ -927,7 +927,7 @@ raises the expected payoff of entering into
 sector $i$. In steady state, wage rises one-to-one with productivity since the marginal product of labor (MPL) is 
 $MPL_i = \alpha_i Z l_i^{\alpha_i -1}$, such that only the ratio $w/Z$ actually matters, and thus a momentary increase in $Z$ has no direct impact
 on firm-level output in a steady-state static equilibrium. Markups also have an interesting impact on firm-level output and size, where an increase in 
-markups drives firm-level profits-per-unit up which makes entry appear more attractive to prospective entrepreneurs, raising $M_i$.
+markups drives firm-level profits-per-unit up, which makes entry appear more attractive to prospective entrepreneurs, raising $M_i$.
 On top of that, however, higher markups also drive household demand for goods down since they increase relative prices, 
 lowering $C_i$. These two effects combined make rising markups lower firm-level output.
 
@@ -951,7 +951,7 @@ The same general idea of matching expenditure (consumption plus investment) with
 in a two ``macro-sector'' economy remains. However, investment and dividends can be broken down into further detail. 
 
 Investment, on the one hand, now captures the replacement principle seen in the classic RBC model 
-of \textcite{campbell1994inspecting} more clearly, where investment made at steady state acts as pure maintenance to keep the variety/firm stock from shrinking. Therefore,
+of \textcite{campbell1994inspecting} more clearly, where investment made in steady state acts as pure maintenance to keep the variety/firm stock from shrinking. Therefore,
 a higher death rate immediately requires more labor to be spent on producing new firms. Dividends, on the other hand, represent in
 steady state the profits required to finance this replacement. A higher death rate, through $\kappa$, makes households require 
 higher payoffs to keep financing new entries. Better matching in the form of a higher $\Pi_i$ also frees up profits that can go to 
@@ -971,7 +971,7 @@ composition of the firm sector and entry dynamics.
 \subsection{Numerical Algorithm for Steady State Solution}
 \label{sec:solution-num}
 
-In practice, the steady state routine is a two‐tier guess‐and‐verify scheme, similar to the 
+In practice, the steady-state routine is a two‐tier guess‐and‐verify scheme, similar to the 
 price-clearing bisection loop found in 
 \textcite{khan2008idiosyncratic}, but simpler. 
 First, I propose a trial real wage \(w^{(0)}\) that the household and firms would face. 
@@ -1112,7 +1112,7 @@ returns-to-scale parameter, especially when compared to the preceding sectors 8 
 is merely $0.004$, whereas from sector 8 to 9 it is three times bigger at $0.012$. This significantly impacts the size to which firms in 
 sector 9 can grow when compared to other sectors, leading to bigger employment and output levels.
 
-Moving on to the number of firms/varieties $M_i$, it is important to recall that, in steady-state, the higher the returns-to-scale parameter
+Moving on to the number of firms/varieties $M_i$, it is important to recall that, in steady state, the higher the returns-to-scale parameter
 in a sector, the smaller the matching probability $\Pi_i$ due to a limited stock of ideas and excessive competition. Therefore, one might find
 the high number of firms in sectors 9, 8, or 7 contradictory, since entry is harder and firms are larger and thus the number of incumbents should
 be smaller. This would, however, be an incorrect interpretation, since $M_i$ should be interpreted as the number of product lines (or varieties) 
@@ -1134,8 +1134,8 @@ limited stock of ideas. This is balanced out by the high expected profits that t
 making the free-entry condition \eqref{eq:freeentry} accommodate a vast flow of attempts, which in equilibrium yields a large stock
 of active varieties $M_i$ (that might be all owned by the same firm, but the model abstracts away from this perspective). However, the difficulty of
 entry starts to overpower the high scalability factor at some point. This is particularly true for sector 9, whose number of active varieties $M_9$ is slightly
-smaller than $M_8$ for sector 8, despite the significantly higher value of $\alpha_9$, due to the extremely low probability of successful entry in 
-steady-state $\Pi_9$ of around $0.2\%$\footnote{For quick reference, $\Pi_8$ is $1.3\%$ and $\Pi_7$ is $2.2\%$.}.
+smaller than $M_8$ for sector 8, despite the significantly higher value of $\alpha_9$, due to the extremely low steady-state probability of successful entry in 
+$\Pi_9$ of around $0.2\%$\footnote{For quick reference, $\Pi_8$ is $1.3\%$ and $\Pi_7$ is $2.2\%$.}.
 
 Another interesting aspect of the steady-state solution is the friction of entry and the resulting relationship 
 between prospective entrants and successful ones, depicted in Figure \ref{fig:steady-entry-log}. 
@@ -1152,7 +1152,7 @@ in the legend.
 \end{figure}
 As before, the axes are logged to reveal the elasticity between variables.
 Therefore, taking logs turns the relationship into a line whose slope is elasticity $\epsilon_i = \frac{\Delta \ln m_i}{\Delta \ln e_i}$. 
-The figure puts the matching friction aspect of the model into the spotlight, showcasing the ``decresing-returns-to-entry''
+The figure puts the matching friction aspect of the model into the spotlight, showcasing the ``decreasing-returns-to-entry''
 as one moves up the $\alpha_i$ values (which consequently moves down the matching probabilities $\Pi_i$). That is, on the double-log axes the 
 curvature shows that the elasticity between potential entrants $e_i$ and successful startups $m_i$ falls steadily as the entry pool 
 gets larger. In other words, each successive sector is fighting increasingly smaller returns-to-entry than the one to its left. 
@@ -1185,7 +1185,7 @@ The results corroborate the intuition presented in the previous sections while a
 BGM approach, I present the impulse response functions (IRFs) only for the inelastic labor case, with the IRFs for the elastic labor
 found in Section \ref{sec-app:full} of the Appendix. Finally, in Section \ref{sec:quant-BCmon} I report and explore the 
 business cycle second moments of my model
-in comparison to the BGM framework, and the real Business Cycle data and standard RBC model results both found in 
+in comparison to the BGM framework, and the Real-Business-Cycle data and standard RBC model results both found in 
 \textcite{king1999resuscitating}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1208,7 +1208,7 @@ then move on to the aggregate ones.
 \end{figure}
 
 In Figure \ref{fig:multiprod}, the response of sectoral flow variables such as $M_{i,t}$, $e_{i,t}$, and $L_{i,t}$ are kept in level
-deviation from steady-state, to make the absolute quantities more clear for sectoral comparison. The variables are not normalized, however,
+deviation from steady state, to make the absolute quantities more clear for sectoral comparison. The variables are not normalized, however,
 so absolute values should not be interpreted literally. On the other hand, all other
 variables are logged, such that the response represents percentage deviations from steady state, to characterize the heterogeneous
 responses of different sectors. The only exception is the IRF for the real/relative price $\rho_{i,t}$, which is 
@@ -1609,7 +1609,7 @@ Parameter & Value & Target \\
   & \textcite{bilbiie2012endogenous} \\
 
 \begin{tabular}[t]{@{}l@{}}$\varphi$\\elasticity of labor supply\end{tabular}
-  & 4
+  & 4 (2 for moment calculation)
   & \textcite{bilbiie2012endogenous} \\
 
 \begin{tabular}[t]{@{}l@{}}$\phi$\\elasticity in the entry function\end{tabular}
@@ -1751,7 +1751,7 @@ because \texttt{Dynare.jl} does not yet support dynamic parameter passing. Then:
 \label{sec-app:option}
 
 The following proof is very similar to the one found in BGM, with the only major difference being the addition of $\Pi_{i,t}$,
-the mathing probability at time $t$ for sector $i$, and that firms are now characterized by both $i$ and $\omega$.
+the matching probability at time $t$ for sector $i$, and that firms are now characterized by both $i$ and $\omega$.
 Let the option value of waiting to enter for firm $\omega i$ be $W_{i,t}(\omega)\ge0$. In all periods $t$,
 \[
 \mathcal{W}_{i,t}(\omega)
