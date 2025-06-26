@@ -35,6 +35,7 @@ urldate=long
 \usepackage{ragged2e}
 \usepackage{fancyhdr}
 \usepackage{enumitem}
+\usepackage[bottom]{footmisc}
 \usepackage{tikz}
 \usepackage{rotating}
 \usepackage{hyperref} % Load after everything else
@@ -1081,13 +1082,12 @@ employment, and the number
 of varieties/firms in each sector, which is represented by the size of each circle both in the figure and the legend.
 Focusing first on the relationship between firm labor demand and output, the axes are logged to make the power law governing the relationship 
 clearer, especially the ways in which the returns-to-scale coefficient affects this relationship. That is, by taking logs of equation 
-\eqref{eq:laborClearing}, the relationship between labor and output at the firm-level becomes
+\eqref{eq:laborClearing} and rearranging, the relationship between labor and output at the firm-level becomes
 \begin{equation}
-  \ln l_i = \frac{1}{\alpha_i}(\ln y_i - \ln Z), \label{eq:laboroutputlog}
+  \ln y_i = \alpha_i\ln l_i + \ln Z, \label{eq:laboroutputlog}
 \end{equation}
-such that the slope in the figure is $1/\alpha_i$, capturing the effects of different returns-to-scale parameters on the labor requirement
-per unit of output. 
-
+which puts in evidence the direct impact that $\alpha_i$ has, such that, holding 
+everything else fixed, a one percent rise in labor raises output by $\alpha_i$ percent.
 \begin{figure}[H]
   \centering
   \includegraphics[width=1\textwidth]{../images/steady_state/elastic_labor/steady_firm_dynamic_log.pdf}
@@ -1095,22 +1095,17 @@ per unit of output.
   \label{fig:steady-output-log}
 \end{figure}
 
-The different slopes are particularly clear when comparing the position of the circles in relation to the 45-degree dashed line. 
-Given the small differences in the $\alpha$ parameters gathered from BDS data, differences in slope are small ($1/\alpha_i$ ranges 
-only from 1.12 to 1.01), but not imperceptible. The higher $\alpha_i$, the closer the circle's center is to the 45-degree line, since 
-for $\alpha_i = 1$ and no change in productivity $Z$, labor demand $l_i$ moves one-to-one with $y_i$ as evident by \eqref{eq:laboroutputlog}.
-
-Therefore, the further a sector's bubble is from the 45-degree line, the smaller their returns-to-scale are, and as a consequence, output
-rises noticeably less than employment, so the firm quickly runs into diminishing returns and stays small (low employment). On the other hand, 
+Therefore, the smaller $\alpha_i$, the more mild the response of output to an increase in employment, 
+so low-scalability firms quickly run into diminishing returns and stay small (low employment). On the other hand, 
 for high-scalability sectors, a one-percent increase in employment raises output by almost one percent. Because marginal product falls slowly,
-it takes longer for the firm to face diminishing returns to employment, and thus the firms' optimal size/employment is larger\footnote{ See \textcite{baqaee2024darwinian}, where the authors show using Belgian data that 
-plants with the highest value-added per worker systematically expand and capture market share. \textcite{sedlavcek2017growth} also document a similar dynamic where 
-high-scalability firms invest more in demand expansion due to higher returns to scale.}.
+it takes longer for the firm to face diminishing returns to employment, and thus the firms' optimal size/employment is larger.
 
 A real-life analogy could be the difference between a multi-plant manufacturer (highly scalable) and a specialized B2B producer 
 (medium-small scalability). For the multi-plant manufacturer, despite their large fixed cost base, their standardized processes, efficient IT, 
 or big capital stock lets each extra worker generate almost proportional extra output. On the other hand, for a specialized B2B producer output
-is tied closely to a small specialized crew, and extra workers might not contribute with equal extra output due to coordination/training costs.
+is tied closely to a small specialized crew, and extra workers might not contribute with equal extra output due to coordination/training costs\footnote{ See \textcite{baqaee2024darwinian}, where the authors show using Belgian data that 
+plants with the highest value-added per worker systematically expand and capture market share. \textcite{sedlavcek2017growth} also document a similar dynamic where 
+high-scalability firms invest more in demand expansion due to higher returns to scale.}.
 
 An interesting case is sector 9, which significantly stands above the rest in both output and employment levels. This is due to its substantial
 returns-to-scale parameter, especially when compared to the preceding sectors 8 and 7. The increase in $\alpha$ from sector 7 to 8 

@@ -38,9 +38,9 @@ function steady_state_scatter(ss;
     N = length(M)
     @assert length(y)==N && length(l)==N && length(αs)==N "ss.y_i, ss.l_i, ss.M_i, ss.α_i must all match length"
 
-    # optional log-transform
-    xdata = log_x ? log.(y) : y
-    ydata = log_y ? log.(l) : l
+    # optional log-transform, now x = employment, y = output
+    xdata = log_x ? log.(l) : l
+    ydata = log_y ? log.(y) : y
 
     # normalize M → [min_marker, size_scale]
     Mnorm   = (M .- minimum(M)) ./ (maximum(M) - minimum(M) + eps())
@@ -60,34 +60,21 @@ function steady_state_scatter(ss;
     xlims = (x_min - dx, x_max + dx)
     ylims = (y_min - dy, y_max + dy)
 
-    # axis labels
-    xlabel = log_x ? "log yᵢ (output)"     : "yᵢ (output)"
-    ylabel = log_y ? "log lᵢ (employment)" : "lᵢ (employment)"
+    # axis labels (swapped)
+    xlabel = log_x ? "log lᵢ (employment)" : "lᵢ (employment)"
+    ylabel = log_y ? "log yᵢ (output)"     : "yᵢ (output)"
 
-    # build base plot
+    # build base plot with equal scaling
     plt = plot(
-      xlabel      = xlabel,
-      ylabel      = ylabel,
-      title       = "",
-      legend      = :outerright,
-      legendtitle = "# firms Mᵢ:",
-      xlim        = xlims,
-      ylim        = ylims,
+      xlabel       = xlabel,
+      ylabel       = ylabel,
+      title        = "",
+      legend       = :outerright,
+      legendtitle  = "# firms Mᵢ:",
+      xlim         = xlims,
+      ylim         = ylims,
+      aspect_ratio = :equal,
     )
-
-    # add 45° line
-    line_min = max(xlims[1], ylims[1])
-    line_max = min(xlims[2], ylims[2])
-    if line_min < line_max
-        plot!(
-          plt,
-          [line_min, line_max],
-          [line_min, line_max];
-          linestyle = :dash,
-          color     = :black,
-          label     = "45°"
-        )
-    end
 
     # plot each bubble with sector‐specific color
     for i in 1:N
@@ -107,6 +94,8 @@ function steady_state_scatter(ss;
 
     return plt
 end
+
+
 
 
 # ────────────────────────────────────────────────────────────────────────
